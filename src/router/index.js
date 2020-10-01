@@ -7,6 +7,7 @@ import Topup from '../views/topUp.vue'
 import Amount from '../views/Amount.vue'
 import Confirmation from '../views/Confirmation.vue'
 import Sukses from '../views/Sukses.vue'
+import Failed from '../views/Failed.vue'
 
 Vue.use(VueRouter)
 
@@ -53,6 +54,11 @@ const routes = [
     path: '/sukses',
     name: 'Sukses',
     component: Sukses
+  },
+  {
+    path: '/failed',
+    name: 'Failed',
+    component: Failed
   }
 ]
 
