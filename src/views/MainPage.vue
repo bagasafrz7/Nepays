@@ -30,7 +30,44 @@
             <b-row>
               <b-col cols="7">
                 <div class="income">
-                  <h3>Data Income</h3>
+                  <b-row>
+                    <b-col cols="8">
+                      <b-icon
+                        icon="arrow-down"
+                        style="color: #1ec15f; font-size: 28px"
+                      ></b-icon>
+                      <p>Income</p>
+                      <h6>Rp2.120.000</h6>
+                    </b-col>
+                    <b-col cols="4">
+                      <b-icon
+                        icon="arrow-up"
+                        style="color: #ff5b37; font-size: 28px"
+                      ></b-icon>
+                      <p>Expense</p>
+                      <h6>Rp1.560.000</h6>
+                    </b-col>
+                  </b-row>
+                  <b-row>
+                    <b-col cols="12" class="mt-4">
+                      <line-chart
+                        :data="{
+                          '2017-01-01': 9,
+                          '2017-01-02': 6,
+                          '2017-01-03': 8,
+                          '2017-01-03': 13,
+                          '2017-01-04': 10,
+                          '2017-01-05': 15,
+                          '2017-01-06': 1,
+                          '2017-01-07': 5,
+                          '2017-01-08': 8,
+                          '2017-01-09': 13,
+                          '2017-01-10': 15
+                        }"
+                      ></line-chart>
+                    </b-col>
+                  </b-row>
+                  <!-- <h3>Data Income</h3> -->
                 </div>
               </b-col>
               <b-col cols="5">
@@ -41,6 +78,34 @@
                     </b-col>
                     <b-col cols="4">
                       <router-link to="/history">See All</router-link>
+                    </b-col>
+                  </b-row>
+                  <b-row>
+                    <b-col cols="2">
+                      <img src="../assets/img/users.png" alt="" />
+                    </b-col>
+                    <b-col cols="6">
+                      <div class="info-transaction">
+                        <h6>Samuel Sushi</h6>
+                        <p>Transfer</p>
+                      </div>
+                    </b-col>
+                    <b-col cols="4">
+                      <p>+Rp.50.000</p>
+                    </b-col>
+                  </b-row>
+                  <b-row>
+                    <b-col cols="2">
+                      <img src="../assets/img/users.png" alt="" />
+                    </b-col>
+                    <b-col cols="6">
+                      <div class="info-transaction">
+                        <h6>Christine Mar...</h6>
+                        <p>Transfer</p>
+                      </div>
+                    </b-col>
+                    <b-col cols="4">
+                      <p>+Rp.150.000</p>
                     </b-col>
                   </b-row>
                   <b-row>
@@ -109,7 +174,7 @@ main {
 .home .main-home .balance {
   background: #6379f4;
   border-radius: 20px;
-  margin: 50px 0 10px 0;
+  margin: 50px 0 25px 0;
   padding: 30px;
   color: #fff;
 }
@@ -123,11 +188,14 @@ main {
   background: #fff;
   border-radius: 20px;
   padding: 30px;
+  height: 450px;
+  margin-bottom: 50px;
 }
 .home .main-home .transaction-history {
   background: #fff;
   border-radius: 20px;
   padding: 30px;
+  height: 450px;
 }
 .home .main-home .transaction-history h5 {
   font-size: 18px;

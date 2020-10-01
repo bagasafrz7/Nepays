@@ -59,7 +59,7 @@ export default {
   padding: 30px 40px;
   margin: 50px 0;
   border-radius: 20px;
-  height: 450px;
+  height: 660px;
 }
 .aside .b-icon.bi {
   font-size: 28px;
@@ -76,7 +76,7 @@ export default {
   cursor: pointer;
 }
 .aside .logout {
-  margin-top: 120px;
+  margin-top: 300px;
   cursor: pointer;
 }
 </style>
