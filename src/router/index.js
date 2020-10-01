@@ -6,6 +6,7 @@ import History from '../views/History.vue'
 import Topup from '../views/topUp.vue'
 import Amount from '../views/Amount.vue'
 import Confirmation from '../views/Confirmation.vue'
+import Sukses from '../views/Sukses.vue'
 
 Vue.use(VueRouter)
 
@@ -47,6 +48,11 @@ const routes = [
     path: '/confirmation',
     name: 'Confirmation',
     component: Confirmation
+  },
+  {
+    path: '/sukses',
+    name: 'Sukses',
+    component: Sukses
   }
 ]
 
