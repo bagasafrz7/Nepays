@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import MainPage from '../views/MainPage.vue'
 import History from '../views/History.vue'
+import Topup from '../views/topUp.vue'
 
 Vue.use(VueRouter)
 
@@ -29,6 +30,11 @@ const routes = [
     path: '/history',
     name: 'History',
     component: History
+  },
+  {
+    path: '/top-up',
+    name: 'Topup',
+    component: Topup
   }
 ]
 
