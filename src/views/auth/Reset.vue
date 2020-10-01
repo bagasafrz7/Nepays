@@ -3,7 +3,7 @@
     <b-row>
       <Left />
       <b-col cols="5">
-        <section v-show="reset">
+        <section>
           <div class="login-form">
             <h3>
               Did You Forgot Your Password? Don’t Worry, You Can Reset Your
@@ -22,6 +22,7 @@
                     class="input"
                     id="input-1"
                     type="email"
+                    v-model="form.email"
                     placeholder="Enter your e-mail"
                   ></b-form-input>
                 </b-form-group>
@@ -32,52 +33,13 @@
             >
           </div>
         </section>
-        <section v-show="confirm">
-          <div class="login-form">
-            <h3>
-              Did You Forgot Your Password? Don’t Worry, You Can Reset Your
-              Password In a Minutes.
-            </h3>
-            <p class="p-text">
-              To reset your password, you must type your e-mail and we will send
-              a link to your email and you will be directed to the reset
-              password screens.
-            </p>
-            <b-form>
-              <div class="form-email">
-                <img src="../../assets/auth_img/lock.png" alt="" />
-                <b-form-group>
-                  <b-form-input
-                    class="input"
-                    id="input-1"
-                    type="password"
-                    placeholder="Create new password"
-                  ></b-form-input>
-                </b-form-group>
-              </div>
-              <div class="form-email">
-                <img src="../../assets/auth_img/lock.png" alt="" />
-                <b-form-group>
-                  <b-form-input
-                    class="input"
-                    id="input-1"
-                    type="password"
-                    placeholder="Confirm new password"
-                  ></b-form-input>
-                </b-form-group>
-              </div>
-            </b-form>
-            <b-button class="btn-login" block @click="resetPassword"
-              >Reset Password</b-button
-            >
-          </div>
-        </section>
       </b-col>
     </b-row>
   </b-container>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import Left from '../../components/AuthLeft'
 export default {
   components: {
@@ -86,17 +48,33 @@ export default {
   name: 'auth',
   data() {
     return {
-      reset: true,
-      confirm: false
+      form: {
+        email: ''
+      }
     }
   },
   methods: {
+    ...mapActions(['resetPassword']),
     confirmation() {
-      this.reset = false
-      this.confirm = true
-    },
-    resetPassword() {
-      this.$router.push('/login')
+      this.resetPassword(this.form)
+        .then((res) => {
+          this.$swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: res.msg,
+            showConfirmButton: false,
+            timer: 2000
+          })
+        })
+        .catch((err) => {
+          this.$swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: err,
+            showConfirmButton: false,
+            timer: 2000
+          })
+        })
     }
   }
 }

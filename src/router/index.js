@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Login from '../views/auth/Login.vue'
 import Register from '../views/auth/Register.vue'
 import Reset from '../views/auth/Reset.vue'
+import ResetPass from '../views/auth/ResetPassword.vue'
 import Pin from '../views/auth/Pin.vue'
 import store from '../store/index'
 
@@ -32,6 +33,11 @@ const routes = [
     name: 'Reset',
     component: Reset,
     meta: { requiresVisitor: true }
+  },
+  {
+    path: '/reset-password',
+    name: 'Reset-password',
+    component: ResetPass
   },
   {
     path: '/pin',

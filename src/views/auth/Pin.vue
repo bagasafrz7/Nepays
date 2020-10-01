@@ -21,36 +21,42 @@
                   type="text"
                   maxLength="1"
                   id="input-2"
+                  v-model="pin1"
                 ></b-form-input>
                 <b-form-input
                   class="input-otp"
                   type="text"
                   maxLength="1"
                   id="input-2"
+                  v-model="pin2"
                 ></b-form-input>
                 <b-form-input
                   class="input-otp"
                   type="text"
                   maxLength="1"
                   id="input-2"
+                  v-model="pin3"
                 ></b-form-input>
                 <b-form-input
                   class="input-otp"
                   type="text"
                   maxLength="1"
                   id="input-2"
+                  v-model="pin4"
                 ></b-form-input>
                 <b-form-input
                   class="input-otp"
                   type="text"
                   maxLength="1"
                   id="input-2"
+                  v-model="pin5"
                 ></b-form-input>
                 <b-form-input
                   class="input-otp"
                   type="text"
                   maxLength="1"
                   id="input-2"
+                  v-model="pin6"
                 ></b-form-input>
               </div>
             </b-form>
@@ -77,6 +83,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 import Left from '../../components/AuthLeft'
 export default {
   components: {
@@ -86,14 +93,59 @@ export default {
   data() {
     return {
       showOtp: true,
-      showSuccess: false
+      showSuccess: false,
+      pin1: '',
+      pin2: '',
+      pin3: '',
+      pin4: '',
+      pin5: '',
+      pin6: ''
     }
   },
   methods: {
+    ...mapActions(['setPin']),
     confirm() {
-      this.showOtp = false
-      this.showSuccess = true
+      // this.showOtp = false
+      // this.showSuccess = true
+      const setData = [
+        this.pin1,
+        this.pin2,
+        this.pin3,
+        this.pin4,
+        this.pin5,
+        this.pin6
+      ]
+      const pin = setData.join('')
+      const newResult = {
+        id: this.user.id,
+        pin
+      }
+      this.setPin(newResult)
+        .then((res) => {
+          this.$swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: res.msg,
+            showConfirmButton: false,
+            timer: 2000
+          })
+          // setTimeout(() => {
+          //   this.$router.push('/')
+          // }, 5000)
+        })
+        .catch((err) => {
+          this.$swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: err,
+            showConfirmButton: false,
+            timer: 2000
+          })
+        })
     }
+  },
+  computed: {
+    ...mapGetters(['user'])
   }
 }
 </script>

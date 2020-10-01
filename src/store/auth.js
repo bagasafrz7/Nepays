@@ -86,11 +86,47 @@ export default {
           return Promise.reject(error)
         }
       )
+    },
+    resetPassword(context, payload) {
+      console.log(payload)
+      return new Promise((resolve, reject) => {
+        axios
+          .post('http://127.0.0.1:5000/user/forgot', payload)
+          .then(res => {
+            resolve(res.data.msg)
+          })
+          .catch(err => {
+            reject(err.response.data.msg)
+          })
+      })
+    },
+    newPassword(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios
+          .patch('http://127.0.0.1:5000/user/reset', payload)
+          .then(res => {
+            resolve(res.data.msg)
+          })
+          .catch(err => {
+            resolve(err.response.data.msg)
+          })
+      })
+    },
+    setPin(context, payload) {
+      console.log(payload)
+      // return new Promise((resolve, reject) => {
+      //   axios.patch(`/${payload.id}`,payload.pin)
+      // .then(res => {
+      //   resolve(res.data.msg)
+      // })
+      // .catch(err => {
+      //   resolve(err.response.data.msg)
+      // })
+      // })
     }
   },
   getters: {
     user(state) {
-      console.log(state.userLogin)
       return state.userLogin
     },
     isLogin(state) {

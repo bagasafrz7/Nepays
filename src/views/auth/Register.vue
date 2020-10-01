@@ -118,6 +118,34 @@ export default {
         password: this.form.password
       }
       this.register(setData)
+        .then((res) => {
+          this.$swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: res.msg,
+            showConfirmButton: false,
+            timer: 1500
+          })
+          this.form = {
+            first_name: '',
+            last_name: '',
+            email: '',
+            phone: '',
+            password: ''
+          }
+          setTimeout(() => {
+            this.$router.push('/login')
+          }, 3000)
+        })
+        .catch((err) => {
+          this.$swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: err,
+            showConfirmButton: false,
+            timer: 1500
+          })
+        })
     }
   }
 }
