@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import MainPage from '../views/MainPage.vue'
 import History from '../views/History.vue'
 import Topup from '../views/topUp.vue'
+import Amount from '../views/Amount.vue'
 
 Vue.use(VueRouter)
 
@@ -35,6 +36,11 @@ const routes = [
     path: '/top-up',
     name: 'Topup',
     component: Topup
+  },
+  {
+    path: '/amount',
+    name: 'Amount',
+    component: Amount
   }
 ]
 
