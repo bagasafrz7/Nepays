@@ -6,6 +6,7 @@ import Register from '../views/auth/Register.vue'
 import Reset from '../views/auth/Reset.vue'
 import ResetPass from '../views/auth/ResetPassword.vue'
 import Pin from '../views/auth/Pin.vue'
+import Transfer from '../views/Transfer.vue'
 import store from '../store/index'
 
 Vue.use(VueRouter)
@@ -15,6 +16,11 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/transfer',
+    name: 'Transfer',
+    component: Transfer
   },
   {
     path: '/register',
