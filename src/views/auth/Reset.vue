@@ -111,15 +111,9 @@ export default {
 }
 
 .login-form h3 {
-  font-size: 35px;
+  font-size: 24px; /* */
   font-weight: bold;
-  line-height: 50px;
-  margin-bottom: 30px;
-}
-
-.login-form .p-text {
-  font-size: 23px;
-  color: rgba(58, 61, 66, 0.6);
+  line-height: 34px; /* */
   margin-bottom: 30px;
 }
 
@@ -127,7 +121,7 @@ export default {
   display: grid;
   align-items: center;
   gap: 10px;
-  grid-template-columns: 18px 560px;
+  grid-template-columns: 18px 315px; /* */
   margin-bottom: 30px;
 }
 
@@ -139,18 +133,17 @@ export default {
   border-radius: 0px;
   margin-top: 12px;
   margin-left: 7px;
-  font-size: 22px;
+  font-size: 16px;
 }
 
 .btn-login {
-  margin-top: 90px;
   background-color: #dadada;
   border-color: #dadada;
   box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
   border-radius: 12px;
-  height: 60px;
+  height: 47px;
   color: #88888f;
-  font-size: 18px;
+  font-size: 16px; /* */
 }
 
 .btn-login:hover {

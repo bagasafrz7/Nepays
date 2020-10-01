@@ -21,6 +21,7 @@
                   class="input"
                   id="input-1"
                   type="email"
+                  v-model="form.email"
                   placeholder="Enter your e-mail"
                 ></b-form-input>
               </b-form-group>
@@ -32,6 +33,7 @@
                   class="input"
                   id="input-2"
                   type="password"
+                  v-model="form.password"
                   placeholder="Enter your password"
                 ></b-form-input>
               </b-form-group>
@@ -41,7 +43,7 @@
             <p class="p-forgot">Forgot password?</p></router-link
           >
 
-          <b-button class="btn-login" block>Login</b-button>
+          <b-button class="btn-login" block @click="loginBtn">Login</b-button>
           <p class="p-signup">
             Don't have an account? Let's
             <router-link to="/register"><span>Sign Up</span></router-link>
@@ -53,12 +55,56 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import Left from '../../components/AuthLeft'
 export default {
   components: {
     Left
   },
-  name: 'auth'
+  name: 'auth',
+  data() {
+    return {
+      form: {
+        email: '',
+        password: ''
+      }
+    }
+  },
+  methods: {
+    ...mapActions(['login']),
+    loginBtn() {
+      const setData = {
+        email: this.form.email,
+        password: this.form.password
+      }
+      this.login(setData)
+        .then((res) => {
+          this.$swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: res.msg,
+            showConfirmButton: false,
+            timer: 1500
+          })
+          this.form = {
+            email: '',
+            password: ''
+          }
+          setTimeout(() => {
+            this.$router.push('/pin')
+          }, 3000)
+        })
+        .catch((err) => {
+          this.$swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: err,
+            showConfirmButton: false,
+            timer: 1500
+          })
+        })
+    }
+  }
 }
 </script>
 
@@ -71,14 +117,14 @@ export default {
 }
 
 .login-form h3 {
-  font-size: 35px;
+  font-size: 24px; /* */
   font-weight: bold;
-  line-height: 50px;
+  line-height: 34px; /* */
   margin-bottom: 30px;
 }
 
 .login-form .p-text {
-  font-size: 23px;
+  font-size: 16px; /* */
   color: rgba(58, 61, 66, 0.6);
   margin-bottom: 30px;
 }
@@ -88,7 +134,7 @@ export default {
   display: grid;
   align-items: center;
   gap: 10px;
-  grid-template-columns: 18px 560px;
+  grid-template-columns: 18px 315px;
   margin-bottom: 30px;
 }
 
@@ -100,25 +146,25 @@ export default {
   border-radius: 0px;
   margin-top: 12px;
   margin-left: 7px;
-  font-size: 22px;
+  font-size: 16px;
 }
 
 .p-forgot {
   margin-top: -30px;
-  font-size: 20px;
+  font-size: 14px;
   text-align: right;
   color: rgba(58, 61, 66, 0.8);
 }
 
 .btn-login {
-  margin-top: 90px;
+  margin-top: 70px;
   background-color: #dadada;
   border-color: #dadada;
   box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
   border-radius: 12px;
-  height: 60px;
+  height: 47px;
   color: #88888f;
-  font-size: 18px;
+  font-size: 16px; /* */
 }
 
 .btn-login:hover {
@@ -131,7 +177,7 @@ export default {
   margin-top: 30px;
   text-align: center;
   color: rgba(58, 61, 66, 0.8);
-  font-size: 20px;
+  font-size: 16px;
 }
 
 .p-signup span {

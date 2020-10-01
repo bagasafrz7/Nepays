@@ -4,15 +4,15 @@
       <b-row class="ml-5">
         <img class="ml-5" src="../assets/auth_img/nepays_auth.png" alt="" />
       </b-row>
-      <b-row>
-        <div style="position: relative; margin-top: -30px">
+      <b-row style="margin-top: -30px">
+        <div style="position: relative">
           <img
-            style="position: absolute; left: 200px"
+            style="position: absolute; left: 100px"
             src="../assets/auth_img/png-phone2.png"
             alt=""
           />
           <img
-            style="position: relative; margin-left: 350px"
+            style="position: relative; margin-left: 250px"
             src="../assets/auth_img/png-phone.png"
             alt=""
           />
@@ -40,13 +40,13 @@
 }
 
 .text h3 {
-  font-size: 34px;
+  font-size: 24px;
   font-weight: bold;
   color: #fff;
 }
 
 .text p {
-  font-size: 26px;
+  font-size: 16px;
   color: #fff;
 }
 /* LEFT-SIDE */

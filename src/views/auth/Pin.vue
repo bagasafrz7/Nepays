@@ -107,27 +107,27 @@ export default {
 }
 
 .login-form h3 {
-  font-size: 35px;
+  font-size: 24px; /* */
   font-weight: bold;
-  line-height: 50px;
+  line-height: 34px; /* */
   margin-bottom: 30px;
 }
 
 .login-form .p-text {
-  font-size: 23px;
+  font-size: 16px; /* */
   color: rgba(58, 61, 66, 0.6);
   margin-bottom: 30px;
 }
 
 .btn-login {
-  margin-top: 90px;
+  margin-top: 50px;
   background-color: #dadada;
   border-color: #dadada;
   box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
   border-radius: 12px;
-  height: 60px;
+  height: 47px;
   color: #88888f;
-  font-size: 18px;
+  font-size: 16px; /* */
 }
 
 .btn-login:hover {
@@ -139,14 +139,15 @@ export default {
 .otp {
   display: grid;
   margin: auto;
-  grid-template-columns: repeat(6, 70px);
-  gap: 33px;
+  grid-template-columns: repeat(6, 38px);
+  gap: 24px;
 }
 
 .input-otp {
-  font-size: 40px;
+  font-size: 20px;
   text-align: center;
-  height: 90px;
+  font-weight: bold;
+  height: 50px;
 }
 /* RIGHT-SIDE */
 </style>

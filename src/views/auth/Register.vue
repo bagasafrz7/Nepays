@@ -22,6 +22,7 @@
                   id="input-1"
                   type="text"
                   placeholder="First name"
+                  v-model="form.first_name"
                 ></b-form-input>
               </b-form-group>
             </div>
@@ -33,6 +34,7 @@
                   id="input-1"
                   type="text"
                   placeholder="Last Name"
+                  v-model="form.last_name"
                 ></b-form-input>
               </b-form-group>
             </div>
@@ -44,6 +46,7 @@
                   id="input-1"
                   type="text"
                   placeholder="Phone number"
+                  v-model="form.phone"
                 ></b-form-input>
               </b-form-group>
             </div>
@@ -55,6 +58,7 @@
                   id="input-1"
                   type="email"
                   placeholder="Enter your e-mail"
+                  v-model="form.email"
                 ></b-form-input>
               </b-form-group>
             </div>
@@ -66,11 +70,14 @@
                   id="input-2"
                   type="password"
                   placeholder="Enter your password"
+                  v-model="form.password"
                 ></b-form-input>
               </b-form-group>
             </div>
           </b-form>
-          <b-button class="btn-login" block>Login</b-button>
+          <b-button class="btn-login" block @click="registerBtn"
+            >Register</b-button
+          >
           <p class="p-login">
             Already have an account?
             <router-link to="/login"><span>Login</span></router-link>
@@ -82,12 +89,37 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import Left from '../../components/AuthLeft'
 export default {
   components: {
     Left
   },
-  name: 'auth'
+  name: 'auth',
+  data() {
+    return {
+      form: {
+        first_name: '',
+        last_name: '',
+        email: '',
+        phone: '',
+        password: ''
+      }
+    }
+  },
+  methods: {
+    ...mapActions(['register']),
+    registerBtn() {
+      const setData = {
+        firstName: this.form.first_name,
+        lastName: this.form.last_name,
+        email: this.form.email,
+        phone: this.form.phone,
+        password: this.form.password
+      }
+      this.register(setData)
+    }
+  }
 }
 </script>
 
@@ -100,14 +132,14 @@ export default {
 }
 
 .login-form h3 {
-  font-size: 35px;
+  font-size: 24px; /* */
   font-weight: bold;
-  line-height: 50px;
+  line-height: 34px; /* */
   margin-bottom: 30px;
 }
 
 .login-form .p-text {
-  font-size: 23px;
+  font-size: 16px; /* */
   color: rgba(58, 61, 66, 0.6);
   margin-bottom: 30px;
 }
@@ -117,7 +149,7 @@ export default {
   display: grid;
   align-items: center;
   gap: 10px;
-  grid-template-columns: 18px 560px;
+  grid-template-columns: 18px 315px; /* */
   margin-bottom: 30px;
 }
 
@@ -129,7 +161,7 @@ export default {
   border-radius: 0px;
   margin-top: 12px;
   margin-left: 7px;
-  font-size: 22px;
+  font-size: 16px;
 }
 
 .btn-login {
@@ -137,22 +169,23 @@ export default {
   border-color: #dadada;
   box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
   border-radius: 12px;
-  height: 60px;
+  height: 47px;
   color: #88888f;
-  font-size: 18px;
+  font-size: 16px; /* */
 }
 
 .btn-login:hover {
   background-color: #6379f4;
   border-color: #6379f4;
   color: #fff;
+  font-size: 16px; /* */
 }
 
 .p-login {
   margin-top: 30px;
   text-align: center;
   color: rgba(58, 61, 66, 0.8);
-  font-size: 20px;
+  font-size: 16px; /* */
 }
 
 .p-login span {
