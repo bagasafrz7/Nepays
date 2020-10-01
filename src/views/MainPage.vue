@@ -1,0 +1,146 @@
+<template>
+  <div class="home">
+    <Header />
+    <main>
+      <b-container>
+        <b-row>
+          <b-col cols="3">
+            <Aside />
+          </b-col>
+          <b-col cols="9" class="main-home">
+            <div class="balance">
+              <b-row>
+                <b-col cols="8">
+                  <p>Balance</p>
+                  <h2>Rp.120.000</h2>
+                  <p>+62 813-9387-7946</p>
+                </b-col>
+                <b-col cols="4" class="text-right">
+                  <b-button size="lg" class="btn-transfer">
+                    <b-icon icon="arrow-up" aria-hidden="true"></b-icon>
+                    Transer
+                  </b-button>
+                  <b-button size="lg" class="btn-transfer">
+                    <b-icon icon="plus" aria-hidden="true"></b-icon>
+                    Top Up
+                  </b-button>
+                </b-col>
+              </b-row>
+            </div>
+            <b-row>
+              <b-col cols="7">
+                <div class="income">
+                  <h3>Data Income</h3>
+                </div>
+              </b-col>
+              <b-col cols="5">
+                <div class="transaction-history">
+                  <b-row class="mb-4">
+                    <b-col cols="8">
+                      <h5>Transaction History</h5>
+                    </b-col>
+                    <b-col cols="4">
+                      <router-link to="/history">See All</router-link>
+                    </b-col>
+                  </b-row>
+                  <b-row>
+                    <b-col cols="2">
+                      <img src="../assets/img/users.png" alt="" />
+                    </b-col>
+                    <b-col cols="6">
+                      <div class="info-transaction">
+                        <h6>Samuel Sushi</h6>
+                        <p>Transfer</p>
+                      </div>
+                    </b-col>
+                    <b-col cols="4">
+                      <p>+Rp.50.000</p>
+                    </b-col>
+                  </b-row>
+                  <b-row>
+                    <b-col cols="2">
+                      <img src="../assets/img/users.png" alt="" />
+                    </b-col>
+                    <b-col cols="6">
+                      <div class="info-transaction">
+                        <h6>Christine Mar...</h6>
+                        <p>Transfer</p>
+                      </div>
+                    </b-col>
+                    <b-col cols="4">
+                      <p>+Rp.150.000</p>
+                    </b-col>
+                  </b-row>
+                </div>
+              </b-col>
+            </b-row>
+          </b-col>
+        </b-row>
+        <b-row>
+          <!-- COMPONENT FOOTER -->
+        </b-row>
+      </b-container>
+    </main>
+    <Footer />
+  </div>
+</template>
+
+<script>
+import Header from '../components/_base/header'
+import Aside from '../components/_base/aside'
+import Footer from '../components/_base/footer'
+export default {
+  name: 'MainPage',
+  data() {
+    return {}
+  },
+  components: {
+    Header,
+    Aside,
+    Footer
+  }
+}
+</script>
+
+<style scoped>
+main {
+  background: #e5e5e5;
+}
+.home .main-home .balance {
+  background: #6379f4;
+  border-radius: 20px;
+  margin: 50px 0 10px 0;
+  padding: 30px;
+  color: #fff;
+}
+.home .main-home .balance .btn-transfer {
+  border: none;
+  background: #9da9f3;
+  border: 1px solid #fff;
+  margin: 5px 0;
+}
+.home .main-home .income {
+  background: #fff;
+  border-radius: 20px;
+  padding: 30px;
+}
+.home .main-home .transaction-history {
+  background: #fff;
+  border-radius: 20px;
+  padding: 30px;
+}
+.home .main-home .transaction-history h5 {
+  font-size: 18px;
+}
+.home .main-home .transaction-history h6 {
+  font-size: 16px;
+}
+.home .main-home .transaction-history .info-transaction {
+  margin-left: 10px;
+}
+.home .main-home .transaction-history img {
+  width: 46px;
+  height: 46px;
+  border-radius: 10px;
+}
+</style>
