@@ -45,7 +45,8 @@ const routes = [
   {
     path: '/reset-password',
     name: 'Reset-password',
-    component: ResetPass
+    component: ResetPass,
+    meta: { requiresVisitor: true }
   },
   {
     path: '/pin',
