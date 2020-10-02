@@ -8,6 +8,7 @@ import Amount from '../views/Amount.vue'
 import Confirmation from '../views/Confirmation.vue'
 import Sukses from '../views/Sukses.vue'
 import Failed from '../views/Failed.vue'
+import Landing from '../views/Landing.vue'
 
 Vue.use(VueRouter)
 
@@ -59,6 +60,11 @@ const routes = [
     path: '/failed',
     name: 'Failed',
     component: Failed
+  },
+  {
+    path: '/landing',
+    name: 'Landing',
+    component: Landing
   }
 ]
 
