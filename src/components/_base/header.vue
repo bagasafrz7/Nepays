@@ -68,7 +68,7 @@ export default {
     logoutBtn() {
       this.$swal
         .fire({
-          title: 'U sure? :(',
+          title: 'ARE YOU SURE?',
           icon: 'warning',
           showDenyButton: true,
           showCancelButton: true,
@@ -78,7 +78,7 @@ export default {
         .then((result) => {
           /* Read more about isConfirmed, isDenied below */
           if (result.isConfirmed) {
-            this.$swal.fire('See you again!', '', 'success')
+            this.$swal.fire('SEE YOU AGAIN!', '', 'success')
             this.logout()
           }
         })

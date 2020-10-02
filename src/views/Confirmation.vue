@@ -54,7 +54,7 @@
                   </b-col>
                 </b-row>
               </div>
-              <b-row>
+              <b-row class="mb-5">
                 <b-col cols="12">
                   <b-button
                     variant="primary"

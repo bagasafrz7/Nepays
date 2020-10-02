@@ -16,6 +16,7 @@ import Sukses from '../views/Sukses.vue'
 import Failed from '../views/Failed.vue'
 import Landing from '../views/Landing.vue'
 import changePin from '../views/changePin.vue'
+import TopupHistory from '../views/HistoryTopup.vue'
 
 Vue.use(VueRouter)
 
@@ -72,6 +73,12 @@ const routes = [
     path: '/top-up',
     name: 'Topup',
     component: Topup,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/topup-history',
+    name: 'TopupHistory',
+    component: TopupHistory,
     meta: { requiresAuth: true }
   },
   {
