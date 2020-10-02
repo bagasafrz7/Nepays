@@ -8,6 +8,14 @@ import ResetPass from '../views/auth/ResetPassword.vue'
 import Pin from '../views/auth/Pin.vue'
 import Transfer from '../views/Transfer.vue'
 import store from '../store/index'
+import MainPage from '../views/MainPage.vue'
+import History from '../views/History.vue'
+import Topup from '../views/topUp.vue'
+import Amount from '../views/Amount.vue'
+import Confirmation from '../views/Confirmation.vue'
+import Sukses from '../views/Sukses.vue'
+import Failed from '../views/Failed.vue'
+import Landing from '../views/Landing.vue'
 
 Vue.use(VueRouter)
 
@@ -53,6 +61,46 @@ const routes = [
     name: 'Pin',
     component: Pin,
     meta: { requiresAuth: true }
+  },
+  {
+    path: '/home',
+    name: 'MainPage',
+    component: MainPage
+  },
+  {
+    path: '/history',
+    name: 'History',
+    component: History
+  },
+  {
+    path: '/top-up',
+    name: 'Topup',
+    component: Topup
+  },
+  {
+    path: '/amount',
+    name: 'Amount',
+    component: Amount
+  },
+  {
+    path: '/confirmation',
+    name: 'Confirmation',
+    component: Confirmation
+  },
+  {
+    path: '/sukses',
+    name: 'Sukses',
+    component: Sukses
+  },
+  {
+    path: '/failed',
+    name: 'Failed',
+    component: Failed
+  },
+  {
+    path: '/landing',
+    name: 'Landing',
+    component: Landing
   }
 ]
 
