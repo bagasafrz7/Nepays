@@ -118,7 +118,10 @@ export default {
       const pin = setData.join('')
       const newResult = {
         id: this.user.id,
-        pin
+        form: {
+          pin,
+          pin_confirm: pin
+        }
       }
       this.setPin(newResult)
         .then((res) => {
@@ -127,11 +130,11 @@ export default {
             icon: 'success',
             title: res,
             showConfirmButton: false,
-            timer: 2000
+            timer: 3000
           })
-          // setTimeout(() => {
-          //   this.$router.push('/')
-          // }, 5000)
+          setTimeout(() => {
+            this.$router.push('/home')
+          }, 4000)
         })
         .catch((err) => {
           this.$swal.fire({

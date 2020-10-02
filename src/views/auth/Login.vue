@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import Left from '../../components/AuthLeft'
 export default {
   components: {
@@ -91,8 +91,12 @@ export default {
             password: ''
           }
           setTimeout(() => {
-            this.$router.push('/pin')
-          }, 3000)
+            if (this.user.pin_code === '' || this.user.pin_code === undefined) {
+              this.$router.push('/pin')
+            } else {
+              this.$router.push('/home')
+            }
+          }, 1500)
         })
         .catch((err) => {
           this.$swal.fire({
@@ -104,6 +108,9 @@ export default {
           })
         })
     }
+  },
+  computed: {
+    ...mapGetters(['user'])
   }
 }
 </script>

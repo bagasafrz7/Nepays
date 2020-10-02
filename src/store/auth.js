@@ -59,7 +59,7 @@ export default {
     logout(context) {
       localStorage.removeItem('token')
       context.commit('delUser')
-      router.push('/login')
+      router.push('/')
     },
     interceptorResponse(context) {
       axios.interceptors.response.use(
@@ -115,15 +115,17 @@ export default {
     },
     setPin(context, payload) {
       console.log(payload)
-      // return new Promise((resolve, reject) => {
-      //   axios.patch(`/${payload.id}`,payload.pin)
-      // .then(res => {
-      //   resolve(res.data.msg)
-      // })
-      // .catch(err => {
-      //   resolve(err.response.data.msg)
-      // })
-      // })
+      return new Promise((resolve, reject) => {
+        axios
+          .patch(`http://127.0.0.1:5000/pin/${payload.id}`, payload.form)
+          .then(res => {
+            console.log(res)
+            resolve(res.data.msg)
+          })
+          .catch(err => {
+            resolve(err.response.data.msg)
+          })
+      })
     }
   },
   getters: {

@@ -59,37 +59,44 @@ const routes = [
   {
     path: '/home',
     name: 'Home',
-    component: Home
+    component: Home,
+    meta: { requiresAuth: true }
   },
   {
     path: '/history',
     name: 'History',
-    component: History
+    component: History,
+    meta: { requiresAuth: true }
   },
   {
     path: '/top-up',
     name: 'Topup',
-    component: Topup
+    component: Topup,
+    meta: { requiresAuth: true }
   },
   {
     path: '/amount',
     name: 'Amount',
-    component: Amount
+    component: Amount,
+    meta: { requiresAuth: true }
   },
   {
     path: '/confirmation',
     name: 'Confirmation',
-    component: Confirmation
+    component: Confirmation,
+    meta: { requiresAuth: true }
   },
   {
     path: '/sukses',
     name: 'Sukses',
-    component: Sukses
+    component: Sukses,
+    meta: { requiresAuth: true }
   },
   {
     path: '/failed',
     name: 'Failed',
-    component: Failed
+    component: Failed,
+    meta: { requiresAuth: true }
   },
   {
     path: '/',

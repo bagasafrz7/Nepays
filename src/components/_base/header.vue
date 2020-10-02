@@ -12,14 +12,31 @@
             <div class="header-info">
               <b-row>
                 <b-col cols="2">
-                  <img src="../../assets/img/users.png" alt="" />
+                  <img id="popover-3" :src="port + user.image" alt="" />
+                  <b-popover
+                    target="popover-3"
+                    triggers="hover"
+                    placement="top"
+                  >
+                    <b-button
+                      @click="logoutBtn"
+                      variant="outline-info"
+                      class="mb-2"
+                    >
+                      <b-icon icon="power" aria-hidden="true"></b-icon> Logout
+                    </b-button>
+                  </b-popover>
                 </b-col>
                 <b-col cols="7">
-                  <h6>Robert Chandler</h6>
-                  <p>+62 8139 3877 7946</p>
+                  <h6>{{ user.first_name }} {{ user.last_name }}</h6>
+                  <p>{{ user.phone }}</p>
                 </b-col>
                 <b-col cols="3">
-                  <b-icon icon="bell"></b-icon>
+                  <img
+                    style="width: 30px; height: 30px; margin: 10px auto"
+                    src="../../assets/img/bell.png"
+                    alt=""
+                  />
                 </b-col>
               </b-row>
             </div>
@@ -31,8 +48,38 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
 export default {
-  name: 'Header'
+  name: 'Header',
+  data() {
+    return {
+      port: 'http://127.0.0.1:5000/'
+    }
+  },
+  computed: {
+    ...mapGetters(['user'])
+  },
+  methods: {
+    ...mapActions(['logout']),
+    logoutBtn() {
+      this.$swal
+        .fire({
+          title: 'U sure? :(',
+          icon: 'warning',
+          showDenyButton: true,
+          showCancelButton: true,
+          confirmButtonText: 'Yes',
+          denyButtonText: 'Cancel'
+        })
+        .then((result) => {
+          /* Read more about isConfirmed, isDenied below */
+          if (result.isConfirmed) {
+            this.$swal.fire('See you again!', '', 'success')
+            this.logout()
+          }
+        })
+    }
+  }
 }
 </script>
 
