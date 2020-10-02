@@ -234,7 +234,7 @@ main {
     rgb(199, 199, 199),
     rgb(94, 94, 94)
   );
-  border-radius: 50px 50px 50px 50px;
+  border-radius: 20px 50% 50% 20px;
   padding-left: 60px;
 }
 

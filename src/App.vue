@@ -6,4 +6,14 @@
 </template>
 
 <style>
+#app {
+  @font-face {
+    font-family: NunitoSans;
+    src: url(./assets/NunitoSans-Regular.ttf);
+  }
+}
+
+* {
+  font-family: NunitoSans;
+}
 </style>

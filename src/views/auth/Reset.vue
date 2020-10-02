@@ -61,7 +61,7 @@ export default {
           this.$swal.fire({
             position: 'center',
             icon: 'success',
-            title: res.msg,
+            title: res,
             showConfirmButton: false,
             timer: 2000
           })

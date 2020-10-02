@@ -11,8 +11,8 @@
             </h3>
             <p class="p-text">
               Create 6 digits pin to secure all your money and your data in
-              Zwallet app. Keep it secret and don’t tell anyone about your
-              Nepays account password and the PIN.
+              Nepays app. Keep it secret and don’t tell anyone about your Nepays
+              account password and the PIN.
             </p>
             <b-form class="mt-5">
               <div class="otp">
@@ -125,7 +125,7 @@ export default {
           this.$swal.fire({
             position: 'center',
             icon: 'success',
-            title: res.msg,
+            title: res,
             showConfirmButton: false,
             timer: 2000
           })

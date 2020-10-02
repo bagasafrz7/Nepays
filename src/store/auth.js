@@ -93,6 +93,7 @@ export default {
         axios
           .post('http://127.0.0.1:5000/user/forgot', payload)
           .then(res => {
+            console.log(res.data.msg)
             resolve(res.data.msg)
           })
           .catch(err => {

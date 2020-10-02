@@ -15,12 +15,14 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    meta: { requiresAuth: true }
   },
   {
     path: '/transfer',
     name: 'Transfer',
-    component: Transfer
+    component: Transfer,
+    meta: { requiresAuth: true }
   },
   {
     path: '/register',
@@ -71,7 +73,7 @@ router.beforeEach((to, from, next) => {
   } else if (to.matched.some(record => record.meta.requiresVisitor)) {
     if (store.getters.isLogin) {
       next({
-        path: '/pin'
+        path: '/home'
       })
     } else {
       next()

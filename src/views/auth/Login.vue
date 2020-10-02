@@ -9,7 +9,7 @@
             With 30.000+ Users
           </h3>
           <p class="p-text">
-            Transfering money is eassier than ever, you can access Zwallet
+            Transfering money is eassier than ever, you can access Nepays
             wherever you are. Desktop, laptop, mobile phone? we cover all of
             that for you!
           </p>
