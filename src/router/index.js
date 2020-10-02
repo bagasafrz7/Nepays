@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
 import Login from '../views/auth/Login.vue'
 import Register from '../views/auth/Register.vue'
 import Reset from '../views/auth/Reset.vue'
@@ -8,7 +7,7 @@ import ResetPass from '../views/auth/ResetPassword.vue'
 import Pin from '../views/auth/Pin.vue'
 import Transfer from '../views/Transfer.vue'
 import store from '../store/index'
-import MainPage from '../views/MainPage.vue'
+import Home from '../views/MainPage.vue'
 import History from '../views/History.vue'
 import Topup from '../views/topUp.vue'
 import Amount from '../views/Amount.vue'
@@ -20,12 +19,6 @@ import Landing from '../views/Landing.vue'
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home,
-    meta: { requiresAuth: true }
-  },
   {
     path: '/transfer',
     name: 'Transfer',
@@ -64,8 +57,8 @@ const routes = [
   },
   {
     path: '/home',
-    name: 'MainPage',
-    component: MainPage
+    name: 'Home',
+    component: Home
   },
   {
     path: '/history',
@@ -98,7 +91,7 @@ const routes = [
     component: Failed
   },
   {
-    path: '/landing',
+    path: '/',
     name: 'Landing',
     component: Landing
   }
@@ -114,7 +107,7 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (!store.getters.isLogin) {
       next({
-        path: '/login'
+        path: '/'
       })
     } else {
       next()

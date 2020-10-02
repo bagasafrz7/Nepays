@@ -12,8 +12,12 @@
             />
           </b-col>
           <b-col cols="9" class="text-right">
-            <b-button class="mr-5 login">Login</b-button>
-            <b-button class="register">Sign Up</b-button>
+            <router-link to="/login">
+              <b-button class="mr-5 login">Login</b-button>
+            </router-link>
+            <router-link to="/register">
+              <b-button class="register">Sign Up</b-button>
+            </router-link>
           </b-col>
           <b-col cols="12" xl="7" class="title-banner pl-5">
             <h1>Awesome App</h1>
