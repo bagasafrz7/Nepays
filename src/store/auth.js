@@ -22,6 +22,7 @@ export default {
         axios
           .post('http://127.0.0.1:5000/user/register', payload)
           .then(res => {
+            console.log(res.data)
             resolve(res.data)
           })
           .catch(err => {

@@ -179,6 +179,7 @@ export default {
     continueBtn() {
       this.searchReceiverSection = true
       this.transferSection = false
+      this.$router.push('/confirmation')
     },
     receiverBtn() {
       this.searchReceiverSection = false

@@ -83,24 +83,50 @@
           </b-col>
         </b-row>
         <b-row>
-          <b-col cols="2">
-            <b-input type="number" placeholder="_" class="btn-pin"></b-input>
-          </b-col>
-          <b-col cols="2">
-            <b-input type="number" placeholder="_" class="btn-pin"></b-input>
-          </b-col>
-          <b-col cols="2">
-            <b-input type="number" placeholder="_" class="btn-pin"></b-input>
-          </b-col>
-          <b-col cols="2">
-            <b-input type="number" placeholder="_" class="btn-pin"></b-input>
-          </b-col>
-          <b-col cols="2">
-            <b-input type="number" placeholder="_" class="btn-pin"></b-input>
-          </b-col>
-          <b-col cols="2">
-            <b-input type="number" placeholder="_" class="btn-pin"></b-input>
-          </b-col>
+          <div class="otp">
+            <b-form-input
+              class="input-otp"
+              type="text"
+              maxLength="1"
+              id="input-2"
+              v-model="pin1"
+            ></b-form-input>
+            <b-form-input
+              class="input-otp"
+              type="text"
+              maxLength="1"
+              id="input-2"
+              v-model="pin2"
+            ></b-form-input>
+            <b-form-input
+              class="input-otp"
+              type="text"
+              maxLength="1"
+              id="input-2"
+              v-model="pin3"
+            ></b-form-input>
+            <b-form-input
+              class="input-otp"
+              type="text"
+              maxLength="1"
+              id="input-2"
+              v-model="pin4"
+            ></b-form-input>
+            <b-form-input
+              class="input-otp"
+              type="text"
+              maxLength="1"
+              id="input-2"
+              v-model="pin5"
+            ></b-form-input>
+            <b-form-input
+              class="input-otp"
+              type="text"
+              maxLength="1"
+              id="input-2"
+              v-model="pin6"
+            ></b-form-input>
+          </div>
         </b-row>
       </div>
       <b-row>
@@ -109,7 +135,7 @@
             class="mt-4 btn-modal-continue"
             variant="primary"
             block
-            @click="hideModal"
+            @click="confirmPin"
             >Continue</b-button
           >
         </b-col>
@@ -126,7 +152,14 @@ import Footer from '../components/_base/footer'
 export default {
   name: 'Confirmation',
   data() {
-    return {}
+    return {
+      pin1: '',
+      pin2: '',
+      pin3: '',
+      pin4: '',
+      pin5: '',
+      pin6: ''
+    }
   },
   components: {
     Header,
@@ -137,8 +170,18 @@ export default {
     showModal() {
       this.$refs['my-modal'].show()
     },
-    hideModal() {
-      this.$refs['my-modal'].hide()
+    confirmPin() {
+      // this.$refs['my-modal'].hide()s
+      const setData = [
+        this.pin1,
+        this.pin2,
+        this.pin3,
+        this.pin4,
+        this.pin5,
+        this.pin6
+      ]
+      const pin = setData.join('')
+      console.log(pin)
     },
     toggleModal() {
       // We pass the ID of the button that we want to return focus to
@@ -198,5 +241,19 @@ main {
   background: #6379f4;
   border: 1px solid #6379f4;
   float: right;
+}
+
+.otp {
+  display: grid;
+  margin: auto;
+  grid-template-columns: repeat(6, 38px);
+  gap: 24px;
+}
+
+.input-otp {
+  font-size: 20px;
+  text-align: center;
+  font-weight: bold;
+  height: 50px;
 }
 </style>
