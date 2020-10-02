@@ -15,6 +15,7 @@ import Confirmation from '../views/Confirmation.vue'
 import Sukses from '../views/Sukses.vue'
 import Failed from '../views/Failed.vue'
 import Landing from '../views/Landing.vue'
+import changePin from '../views/changePin.vue'
 
 Vue.use(VueRouter)
 
@@ -22,8 +23,8 @@ const routes = [
   {
     path: '/transfer',
     name: 'Transfer',
-    component: Transfer,
-    meta: { requiresAuth: true }
+    component: Transfer
+    // meta: { requiresAuth: true }
   },
   {
     path: '/register',
@@ -94,6 +95,11 @@ const routes = [
     path: '/',
     name: 'Landing',
     component: Landing
+  },
+  {
+    path: '/change-pin',
+    name: 'changePin',
+    component: changePin
   }
 ]
 
