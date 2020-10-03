@@ -17,6 +17,9 @@ import Failed from '../views/Failed.vue'
 import Landing from '../views/Landing.vue'
 import changePin from '../views/changePin.vue'
 import TopupHistory from '../views/HistoryTopup.vue'
+import Profile from '../views/profile/Profile.vue'
+import Personal from '../views/profile/Personal.vue'
+import ChangePassword from '../views/profile/ChangePass.vue'
 
 Vue.use(VueRouter)
 
@@ -114,6 +117,24 @@ const routes = [
     path: '/change-pin',
     name: 'changePin',
     component: changePin,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/profile/personal-information',
+    name: 'Personal',
+    component: Personal,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/profile/change-password',
+    name: 'ChangePassword',
+    component: ChangePassword,
     meta: { requiresAuth: true }
   }
 ]
