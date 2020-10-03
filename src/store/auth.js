@@ -23,7 +23,7 @@ export default {
     getProfile(context, payload) {
       return new Promise((resolve, reject) => {
         axios
-          .get(`http://127.0.0.1:3009/profile/profile/${payload}`)
+          .get(`${process.env.VUE_APP_URL}profile/personal/${payload}`)
           .then(response => {
             console.log(response)
             context.commit('setProfile', response.data.data[0])
@@ -35,7 +35,7 @@ export default {
     register(context, payload) {
       return new Promise((resolve, reject) => {
         axios
-          .post('http://127.0.0.1:3009/user/register', payload)
+          .post(`${process.env.VUE_APP_URL}user/register`, payload)
           .then(res => {
             console.log(res.data)
             resolve(res.data)
@@ -48,7 +48,7 @@ export default {
     login(context, payload) {
       return new Promise((resolve, reject) => {
         axios
-          .post('http://127.0.0.1:3009/user/login', payload)
+          .post(`${process.env.VUE_APP_URL}user/login`, payload)
           .then(res => {
             context.commit('setUser', res.data.data)
             localStorage.setItem('token', res.data.data.token)
@@ -62,12 +62,12 @@ export default {
     interceptorRequest(context) {
       console.log('interceptors works!')
       axios.interceptors.request.use(
-        function(config) {
+        function (config) {
           config.headers.authorization = `Bearer ${context.state.token}`
           // Do something before request is sent
           return config
         },
-        function(error) {
+        function (error) {
           return Promise.reject(error)
         }
       )
@@ -80,10 +80,10 @@ export default {
     },
     interceptorResponse(context) {
       axios.interceptors.response.use(
-        function(response) {
+        function (response) {
           return response
         },
-        function(error) {
+        function (error) {
           if (error.response.status === 403) {
             if (
               error.response.data.msg === 'invalid token' ||
@@ -108,7 +108,7 @@ export default {
       console.log(payload)
       return new Promise((resolve, reject) => {
         axios
-          .post('http://127.0.0.1:5000/user/forgot', payload)
+          .post(`${process.env.VUE_APP_URL}user/forgot`, payload)
           .then(res => {
             console.log(res.data.msg)
             resolve(res.data.msg)
@@ -121,7 +121,7 @@ export default {
     newPassword(context, payload) {
       return new Promise((resolve, reject) => {
         axios
-          .patch('http://127.0.0.1:5000/user/reset', payload)
+          .patch(`${process.env.VUE_APP_URL}user/reset`, payload)
           .then(res => {
             resolve(res.data.msg)
           })
@@ -134,7 +134,7 @@ export default {
       console.log(payload)
       return new Promise((resolve, reject) => {
         axios
-          .patch(`http://127.0.0.1:5000/pin/${payload.id}`, payload.form)
+          .patch(`${process.env.VUE_APP_URL}pin/${payload.id}`, payload.form)
           .then(res => {
             console.log(res)
             resolve(res.data.msg)
