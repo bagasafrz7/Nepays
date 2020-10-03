@@ -78,7 +78,7 @@ export default {
         password: this.form.password
       }
       this.login(setData)
-        .then((res) => {
+        .then(res => {
           this.$swal.fire({
             position: 'center',
             icon: 'success',
@@ -91,10 +91,10 @@ export default {
             password: ''
           }
           setTimeout(() => {
-            this.$router.push('/pin')
+            this.$router.push('/home')
           }, 3000)
         })
-        .catch((err) => {
+        .catch(err => {
           this.$swal.fire({
             position: 'center',
             icon: 'error',

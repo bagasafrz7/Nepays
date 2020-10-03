@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
 import Login from '../views/auth/Login.vue'
 import Register from '../views/auth/Register.vue'
 import Reset from '../views/auth/Reset.vue'
@@ -16,16 +15,13 @@ import Confirmation from '../views/Confirmation.vue'
 import Sukses from '../views/Sukses.vue'
 import Failed from '../views/Failed.vue'
 import Landing from '../views/Landing.vue'
+import Profile from '../views/profile/Profile.vue'
+import Personal from '../views/profile/Personal.vue'
+import ChangePassword from '../views/profile/ChangePass.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home,
-    meta: { requiresAuth: true }
-  },
   {
     path: '/transfer',
     name: 'Transfer',
@@ -65,7 +61,8 @@ const routes = [
   {
     path: '/home',
     name: 'MainPage',
-    component: MainPage
+    component: MainPage,
+    meta: { requiresAuth: true }
   },
   {
     path: '/history',
@@ -101,6 +98,24 @@ const routes = [
     path: '/landing',
     name: 'Landing',
     component: Landing
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/profile/personal-information',
+    name: 'Personal',
+    component: Personal,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/profile/change-password',
+    name: 'ChangePassword',
+    component: ChangePassword,
+    meta: { requiresAuth: true }
   }
 ]
 
@@ -122,7 +137,7 @@ router.beforeEach((to, from, next) => {
   } else if (to.matched.some(record => record.meta.requiresVisitor)) {
     if (store.getters.isLogin) {
       next({
-        path: '/home'
+        path: '/'
       })
     } else {
       next()

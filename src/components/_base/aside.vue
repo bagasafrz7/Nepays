@@ -26,7 +26,7 @@
             <h3>Top Up</h3>
           </b-col>
         </b-row>
-        <b-row class="nav">
+        <b-row class="nav" @click="$router.push('/profile')">
           <b-col cols="2">
             <b-icon icon="person"></b-icon>
           </b-col>
