@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="profile-personal">
     <Header />
-    <b-jumbotron class="mb-0" style="background-color: #fafcff">
+    <main>
       <b-container>
         <b-row>
           <b-col cols="3">
@@ -63,7 +63,7 @@
           </b-col>
         </b-row>
       </b-container>
-    </b-jumbotron>
+    </main>
     <Footer />
   </div>
 </template>
@@ -131,6 +131,10 @@ export default {
 </script>
 
 <style scoped>
+main {
+  background: #e5e5e5;
+}
+
 .profile {
   background: #fff;
   padding: 50px 40px;

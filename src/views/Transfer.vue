@@ -36,7 +36,7 @@
                       <div
                         class="flex mt-5 mr-5"
                         style="cursor: pointer"
-                        @click="receiverBtn"
+                        @click="receiverBtn(value.id)"
                       >
                         <div class="receiver-img mr-3">
                           <img
@@ -194,7 +194,7 @@ export default {
     this.searchReceiver()
   },
   methods: {
-    ...mapActions(['searchUser', 'getAllReceiver']),
+    ...mapActions(['searchUser', 'getAllReceiver', 'getReceiverById']),
     ...mapMutations(['setPagination', 'setUserLogin']),
     continueBtn() {
       this.searchReceiverSection = true
@@ -206,9 +206,10 @@ export default {
       //   ERROR
       // }
     },
-    receiverBtn() {
+    receiverBtn(id) {
       this.searchReceiverSection = false
       this.transferSection = true
+      this.getReceiverById(id)
     },
     searchReceiver() {
       const setData = {

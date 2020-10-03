@@ -20,6 +20,7 @@ export default {
   },
   actions: {
     getReceiverById(context, payload) {
+      console.log(payload)
       // return new Promise((resolve, reject) => {
       //   axios.get(`${process.env.VUE_APP_URL}`, payload)
       //     .then(res => {
