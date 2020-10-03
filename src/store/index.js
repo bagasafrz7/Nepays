@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import Auth from './auth'
 import Transfer from './transfer'
 import createPersistedState from 'vuex-persistedstate'
+import Transaction from './transaction'
 
 Vue.use(Vuex)
 
@@ -12,7 +13,8 @@ export default new Vuex.Store({
   actions: {},
   modules: {
     Auth,
-    Transfer
+    Transfer,
+    Transaction
   },
   plugins: [
     createPersistedState({
