@@ -16,9 +16,9 @@
         </b-row>
         <b-row class="nav">
           <b-col cols="2">
-            <router-link to="/transfer">
+            <routerLink to="/transfer">
               <b-icon icon="arrow-up"></b-icon>
-            </router-link>
+            </routerLink>
           </b-col>
           <b-col cols="10">
             <router-link to="/transfer">
@@ -38,7 +38,7 @@
             </router-link>
           </b-col>
         </b-row>
-        <b-row class="nav" @click="$router.push('/profile')">
+        <b-row class="nav">
           <b-col cols="2">
             <router-link to="/profile">
               <b-icon icon="person"></b-icon>

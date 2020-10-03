@@ -15,8 +15,8 @@ export default new Vuex.Store({
   modules: {
     Auth,
     Transfer,
-    Transaction,
-    Profile
+    Profile,
+    Transaction
   },
   plugins: [
     createPersistedState({

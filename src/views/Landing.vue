@@ -177,14 +177,11 @@
         <!-- CAROUSEL -->
         <b-carousel
           id="carousel-1"
-          v-model="slide"
           controls
           indicators
           background="#e5e5e5"
           img-width="1024"
           img-height="480"
-          @sliding-start="onSlideStart"
-          @sliding-end="onSlideEnd"
         >
           <b-carousel-slide img-blank>
             <b-avatar size="6rem" class="mb-1 opinion-people">

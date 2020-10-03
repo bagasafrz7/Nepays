@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="profile-personal">
     <Header />
     <main>
       <b-container>
@@ -137,6 +137,7 @@ export default {
 main {
   background: #e5e5e5;
 }
+
 .profile {
   background: #fff;
   padding: 50px 40px;
