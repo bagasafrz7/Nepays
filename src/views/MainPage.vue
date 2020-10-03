@@ -16,14 +16,18 @@
                   <p>+62 813-9387-7946</p>
                 </b-col>
                 <b-col cols="4" class="text-right">
-                  <b-button size="lg" class="btn-transfer">
-                    <b-icon icon="arrow-up" aria-hidden="true"></b-icon>
-                    Transer
-                  </b-button>
-                  <b-button size="lg" class="btn-transfer">
-                    <b-icon icon="plus" aria-hidden="true"></b-icon>
-                    Top Up
-                  </b-button>
+                  <router-link to="/transfer">
+                    <b-button size="lg" class="btn-transfer">
+                      <b-icon icon="arrow-up" aria-hidden="true"></b-icon>
+                      Transer
+                    </b-button>
+                  </router-link>
+                  <router-link to="/top-up">
+                    <b-button size="lg" class="btn-transfer">
+                      <b-icon icon="plus" aria-hidden="true"></b-icon>
+                      Top Up
+                    </b-button>
+                  </router-link>
                 </b-col>
               </b-row>
             </div>
@@ -80,60 +84,21 @@
                       <router-link to="/history">See All</router-link>
                     </b-col>
                   </b-row>
-                  <b-row>
+                  <b-row
+                    v-for="(item, index) in getRecentTransferHome"
+                    :key="index"
+                  >
                     <b-col cols="2">
-                      <img src="../assets/img/users.png" alt="" />
+                      <img :src="urlAPI + item.image" alt="" />
                     </b-col>
                     <b-col cols="6">
                       <div class="info-transaction">
-                        <h6>Samuel Sushi</h6>
+                        <h6>{{ item.first_name }} {{ item.last_name }}</h6>
                         <p>Transfer</p>
                       </div>
                     </b-col>
                     <b-col cols="4">
-                      <p>+Rp.50.000</p>
-                    </b-col>
-                  </b-row>
-                  <b-row>
-                    <b-col cols="2">
-                      <img src="../assets/img/users.png" alt="" />
-                    </b-col>
-                    <b-col cols="6">
-                      <div class="info-transaction">
-                        <h6>Christine Mar...</h6>
-                        <p>Transfer</p>
-                      </div>
-                    </b-col>
-                    <b-col cols="4">
-                      <p>+Rp.150.000</p>
-                    </b-col>
-                  </b-row>
-                  <b-row>
-                    <b-col cols="2">
-                      <img src="../assets/img/users.png" alt="" />
-                    </b-col>
-                    <b-col cols="6">
-                      <div class="info-transaction">
-                        <h6>Samuel Sushi</h6>
-                        <p>Transfer</p>
-                      </div>
-                    </b-col>
-                    <b-col cols="4">
-                      <p>+Rp.50.000</p>
-                    </b-col>
-                  </b-row>
-                  <b-row>
-                    <b-col cols="2">
-                      <img src="../assets/img/users.png" alt="" />
-                    </b-col>
-                    <b-col cols="6">
-                      <div class="info-transaction">
-                        <h6>Christine Mar...</h6>
-                        <p>Transfer</p>
-                      </div>
-                    </b-col>
-                    <b-col cols="4">
-                      <p>+Rp.150.000</p>
+                      <p>+{{ item.amount }}</p>
                     </b-col>
                   </b-row>
                 </div>
@@ -151,18 +116,42 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
 import Header from '../components/_base/header'
 import Aside from '../components/_base/aside'
 import Footer from '../components/_base/footer'
 export default {
   name: 'MainPage',
   data() {
-    return {}
+    return {
+      urlAPI: process.env.VUE_APP_URL
+    }
   },
   components: {
     Header,
     Aside,
     Footer
+  },
+  created() {
+    this.getDataRecent()
+  },
+  computed: {
+    ...mapGetters(['getRecentTransferHome', 'user'])
+  },
+  methods: {
+    ...mapActions(['dataRecentTransferHome']),
+    getDataRecent() {
+      // const setData = {
+      //   id: this.user[0].id
+      // }
+      this.dataRecentTransferHome(this.user)
+        .then((response) => {
+          console.log(response)
+        })
+        .catch((error) => {
+          console.log(error.data.msg)
+        })
+    }
   }
 }
 </script>

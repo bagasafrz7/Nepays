@@ -12,7 +12,9 @@
             <div class="header-info">
               <b-row>
                 <b-col cols="2">
-                  <img id="popover-3" :src="port + user.image" alt="" />
+                  <router-link to="/profile">
+                    <img id="popover-3" :src="port + user.image" alt="" />
+                  </router-link>
                   <b-popover
                     target="popover-3"
                     triggers="hover"
@@ -28,8 +30,10 @@
                   </b-popover>
                 </b-col>
                 <b-col cols="7">
-                  <h6>{{ user.first_name }} {{ user.last_name }}</h6>
-                  <p>{{ user.phone }}</p>
+                  <router-link to="/profile">
+                    <h6>{{ user.first_name }} {{ user.last_name }}</h6>
+                    <p>{{ user.phone }}</p>
+                  </router-link>
                 </b-col>
                 <b-col cols="3">
                   <img
@@ -100,7 +104,15 @@ export default {
   width: 52px;
   height: 52px;
 }
+.header .header-info h6 {
+  color: #3a3d42;
+  text-decoration: none !important;
+}
 .header .header-info p {
   color: #3a3d42;
+  text-decoration: none !important;
+}
+.header .header-info a:hover {
+  text-decoration: none;
 }
 </style>

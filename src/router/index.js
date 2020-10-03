@@ -23,8 +23,8 @@ const routes = [
   {
     path: '/transfer',
     name: 'Transfer',
-    component: Transfer
-    // meta: { requiresAuth: true }
+    component: Transfer,
+    meta: { requiresAuth: true }
   },
   {
     path: '/register',
@@ -106,7 +106,8 @@ const routes = [
   {
     path: '/change-pin',
     name: 'changePin',
-    component: changePin
+    component: changePin,
+    meta: { requiresAuth: true }
   }
 ]
 

@@ -4,42 +4,58 @@
       <b-col cols="12">
         <b-row class="nav">
           <b-col cols="2">
-            <b-icon icon="grid"></b-icon>
+            <router-link to="/home">
+              <b-icon icon="grid"></b-icon>
+            </router-link>
           </b-col>
           <b-col cols="10">
-            <h3>Dashboard</h3>
+            <router-link to="/home">
+              <h3>Dashboard</h3>
+            </router-link>
           </b-col>
         </b-row>
         <b-row class="nav">
           <b-col cols="2">
-            <b-icon icon="arrow-up"></b-icon>
+            <router-link to="/transfer">
+              <b-icon icon="arrow-up"></b-icon>
+            </router-link>
           </b-col>
           <b-col cols="10">
-            <h3>Transfer</h3>
+            <router-link to="/transfer">
+              <h3>Transfer</h3>
+            </router-link>
           </b-col>
         </b-row>
         <b-row class="nav">
           <b-col cols="2">
-            <b-icon icon="plus"></b-icon>
+            <router-link to="/top-up">
+              <b-icon icon="plus"></b-icon>
+            </router-link>
           </b-col>
           <b-col cols="10">
-            <h3>Top Up</h3>
+            <router-link to="/top-up">
+              <h3>Top Up</h3>
+            </router-link>
           </b-col>
         </b-row>
         <b-row class="nav">
           <b-col cols="2">
-            <b-icon icon="person"></b-icon>
+            <router-link to="/profile">
+              <b-icon icon="person"></b-icon>
+            </router-link>
           </b-col>
           <b-col cols="10">
-            <h3>Profile</h3>
+            <router-link to="/profile">
+              <h3>Profile</h3>
+            </router-link>
           </b-col>
         </b-row>
         <b-row class="logout">
           <b-col cols="2">
-            <b-icon icon="box-arrow-right"></b-icon>
+            <b-icon icon="box-arrow-right" @click="logoutBtn"></b-icon>
           </b-col>
           <b-col cols="10">
-            <h3>Logout</h3>
+            <h3 @click="logoutBtn">Logout</h3>
           </b-col>
         </b-row>
       </b-col>
@@ -48,8 +64,34 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
-  name: 'Aside'
+  name: 'Aside',
+  data() {
+    return {}
+  },
+  methods: {
+    ...mapActions(['logout']),
+    logoutBtn() {
+      this.$swal
+        .fire({
+          title: 'U sure? :(',
+          icon: 'warning',
+          showDenyButton: true,
+          showCancelButton: true,
+          confirmButtonText: 'Yes',
+          denyButtonText: 'Cancel'
+        })
+        .then((result) => {
+          /* Read more about isConfirmed, isDenied below */
+          if (result.isConfirmed) {
+            this.$swal.fire('See you again!', '', 'success')
+            this.logout()
+          }
+        })
+    }
+  }
 }
 </script>
 
@@ -78,5 +120,8 @@ export default {
 .aside .logout {
   margin-top: 300px;
   cursor: pointer;
+}
+.aside a:hover {
+  text-decoration: none;
 }
 </style>
