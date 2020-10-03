@@ -13,7 +13,7 @@
   }
 }
 
-* {
+body {
   font-family: NunitoSans;
 }
 </style>
