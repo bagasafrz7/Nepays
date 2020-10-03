@@ -15,19 +15,6 @@
                   <router-link to="/profile">
                     <img id="popover-3" :src="port + user.image" alt="" />
                   </router-link>
-                  <b-popover
-                    target="popover-3"
-                    triggers="hover"
-                    placement="top"
-                  >
-                    <b-button
-                      @click="logoutBtn"
-                      variant="outline-info"
-                      class="mb-2"
-                    >
-                      <b-icon icon="power" aria-hidden="true"></b-icon> Logout
-                    </b-button>
-                  </b-popover>
                 </b-col>
                 <b-col cols="7">
                   <router-link to="/profile">
@@ -52,7 +39,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 export default {
   name: 'Header',
   data() {
@@ -63,27 +50,7 @@ export default {
   computed: {
     ...mapGetters(['user'])
   },
-  methods: {
-    ...mapActions(['logout']),
-    logoutBtn() {
-      this.$swal
-        .fire({
-          title: 'ARE YOU SURE?',
-          icon: 'warning',
-          showDenyButton: true,
-          showCancelButton: true,
-          confirmButtonText: 'Yes',
-          denyButtonText: 'Cancel'
-        })
-        .then((result) => {
-          /* Read more about isConfirmed, isDenied below */
-          if (result.isConfirmed) {
-            this.$swal.fire('SEE YOU AGAIN!', '', 'success')
-            this.logout()
-          }
-        })
-    }
-  }
+  methods: {}
 }
 </script>
 

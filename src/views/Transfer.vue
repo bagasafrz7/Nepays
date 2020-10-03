@@ -67,6 +67,7 @@
                     <b-pagination
                       v-model="currentPage"
                       :total-rows="rows"
+                      :per-page="limit"
                       align="center"
                       @change="pageChange"
                     ></b-pagination>
@@ -180,23 +181,19 @@ export default {
     return {
       // rows: 100,
       currentPage: 1,
+      limit: 4,
       searchReceiverSection: true,
       transferSection: false,
       search: '',
       amounts: '',
       notes: '',
-      userId: '',
       port: 'http://127.0.0.1:5000/'
     }
   },
   created() {
-    this.pageChange()
+    this.searchReceiver()
   },
   methods: {
-    // alwaysOn() {
-    //   this.userId = this.user.id
-    //   this.setUserLogin(this.userId)
-    // },
     ...mapActions(['searchUser', 'getAllReceiver']),
     ...mapMutations(['setPagination', 'setUserLogin']),
     continueBtn() {
@@ -222,6 +219,7 @@ export default {
     },
     pageChange(event) {
       this.setPagination(event)
+      this.searchReceiver()
     }
   },
   computed: {

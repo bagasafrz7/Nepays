@@ -23,7 +23,7 @@ export default {
     getProfile(context, payload) {
       return new Promise((resolve, reject) => {
         axios
-          .get(`http://127.0.0.1:3009/profile/profile/${payload}`)
+          .get(`http://127.0.0.1:5000/profile/profile/${payload}`)
           .then(response => {
             console.log(response)
             context.commit('setProfile', response.data.data[0])
@@ -35,7 +35,7 @@ export default {
     register(context, payload) {
       return new Promise((resolve, reject) => {
         axios
-          .post('http://127.0.0.1:3009/user/register', payload)
+          .post('http://127.0.0.1:5000/user/register', payload)
           .then(res => {
             console.log(res.data)
             resolve(res.data)
@@ -48,7 +48,7 @@ export default {
     login(context, payload) {
       return new Promise((resolve, reject) => {
         axios
-          .post('http://127.0.0.1:3009/user/login', payload)
+          .post('http://127.0.0.1:5000/user/login', payload)
           .then(res => {
             context.commit('setUser', res.data.data)
             localStorage.setItem('token', res.data.data.token)
