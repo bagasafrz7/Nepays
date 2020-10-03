@@ -14,7 +14,7 @@
                   <h2>Top Up</h2>
                 </b-col>
                 <b-col cols="6" class="text-right">
-                  <router-link to="/history-topup">
+                  <router-link to="/topup-history">
                     <h5 class="mt-2">See All History Top Up</h5>
                   </router-link>
                 </b-col>

@@ -38,12 +38,16 @@
               <b-row>
                 <b-col cols="12">
                   <div class="search-result">
-                    <b-row class="my-4">
+                    <b-row
+                      class="my-4"
+                      v-for="(item, index) in getHistoryTransaction"
+                      :key="index"
+                    >
                       <b-col cols="2">
-                        <img src="../assets/img/users.png" alt="" />
+                        <img :src="urlAPI + item.image" alt="" />
                       </b-col>
                       <b-col cols="8">
-                        <h6>Samuel Sushi</h6>
+                        <h6>{{ item.first_name }} {{ item.first_name }}</h6>
                         <p>Transfer</p>
                       </b-col>
                       <b-col cols="2">
@@ -54,47 +58,7 @@
                             font-weight: bold;
                           "
                         >
-                          +Rp50.000
-                        </p>
-                      </b-col>
-                    </b-row>
-                    <b-row class="my-4">
-                      <b-col cols="2">
-                        <img src="../assets/img/users.png" alt="" />
-                      </b-col>
-                      <b-col cols="8">
-                        <h6>Samuel Sushi</h6>
-                        <p>Transfer</p>
-                      </b-col>
-                      <b-col cols="2">
-                        <p
-                          style="
-                            color: #1ec15f;
-                            font-size: 18px;
-                            font-weight: bold;
-                          "
-                        >
-                          +Rp50.000
-                        </p>
-                      </b-col>
-                    </b-row>
-                    <b-row class="my-4">
-                      <b-col cols="2">
-                        <img src="../assets/img/users.png" alt="" />
-                      </b-col>
-                      <b-col cols="8">
-                        <h6>Samuel Sushi</h6>
-                        <p>Transfer</p>
-                      </b-col>
-                      <b-col cols="2">
-                        <p
-                          style="
-                            color: #1ec15f;
-                            font-size: 18px;
-                            font-weight: bold;
-                          "
-                        >
-                          +Rp50.000
+                          +{{ item.amount }}
                         </p>
                       </b-col>
                     </b-row>
@@ -107,6 +71,7 @@
                     <b-pagination
                       v-model="currentPage"
                       :total-rows="rows"
+                      @change="handlePageChange"
                       align="center"
                       style="margin-top: 50px"
                     ></b-pagination>
@@ -123,18 +88,60 @@
 </template>
 
 <script>
+import { mapGetters, mapActions, mapMutations } from 'vuex'
+
 import Header from '../components/_base/header'
 import Aside from '../components/_base/aside'
 import Footer from '../components/_base/footer'
 export default {
   name: 'History',
   data() {
-    return {}
+    return {
+      currentPage: 1,
+      urlAPI: process.env.VUE_APP_URL
+    }
   },
   components: {
     Header,
     Aside,
     Footer
+  },
+  created() {
+    this.getDataHistory()
+    this.tes()
+  },
+  computed: {
+    ...mapGetters({
+      getHistoryTransaction: 'getHistoryTransaction',
+      user: 'user',
+      rows: 'getTotalPage'
+    })
+    // ...mapGetters(['getTotalPage'])
+  },
+  methods: {
+    ...mapActions(['dataHistoryTransaction']),
+    ...mapMutations(['changePage']),
+    handlePageChange(numberPage) {
+      this.$router.push(`?page=${numberPage}`)
+      this.changePage(numberPage)
+      this.getDataHistory()
+    },
+    tes() {
+      console.log(this.getTotalPage)
+      console.log(this.totalData)
+    },
+    getDataHistory() {
+      // const setData = {
+      //   id: this.user[0].id
+      // }
+      this.dataHistoryTransaction(this.user)
+        .then((response) => {
+          console.log(response)
+        })
+        .catch((error) => {
+          console.log(error.data)
+        })
+    }
   }
 }
 </script>

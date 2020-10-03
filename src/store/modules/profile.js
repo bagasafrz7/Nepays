@@ -8,7 +8,7 @@ export default {
       return new Promise((resolve, reject) => {
         axios
           .patch(
-            `http://127.0.0.1:3009/profile/profile_image/${payload.id}`,
+            `${process.env.VUE_APP_URL}profile/profile_image/${payload.id}`,
             payload.image
           )
           .then(response => resolve(response.data))
@@ -19,7 +19,7 @@ export default {
       return new Promise((resolve, reject) => {
         axios
           .patch(
-            `http://127.0.0.1:3009/password_change/${payload.id}`,
+            `${process.env.VUE_APP_URL}password_change/${payload.id}`,
             payload.form
           )
           .then(response => resolve(response.data))
@@ -30,7 +30,7 @@ export default {
       return new Promise((resolve, reject) => {
         axios
           .patch(
-            `http://127.0.0.1:3009/profile/personal_name/${payload.id}`,
+            `${process.env.VUE_APP_URL}profile/personal_name/${payload.id}`,
             payload.setData
           )
           .then(response => resolve(response.data))
@@ -41,7 +41,7 @@ export default {
       return new Promise((resolve, reject) => {
         axios
           .patch(
-            `http://127.0.0.1:3009/profile/personal_phone/${payload.id}`,
+            `${process.env.VUE_APP_URL}profile/personal_phone/${payload.id}`,
             payload.setData2
           )
           .then(response => resolve(response.data))

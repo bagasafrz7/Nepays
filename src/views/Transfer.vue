@@ -15,7 +15,7 @@
                     Search Receiver
                   </h3>
                   <div class="grid">
-                    <div>
+                    <div @click="searchReceiver">
                       <img src="../assets/img/search.png" alt="" />
                     </div>
                     <b-form>
@@ -23,11 +23,16 @@
                         class="input"
                         type="text"
                         placeholder="Search receiver here"
+                        v-model="search"
                       ></b-form-input>
                     </b-form>
                   </div>
                   <div>
-                    <b-row class="ml-1">
+                    <b-row
+                      class="ml-1"
+                      v-for="(value, index) in allReceiver.data"
+                      :key="index"
+                    >
                       <div
                         class="flex mt-5 mr-5"
                         style="cursor: pointer"
@@ -36,7 +41,7 @@
                         <div class="receiver-img mr-3">
                           <img
                             class="receiver-img mr-3"
-                            src="../assets/img/users.png"
+                            :src="port + value.image"
                             alt=""
                           />
                         </div>
@@ -49,10 +54,10 @@
                               margin-top: 9px;
                             "
                           >
-                            Muhammad Naldi
+                            {{ value.first_name }} {{ value.last_name }}
                           </p>
                           <p style="font-size: 16px; color: #7a7886">
-                            +62 812-6993-5503
+                            {{ value.phone }}
                           </p>
                         </div>
                       </div>
@@ -63,6 +68,7 @@
                       v-model="currentPage"
                       :total-rows="rows"
                       align="center"
+                      @change="pageChange"
                     ></b-pagination>
                   </div>
                 </b-container>
@@ -112,6 +118,7 @@
                           type="text"
                           maxLength="10"
                           placeholder="0.00"
+                          v-model="amounts"
                         ></b-form-input>
                         <p
                           style="
@@ -134,6 +141,7 @@
                             id="input-1"
                             type="text"
                             placeholder="Add some notes"
+                            v-model="notes"
                           ></b-form-input>
                         </b-form-group>
                       </div>
@@ -161,6 +169,7 @@
 import Aside from '../components/_base/aside'
 import Footer from '../components/_base/footer'
 import Header from '../components/_base/header'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 export default {
   components: {
     Aside,
@@ -169,22 +178,54 @@ export default {
   },
   data() {
     return {
-      rows: 100,
-      currentPage: 3,
+      // rows: 100,
+      currentPage: 1,
       searchReceiverSection: true,
-      transferSection: false
+      transferSection: false,
+      search: '',
+      amounts: '',
+      notes: '',
+      userId: '',
+      port: 'http://127.0.0.1:5000/'
     }
   },
+  created() {
+    this.pageChange()
+  },
   methods: {
+    // alwaysOn() {
+    //   this.userId = this.user.id
+    //   this.setUserLogin(this.userId)
+    // },
+    ...mapActions(['searchUser', 'getAllReceiver']),
+    ...mapMutations(['setPagination', 'setUserLogin']),
     continueBtn() {
       this.searchReceiverSection = true
       this.transferSection = false
-      this.$router.push('/confirmation')
+      // KONDISI JIKA NOMINAL KURANG DARI AMOUNTS ----
+      // if(nominal > amounts) {
+      //   this.$router.push('/confirmation')
+      // } else {
+      //   ERROR
+      // }
     },
     receiverBtn() {
       this.searchReceiverSection = false
       this.transferSection = true
+    },
+    searchReceiver() {
+      const setData = {
+        search: this.search,
+        id_user_login: this.user.id
+      }
+      this.getAllReceiver(setData)
+    },
+    pageChange(event) {
+      this.setPagination(event)
     }
+  },
+  computed: {
+    ...mapGetters(['user', 'allReceiver', 'rows'])
   }
 }
 </script>
@@ -243,7 +284,6 @@ main {
   border-radius: 10px;
   width: 70px;
   height: 70px;
-  background-color: red;
 }
 
 .pagination {

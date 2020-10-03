@@ -4,6 +4,7 @@ import Auth from './auth'
 import Transfer from './transfer'
 import Profile from './modules/profile'
 import createPersistedState from 'vuex-persistedstate'
+import Transaction from './transaction'
 
 Vue.use(Vuex)
 
@@ -14,7 +15,8 @@ export default new Vuex.Store({
   modules: {
     Auth,
     Transfer,
-    Profile
+    Profile,
+    Transaction
   },
   plugins: [
     createPersistedState({
