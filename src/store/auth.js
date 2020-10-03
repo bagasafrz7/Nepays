@@ -23,7 +23,7 @@ export default {
     getProfile(context, payload) {
       return new Promise((resolve, reject) => {
         axios
-          .get(`${process.env.VUE_APP_URL}profile/profile/${payload}`)
+          .get(`${process.env.VUE_APP_URL}profile/personal/${payload}`)
           .then(response => {
             console.log(response)
             context.commit('setProfile', response.data.data[0])
