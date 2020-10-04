@@ -7,9 +7,10 @@ export default {
     limit: 3,
     search: '',
     totalPage: '',
-    span: 'week',
+    span: 'month',
     recentTransferHome: {},
-    historyTransaction: {}
+    historyTransaction: [],
+    dataSearch: []
   },
   mutations: {
     setRecentTransferHome(state, payload) {
@@ -18,6 +19,15 @@ export default {
     setHistoryTransaction(state, payload) {
       state.historyTransaction = payload.data
       state.totalPage = payload.pagination.totalData
+    },
+    sortHistoryTransaction(state, payload) {
+      state.span = payload
+    },
+    searchHistoryTransaction(state, payload) {
+      state.historyTransaction = payload.data
+      // state.dataSearch = payload.data
+      // state.search = payload.data
+      // console.log(payload.data)
     },
     changePage(state, payload) {
       state.page = payload
@@ -49,6 +59,21 @@ export default {
             reject(error.response)
           })
       })
+    },
+    searchingHistoryTransaction(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios
+          .get(
+            `${process.env.VUE_APP_URL}transaction/search?id=${payload.id}&keyword=${payload.search.keyword}&page=${context.state.page}`
+          )
+          .then(response => {
+            context.commit('searchHistoryTransaction', response.data)
+            resolve(response.data)
+          })
+          .catch(error => {
+            reject(error.response)
+          })
+      })
     }
   },
   getters: {
@@ -59,8 +84,13 @@ export default {
       return state.historyTransaction
     },
     getTotalPage(state) {
-      // console.log(state.totalPage)
       return state.totalPage
+    },
+    getSearchHistoryTransaction(state) {
+      return state.historyTransaction
+    },
+    getLimit(state) {
+      return state.limit
     }
   }
 }

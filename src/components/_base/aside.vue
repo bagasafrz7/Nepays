@@ -76,7 +76,7 @@ export default {
     logoutBtn() {
       this.$swal
         .fire({
-          title: 'U sure? :(',
+          title: 'logout account ?',
           icon: 'warning',
           showDenyButton: true,
           showCancelButton: true,

@@ -19,6 +19,8 @@
                     <b-form-input
                       type="search"
                       placeholder="Search By Name"
+                      v-model="form.keyword"
+                      v-on:keyup.enter="searching(form.keyword)"
                     ></b-form-input>
                   </b-input-group>
                 </b-col>
@@ -26,12 +28,18 @@
                   <b-dropdown
                     id="dropdown-right"
                     right
-                    text="Sorting"
+                    :text="sortText"
                     variant="primary"
                   >
-                    <b-dropdown-item href="#">This Week</b-dropdown-item>
-                    <b-dropdown-item href="#">This Month</b-dropdown-item>
-                    <b-dropdown-item href="#">This Years</b-dropdown-item>
+                    <b-dropdown-item href="#" @click="sorting('week')"
+                      >This Week</b-dropdown-item
+                    >
+                    <b-dropdown-item href="#" @click="sorting('month')"
+                      >This Month</b-dropdown-item
+                    >
+                    <b-dropdown-item href="#" @click="sorting('year')"
+                      >This Years</b-dropdown-item
+                    >
                   </b-dropdown>
                 </b-col>
               </b-row>
@@ -47,18 +55,26 @@
                         <img :src="urlAPI + item.image" alt="" />
                       </b-col>
                       <b-col cols="8">
-                        <h6>{{ item.first_name }} {{ item.first_name }}</h6>
-                        <p>Transfer</p>
+                        <h6>{{ item.first_name }} {{ item.last_name }}</h6>
+                        <p v-if="item.category === 1">Transfer</p>
+                        <p v-if="item.category === 2">Receive</p>
                       </b-col>
                       <b-col cols="2">
                         <p
+                          v-if="item.category === 2"
                           style="
                             color: #1ec15f;
                             font-size: 18px;
                             font-weight: bold;
                           "
                         >
-                          +{{ item.amount }}
+                          + {{ item.amount }}
+                        </p>
+                        <p
+                          v-if="item.category === 1"
+                          style="color: red; font-size: 18px; font-weight: bold"
+                        >
+                          - {{ item.amount }}
                         </p>
                       </b-col>
                     </b-row>
@@ -70,7 +86,8 @@
                   <div class="mt-4">
                     <b-pagination
                       v-model="currentPage"
-                      :total-rows="rows"
+                      :total-rows="totalPage"
+                      :per-page="limit"
                       @change="handlePageChange"
                       align="center"
                       style="margin-top: 50px"
@@ -97,8 +114,13 @@ export default {
   name: 'History',
   data() {
     return {
+      total: 50,
       currentPage: 1,
-      urlAPI: process.env.VUE_APP_URL
+      urlAPI: process.env.VUE_APP_URL,
+      sortText: 'Sort',
+      form: {
+        keyword: ''
+      }
     }
   },
   components: {
@@ -108,27 +130,25 @@ export default {
   },
   created() {
     this.getDataHistory()
-    this.tes()
+    this.searching()
   },
   computed: {
     ...mapGetters({
-      getHistoryTransaction: 'getHistoryTransaction',
+      getHistoryTransaction: 'getSearchHistoryTransaction',
       user: 'user',
-      rows: 'getTotalPage'
+      totalPage: 'getTotalPage',
+      limit: 'getLimit',
+      getSearchHistoryTransaction: 'getSearchHistoryTransaction'
     })
     // ...mapGetters(['getTotalPage'])
   },
   methods: {
-    ...mapActions(['dataHistoryTransaction']),
-    ...mapMutations(['changePage']),
+    ...mapActions(['dataHistoryTransaction', 'searchingHistoryTransaction']),
+    ...mapMutations(['changePage', 'sortHistoryTransaction']),
     handlePageChange(numberPage) {
       this.$router.push(`?page=${numberPage}`)
       this.changePage(numberPage)
       this.getDataHistory()
-    },
-    tes() {
-      console.log(this.getTotalPage)
-      console.log(this.totalData)
     },
     getDataHistory() {
       // const setData = {
@@ -141,6 +161,26 @@ export default {
         .catch((error) => {
           console.log(error.data)
         })
+    },
+    sorting(value) {
+      if (value === 'week') {
+        this.sortText = 'This Week'
+      } else if (value === 'month') {
+        this.sortText = 'This Month'
+      } else if (value === 'year') {
+        this.sortText = 'This Years'
+      }
+      this.sortHistoryTransaction(value)
+      this.getDataHistory()
+      this.$router.push(`?sort=${value}`)
+    },
+    searching() {
+      const setData = {
+        id: this.user.id,
+        search: this.form
+      }
+      this.searchingHistoryTransaction(setData)
+      this.$router.push(`?search=${this.form.keyword}`)
     }
   }
 }

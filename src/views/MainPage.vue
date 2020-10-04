@@ -12,8 +12,8 @@
               <b-row>
                 <b-col cols="8">
                   <p>Balance</p>
-                  <h2>Rp.120.000</h2>
-                  <p>+62 813-9387-7946</p>
+                  <h2>Rp. {{ user.balance }}</h2>
+                  <p>{{ user.phone }}</p>
                 </b-col>
                 <b-col cols="4" class="text-right">
                   <router-link to="/transfer">
@@ -134,12 +134,13 @@ export default {
   },
   created() {
     this.getDataRecent()
+    this.getProfile(this.user.id)
   },
   computed: {
     ...mapGetters(['getRecentTransferHome', 'user'])
   },
   methods: {
-    ...mapActions(['dataRecentTransferHome']),
+    ...mapActions(['dataRecentTransferHome', 'getProfile']),
     getDataRecent() {
       // const setData = {
       //   id: this.user[0].id

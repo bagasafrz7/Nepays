@@ -188,7 +188,7 @@ export default {
       search: '',
       amounts: '',
       notes: '',
-      port: 'http://127.0.0.1:5000/'
+      port: process.env.VUE_APP_URL
     }
   },
   created() {
