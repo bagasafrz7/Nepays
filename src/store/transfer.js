@@ -7,6 +7,7 @@ export default {
     limit: 3,
     search: '',
     totalPage: '',
+    totalSearch: '',
     span: 'month',
     recentTransferHome: {},
     historyTransaction: [],
@@ -25,9 +26,9 @@ export default {
     },
     searchHistoryTransaction(state, payload) {
       state.historyTransaction = payload.data
+      state.totalSearch = payload.pagination.totalData
       // state.dataSearch = payload.data
       // state.search = payload.data
-      // console.log(payload.data)
     },
     changePage(state, payload) {
       state.page = payload
@@ -85,6 +86,9 @@ export default {
     },
     getTotalPage(state) {
       return state.totalPage
+    },
+    getTotalSearch(state) {
+      return state.totalSearch
     },
     getSearchHistoryTransaction(state) {
       return state.historyTransaction
