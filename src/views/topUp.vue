@@ -32,11 +32,14 @@
                     type="text"
                     maxLength="10"
                     placeholder="0.00"
+                    v-model="form.topup"
                   ></b-form-input>
                 </b-form>
               </b-row>
               <b-row>
-                <b-button class="btn-continue ml-auto">Continue</b-button>
+                <b-button class="btn-continue ml-auto" @click="upBalance"
+                  >Continue</b-button
+                >
               </b-row>
             </div>
           </b-col>
@@ -51,15 +54,52 @@
 import Header from '../components/_base/header'
 import Aside from '../components/_base/aside'
 import Footer from '../components/_base/footer'
+import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'Topup',
   data() {
-    return {}
+    return {
+      form: {}
+    }
   },
   components: {
     Header,
     Aside,
     Footer
+  },
+  computed: {
+    ...mapGetters(['user'])
+  },
+  methods: {
+    ...mapActions(['postBalance']),
+    upBalance() {
+      const payload = {
+        id: this.user.id,
+        data: { nominal: this.form.topup }
+      }
+      this.postBalance(payload)
+        .then((response) => {
+          this.$swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: response.msg,
+            showConfirmButton: false,
+            timer: 1500
+          })
+          setTimeout(() => {
+            this.$router.push('/home')
+          }, 2000)
+        })
+        .catch((error) => {
+          this.$swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: error.data.msg,
+            showConfirmButton: false,
+            timer: 1500
+          })
+        })
+    }
   }
 }
 </script>
