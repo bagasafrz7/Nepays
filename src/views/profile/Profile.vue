@@ -47,7 +47,10 @@
                 </p>
                 <b-icon class="align-self-center" icon="arrow-right"></b-icon>
               </div>
-              <div class="profile-menu text-center">
+              <div
+                class="profile-menu text-center"
+                @click="$router.push('/change-pin')"
+              >
                 <p class="mb-0 text-muted">
                   <strong>Change PIN</strong>
                 </p>
@@ -150,7 +153,6 @@ export default {
 main {
   background: #e5e5e5;
 }
-
 .profile {
   background: #fff;
   padding: 50px 40px;
