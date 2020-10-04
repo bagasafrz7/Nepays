@@ -4,16 +4,16 @@
       <b-img class="wave" :src="require('../assets/landing/wave.png')" />
       <b-container>
         <b-row class="align-items-center">
-          <b-col cols="3">
+          <b-col xl="2" cols="4">
             <b-img
               fluid
               sizes="10rem"
               :src="require('../assets/landing/nepays.png')"
             />
           </b-col>
-          <b-col cols="9" class="text-right">
+          <b-col xl="10" cols="8" class="text-right">
             <router-link to="/login">
-              <b-button class="mr-5 login">Login</b-button>
+              <b-button class="login">Login</b-button>
             </router-link>
             <router-link to="/register">
               <b-button class="register">Sign Up</b-button>
@@ -244,12 +244,13 @@ export default {
 }
 
 .login {
-  padding: 8px 32px;
+  padding: 1% 4%;
   border-radius: 12px;
   background: #6379f4;
   color: #fff;
   border: solid 2px #fff;
   font-weight: bold;
+  margin-right: 4%;
 }
 
 .login:hover,
@@ -257,11 +258,10 @@ export default {
   border: solid 2px #6379f4;
   background: #fff;
   color: #6379f4;
-  opacity: 0.9;
 }
 
 .register {
-  padding: 8px 32px;
+  padding: 1% 3%;
   border-radius: 12px;
   background: #fff;
   color: #6379f4;

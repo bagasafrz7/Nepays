@@ -12,7 +12,7 @@ export default {
             payload.image
           )
           .then(response => resolve(response.data))
-          .catch(error => reject(error))
+          .catch(error => reject(error.response))
       })
     },
     patchProfilePassword(context, payload) {
