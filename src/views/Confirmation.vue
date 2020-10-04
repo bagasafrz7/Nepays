@@ -174,7 +174,7 @@ export default {
     ...mapGetters(['transferDetail', 'user', 'getReceiver'])
   },
   methods: {
-    ...mapActions(['transfer']),
+    ...mapActions(['transfer', 'getProfile']),
     showModal() {
       this.$refs['my-modal'].show()
     },
@@ -222,6 +222,7 @@ export default {
           this.pin5 = ''
           this.pin6 = ''
         })
+      this.getProfile(this.user.id)
     },
     toggleModal() {
       // We pass the ID of the button that we want to return focus to

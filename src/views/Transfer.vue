@@ -199,7 +199,8 @@ export default {
       'searchUser',
       'getAllReceiver',
       'getReceiverById',
-      'transfer'
+      'transfer',
+      'getProfile'
     ]),
     ...mapMutations(['setPagination', 'setUserLogin', 'setTransferDetails']),
     continueBtn(data) {
@@ -230,6 +231,7 @@ export default {
       this.searchReceiverSection = false
       this.transferSection = true
       this.getReceiverById(id)
+      this.getProfile(this.user.id)
     },
     searchReceiver() {
       const setData = {

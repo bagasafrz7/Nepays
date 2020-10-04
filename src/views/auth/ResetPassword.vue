@@ -74,16 +74,24 @@ export default {
       }
       this.newPassword(setData)
         .then((res) => {
-          this.$swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: res,
-            showConfirmButton: false,
-            timer: 2000
-          })
-          setTimeout(() => {
+          if (res.status === 400 || res.status === 404) {
+            this.$swal.fire({
+              position: 'center',
+              icon: 'error',
+              title: res.msg,
+              showConfirmButton: false,
+              timer: 2000
+            })
+          } else {
+            this.$swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: res.msg,
+              showConfirmButton: false,
+              timer: 2000
+            })
             this.$router.push('/login')
-          }, 4000)
+          }
         })
         .catch((err) => {
           this.$swal.fire({

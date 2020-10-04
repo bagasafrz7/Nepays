@@ -116,6 +116,7 @@ export default {
         this.pin6
       ]
       const pin = setData.join('')
+      console.log(typeof pin)
       const newResult = {
         id: this.user.id,
         form: {

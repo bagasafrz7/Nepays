@@ -83,7 +83,7 @@ export default {
   },
   data() {
     return {
-      url: 'http://127.0.0.1:3009',
+      url: process.env.VUE_APP_URL,
       formImage: {}
     }
   },

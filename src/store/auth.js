@@ -53,6 +53,7 @@ export default {
             context.commit('setUser', res.data.data)
             localStorage.setItem('token', res.data.data.token)
             resolve(res.data)
+            console.log(res)
           })
           .catch(err => {
             reject(err.response.data.msg)
@@ -105,12 +106,10 @@ export default {
       )
     },
     resetPassword(context, payload) {
-      console.log(payload)
       return new Promise((resolve, reject) => {
         axios
           .post(`${process.env.VUE_APP_URL}user/forgot`, payload)
           .then(res => {
-            console.log(res.data.msg)
             resolve(res.data.msg)
           })
           .catch(err => {
@@ -123,10 +122,12 @@ export default {
         axios
           .patch(`${process.env.VUE_APP_URL}user/reset`, payload)
           .then(res => {
-            resolve(res.data.msg)
+            console.log(res.data)
+            resolve(res.data)
           })
           .catch(err => {
-            resolve(err.response.data.msg)
+            console.log(err.response)
+            resolve(err.response.data)
           })
       })
     },
