@@ -13,11 +13,13 @@
               <div class="detail-user">
                 <b-row>
                   <b-col cols="2">
-                    <img src="../assets/img/users.png" alt="" />
+                    <img :src="port + getReceiver.image" alt="" />
                   </b-col>
                   <b-col cols="10">
-                    <h6>Sushi Samuel</h6>
-                    <p>+62 813-8492-9994</p>
+                    <h6>
+                      {{ getReceiver.first_name }} {{ getReceiver.last_name }}
+                    </h6>
+                    <p>{{ getReceiver.phone }}</p>
                   </b-col>
                 </b-row>
               </div>
@@ -26,7 +28,7 @@
                 <b-row>
                   <b-col cols="12">
                     <p>Amount</p>
-                    <h5>Rp.100.000</h5>
+                    <h5>Rp. {{ transferDetail.amount }}</h5>
                   </b-col>
                 </b-row>
               </div>
@@ -34,7 +36,7 @@
                 <b-row>
                   <b-col cols="12">
                     <p>Balance Left</p>
-                    <h5>Rp.20.000</h5>
+                    <h5>Rp. {{ user.balance - transferDetail.amount }}</h5>
                   </b-col>
                 </b-row>
               </div>
@@ -42,7 +44,7 @@
                 <b-row>
                   <b-col cols="12">
                     <p>Date & Time</p>
-                    <h5>May 11, 2020 - 12.20</h5>
+                    <h5>{{ transferDetail.date }}</h5>
                   </b-col>
                 </b-row>
               </div>
@@ -50,7 +52,7 @@
                 <b-row>
                   <b-col cols="12">
                     <p>Notes</p>
-                    <h5>For buying some socks</h5>
+                    <h5>{{ transferDetail.note }}</h5>
                   </b-col>
                 </b-row>
               </div>
@@ -149,6 +151,7 @@
 import Header from '../components/_base/header'
 import Aside from '../components/_base/aside'
 import Footer from '../components/_base/footer'
+import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'Confirmation',
   data() {
@@ -158,7 +161,8 @@ export default {
       pin3: '',
       pin4: '',
       pin5: '',
-      pin6: ''
+      pin6: '',
+      port: process.env.VUE_APP_URL
     }
   },
   components: {
@@ -166,7 +170,11 @@ export default {
     Aside,
     Footer
   },
+  computed: {
+    ...mapGetters(['transferDetail', 'user', 'getReceiver'])
+  },
   methods: {
+    ...mapActions(['transfer']),
     showModal() {
       this.$refs['my-modal'].show()
     },
@@ -181,7 +189,39 @@ export default {
         this.pin6
       ]
       const pin = setData.join('')
-      console.log(pin)
+      const setForm = {
+        userId: this.transferDetail.userId,
+        targetId: this.transferDetail.targetId,
+        amount: this.transferDetail.amount,
+        note: this.transferDetail.note,
+        pin
+      }
+      this.transfer(setForm)
+        .then((res) => {
+          this.$swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: res,
+            showConfirmButton: false,
+            timer: 1500
+          })
+          this.$router.push('/transfer')
+        })
+        .catch((err) => {
+          this.$swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: err,
+            showConfirmButton: false,
+            timer: 1500
+          })
+          this.pin1 = ''
+          this.pin2 = ''
+          this.pin3 = ''
+          this.pin4 = ''
+          this.pin5 = ''
+          this.pin6 = ''
+        })
     },
     toggleModal() {
       // We pass the ID of the button that we want to return focus to
