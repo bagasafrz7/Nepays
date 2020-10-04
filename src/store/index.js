@@ -5,6 +5,7 @@ import Transfer from './transfer'
 import Profile from './modules/profile'
 import createPersistedState from 'vuex-persistedstate'
 import Transaction from './transaction'
+import Chart from './chart'
 
 Vue.use(Vuex)
 
@@ -16,7 +17,8 @@ export default new Vuex.Store({
     Auth,
     Transfer,
     Profile,
-    Transaction
+    Transaction,
+    Chart
   },
   plugins: [
     createPersistedState({
