@@ -125,17 +125,21 @@ export default {
         })
     },
     toLogout() {
-      this.$bvModal
-        .msgBoxConfirm('logout account?', {
-          cancelVariant: 'danger',
-          okVariant: 'success',
-          headerClass: 'p-2 border-bottom-0',
-          footerClass: 'p-2 border-top-0',
-          centered: true
+      this.$swal
+        .fire({
+          title: 'logout account ?',
+          icon: 'warning',
+          showDenyButton: true,
+          showCancelButton: true,
+          confirmButtonText: 'Yes',
+          denyButtonText: 'Cancel'
         })
-        .then((value) => {
-          this.isLogout = value
-          this.isLogout ? this.logout() : console.log(value)
+        .then((result) => {
+          /* Read more about isConfirmed, isDenied below */
+          if (result.isConfirmed) {
+            this.$swal.fire('See you again!', '', 'success')
+            this.logout()
+          }
         })
     }
   }
