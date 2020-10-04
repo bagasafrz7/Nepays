@@ -45,7 +45,7 @@
               </b-row>
               <b-row>
                 <b-col cols="12">
-                  <div class="search-result">
+                  <div class="search-result" v-if="search === false">
                     <b-row
                       class="my-4"
                       v-for="(item, index) in getHistoryTransaction"
@@ -79,14 +79,62 @@
                       </b-col>
                     </b-row>
                   </div>
+                  <div class="search-result" v-if="search === true">
+                    <b-row
+                      class="my-4"
+                      v-for="(item, index) in getSearchHistoryTransaction"
+                      :key="index"
+                    >
+                      <b-col cols="2">
+                        <img :src="urlAPI + item.image" alt="" />
+                      </b-col>
+                      <b-col cols="8">
+                        <h6>{{ item.first_name }} {{ item.last_name }}</h6>
+                        <p v-if="item.category === 1">Transfer</p>
+                        <p v-if="item.category === 2">Receive</p>
+                      </b-col>
+                      <b-col cols="2">
+                        <p
+                          v-if="item.category === 2"
+                          style="
+                            color: #1ec15f;
+                            font-size: 18px;
+                            font-weight: bold;
+                          "
+                        >
+                          + {{ item.amount }}
+                        </p>
+                        <p
+                          v-if="item.category === 1"
+                          style="color: red; font-size: 18px; font-weight: bold"
+                        >
+                          - {{ item.amount }}
+                        </p>
+                      </b-col>
+                    </b-row>
+                  </div>
                 </b-col>
               </b-row>
               <b-row>
-                <b-col cols="12">
+                <b-col cols="12" v-if="search === false">
                   <div class="mt-4">
                     <b-pagination
                       v-model="currentPage"
                       :total-rows="totalPage"
+                      :per-page="limit"
+                      @change="handlePageChange"
+                      align="center"
+                      style="margin-top: 50px"
+                    ></b-pagination>
+                  </div>
+                </b-col>
+              </b-row>
+              <b-row>
+                <b-col cols="12" v-if="search === true">
+                  <div class="mt-4">
+                    <b-pagination
+                      v-model="currentPage"
+                      :total-rows="totalSearch"
                       :per-page="limit"
                       @change="handlePageChange"
                       align="center"
@@ -118,6 +166,7 @@ export default {
       currentPage: 1,
       urlAPI: process.env.VUE_APP_URL,
       sortText: 'Sort',
+      search: false,
       form: {
         keyword: ''
       }
@@ -138,6 +187,7 @@ export default {
       user: 'user',
       totalPage: 'getTotalPage',
       limit: 'getLimit',
+      totalSearch: 'getTotalSearch',
       getSearchHistoryTransaction: 'getSearchHistoryTransaction'
     })
     // ...mapGetters(['getTotalPage'])
@@ -156,6 +206,7 @@ export default {
       // }
       this.dataHistoryTransaction(this.user)
         .then((response) => {
+          this.search = false
           console.log(response)
         })
         .catch((error) => {
@@ -178,6 +229,10 @@ export default {
       const setData = {
         id: this.user.id,
         search: this.form
+      }
+      this.search = true
+      if (this.form.keyword === '') {
+        this.search = false
       }
       this.searchingHistoryTransaction(setData)
       this.$router.push(`?search=${this.form.keyword}`)
