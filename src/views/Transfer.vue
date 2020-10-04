@@ -36,7 +36,7 @@
                       <div
                         class="flex mt-5 mr-5"
                         style="cursor: pointer"
-                        @click="receiverBtn"
+                        @click="receiverBtn(value.id)"
                       >
                         <div class="receiver-img mr-3">
                           <img
@@ -67,6 +67,7 @@
                     <b-pagination
                       v-model="currentPage"
                       :total-rows="rows"
+                      :per-page="limit"
                       align="center"
                       @change="pageChange"
                     ></b-pagination>
@@ -180,24 +181,20 @@ export default {
     return {
       // rows: 100,
       currentPage: 1,
+      limit: 4,
       searchReceiverSection: true,
       transferSection: false,
       search: '',
       amounts: '',
       notes: '',
-      userId: '',
       port: 'http://127.0.0.1:5000/'
     }
   },
   created() {
-    this.pageChange()
+    this.searchReceiver()
   },
   methods: {
-    // alwaysOn() {
-    //   this.userId = this.user.id
-    //   this.setUserLogin(this.userId)
-    // },
-    ...mapActions(['searchUser', 'getAllReceiver']),
+    ...mapActions(['searchUser', 'getAllReceiver', 'getReceiverById']),
     ...mapMutations(['setPagination', 'setUserLogin']),
     continueBtn() {
       this.searchReceiverSection = true
@@ -209,9 +206,10 @@ export default {
       //   ERROR
       // }
     },
-    receiverBtn() {
+    receiverBtn(id) {
       this.searchReceiverSection = false
       this.transferSection = true
+      this.getReceiverById(id)
     },
     searchReceiver() {
       const setData = {
@@ -222,6 +220,7 @@ export default {
     },
     pageChange(event) {
       this.setPagination(event)
+      this.searchReceiver()
     }
   },
   computed: {

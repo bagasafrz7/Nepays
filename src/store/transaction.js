@@ -8,21 +8,19 @@ export default {
   },
   mutations: {
     setPagination(state, payload) {
-      state.page = payload
-      // console.log(state.page)
+      state.pages = payload
     },
     setAllReceiver(state, payload) {
       state.rows = payload.pagination.totalData[0].total_user
-      console.log(payload)
       state.allUser = payload
     },
     setReceiverById(state, payload) {
-      // console.log(payload)
       state.userById = payload
     }
   },
   actions: {
     getReceiverById(context, payload) {
+      console.log(payload)
       // return new Promise((resolve, reject) => {
       //   axios.get(`${process.env.VUE_APP_URL}`, payload)
       //     .then(res => {
@@ -35,7 +33,6 @@ export default {
       // })
     },
     getAllReceiver(context, payload) {
-      console.log(payload)
       return new Promise((resolve, reject) => {
         axios
           .get(
@@ -48,18 +45,6 @@ export default {
             reject(err.response.data.msg)
           })
       })
-    },
-    searchUser(context, payload) {
-      // return new Promise((resolve, reject) => {
-      //   axios
-      //     .get(`${process.env.VUE_APP_URL/}`, payload)
-      //     .then(res => {
-      //       console.log(res)
-      //     })
-      //     .catch(err => {
-      //       reject(err.response.data.msg)
-      //     })
-      // })
     }
   },
   getters: {
