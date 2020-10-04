@@ -106,10 +106,22 @@ export default {
       this.patchProfileImage(payload)
         .then((response) => {
           this.getProfile(this.user.id)
-          // this.formImage = {}
+          this.$swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: response.msg,
+            showConfirmButton: false,
+            timer: 1500
+          })
         })
         .catch((error) => {
-          console.log(error)
+          this.$swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: error.data.msg,
+            showConfirmButton: false,
+            timer: 1500
+          })
         })
     },
     toLogout() {
