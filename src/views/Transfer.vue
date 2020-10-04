@@ -85,7 +85,7 @@
                         <div class="receiver-img mr-3">
                           <img
                             class="receiver-img mr-3"
-                            src="../assets/img/users.png"
+                            :src="port + getReceiver.image"
                             alt=""
                           />
                         </div>
@@ -98,10 +98,11 @@
                               margin-top: 9px;
                             "
                           >
-                            Muhammad Naldi
+                            {{ getReceiver.first_name }}
+                            {{ getReceiver.last_name }}
                           </p>
                           <p style="font-size: 16px; color: #7a7886">
-                            +62 812-6993-5503
+                            {{ getReceiver.phone }}
                           </p>
                         </div>
                       </div>
@@ -129,7 +130,7 @@
                             font-size: 16px;
                           "
                         >
-                          Rp. 120.000 Available
+                          Rp. {{ user.balance }} Available
                         </p>
                       </b-form>
                     </b-row>
@@ -150,7 +151,7 @@
                     <b-row>
                       <b-button
                         class="btn-continue ml-auto"
-                        @click="continueBtn"
+                        @click="continueBtn(getReceiver.id)"
                         >Continue</b-button
                       >
                     </b-row>
@@ -194,17 +195,36 @@ export default {
     this.searchReceiver()
   },
   methods: {
-    ...mapActions(['searchUser', 'getAllReceiver', 'getReceiverById']),
-    ...mapMutations(['setPagination', 'setUserLogin']),
-    continueBtn() {
-      this.searchReceiverSection = true
-      this.transferSection = false
+    ...mapActions([
+      'searchUser',
+      'getAllReceiver',
+      'getReceiverById',
+      'transfer'
+    ]),
+    ...mapMutations(['setPagination', 'setUserLogin', 'setTransferDetails']),
+    continueBtn(data) {
+      // this.searchReceiverSection = true
+      // this.transferSection = false
       // KONDISI JIKA NOMINAL KURANG DARI AMOUNTS ----
-      // if(nominal > amounts) {
-      //   this.$router.push('/confirmation')
-      // } else {
-      //   ERROR
-      // }
+      if (this.user.balance > this.amounts) {
+        const setData = {
+          userId: this.user.id,
+          targetId: data,
+          amount: this.amounts,
+          note: this.notes,
+          date: new Date()
+        }
+        this.setTransferDetails(setData)
+        this.$router.push('/confirmation')
+      } else {
+        this.$swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Sorry, your balance is not enough',
+          showConfirmButton: false,
+          timer: 1500
+        })
+      }
     },
     receiverBtn(id) {
       this.searchReceiverSection = false
@@ -224,7 +244,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['user', 'allReceiver', 'rows'])
+    ...mapGetters(['user', 'allReceiver', 'rows', 'getReceiver'])
   }
 }
 </script>

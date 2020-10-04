@@ -4,7 +4,8 @@ export default {
     pages: 1,
     userById: {},
     allUser: [],
-    rows: ''
+    rows: '',
+    transferDetails: {}
   },
   mutations: {
     setPagination(state, payload) {
@@ -16,21 +17,24 @@ export default {
     },
     setReceiverById(state, payload) {
       state.userById = payload
+    },
+    setTransferDetails(state, payload) {
+      state.transferDetails = payload
+      // console.log(state.transferDetails)
     }
   },
   actions: {
     getReceiverById(context, payload) {
-      console.log(payload)
-      // return new Promise((resolve, reject) => {
-      //   axios.get(`${process.env.VUE_APP_URL}`, payload)
-      //     .then(res => {
-      //       console.log(res)
-      //       context.commit()
-      //     })
-      //     .catch(err => {
-      //       reject(err.response.data.msg)
-      //     })
-      // })
+      return new Promise((resolve, reject) => {
+        axios
+          .get(`${process.env.VUE_APP_URL}transfer/${payload}`)
+          .then(res => {
+            context.commit('setReceiverById', res.data.data[0])
+          })
+          .catch(err => {
+            reject(err.response.data.msg)
+          })
+      })
     },
     getAllReceiver(context, payload) {
       return new Promise((resolve, reject) => {
@@ -45,6 +49,20 @@ export default {
             reject(err.response.data.msg)
           })
       })
+    },
+    transfer(context, payload) {
+      console.log(payload)
+      return new Promise((resolve, reject) => {
+        axios
+          .post(`${process.env.VUE_APP_URL}transaction/transfer`, payload)
+          .then(res => {
+            console.log(res)
+            resolve(res.data.msg)
+          })
+          .catch(err => {
+            reject(err.response.data.msg)
+          })
+      })
     }
   },
   getters: {
@@ -53,6 +71,12 @@ export default {
     },
     rows(state) {
       return state.rows
+    },
+    getReceiver(state) {
+      return state.userById
+    },
+    transferDetail(state) {
+      return state.transferDetails
     }
   }
 }
