@@ -79,6 +79,8 @@ export default {
       }
       this.postBalance(payload)
         .then((response) => {
+          window.location.href = response.data
+          console.log(response.data)
           this.$swal.fire({
             position: 'center',
             icon: 'success',
