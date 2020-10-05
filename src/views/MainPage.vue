@@ -82,23 +82,30 @@
                   <b-row
                     v-for="(item, index) in getRecentTransferHome"
                     :key="index"
+                    class="my-2"
                   >
-                    <b-col cols="2">
+                    <b-col cols="2" style="margin-top: 13px">
                       <img :src="urlAPI + item.image" alt="" />
                     </b-col>
                     <b-col cols="6">
                       <div class="info-transaction">
-                        <h6>{{ item.first_name }} {{ item.last_name }}</h6>
-                        <p v-if="item.category === 1">Transfer</p>
-                        <p v-if="item.category === 2">Receive</p>
+                        <h6 style="margin-top: 12px; font-size: 13px">
+                          {{ item.first_name }} {{ item.last_name }}
+                        </h6>
+                        <p style="font-size: 15px" v-if="item.category === 1">
+                          Transfer
+                        </p>
+                        <p style="font-size: 15px" v-if="item.category === 2">
+                          Receive
+                        </p>
                       </div>
                     </b-col>
-                    <b-col cols="4" class="text-right">
+                    <b-col cols="4" class="text-right" style="margin-top: 30px">
                       <p
                         v-if="item.category === 2"
                         style="
                           color: #1ec15f;
-                          font-size: 14px;
+                          font-size: 12px;
                           font-weight: bold;
                         "
                       >
@@ -106,7 +113,7 @@
                       </p>
                       <p
                         v-if="item.category === 1"
-                        style="color: red; font-size: 14px; font-weight: bold"
+                        style="color: red; font-size: 12px; font-weight: bold"
                       >
                         - {{ item.amount }}
                       </p>

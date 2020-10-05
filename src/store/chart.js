@@ -1,4 +1,5 @@
 import axios from 'axios'
+import moment from 'moment'
 export default {
   state: {
     income: '',
@@ -15,11 +16,14 @@ export default {
       state.dailyExpense = payload.chartData.dailyExpense
       state.dailyIncome = payload.chartData.dailyIncome
       for (let i = 0; i < state.dailyExpense.length; i++) {
-        state.dataExpense[state.dailyExpense[i].date] =
-          state.dailyExpense[i].total
+        state.dataExpense[
+          moment(state.dailyExpense[i].date).format('MMM Do YY')
+        ] = state.dailyExpense[i].total
       }
       for (let i = 0; i < state.dailyIncome.length; i++) {
-        state.dataIncome[state.dailyIncome[i].date] = state.dailyIncome[i].total
+        state.dataIncome[
+          moment(state.dailyIncome[i].date).format('MMM Do YY')
+        ] = state.dailyIncome[i].total
       }
     }
   },
