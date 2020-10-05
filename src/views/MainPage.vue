@@ -58,10 +58,12 @@
                     <b-col cols="12" class="mt-4">
                       <column-chart
                         v-show="showDailyIncome"
+                        v-if="this.dataIncome"
                         :data="this.dataIncome"
                       ></column-chart>
                       <column-chart
                         v-show="showDailyExpense"
+                        v-if="this.dataExpense"
                         :data="this.dataExpense"
                       ></column-chart>
                     </b-col>
