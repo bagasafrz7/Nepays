@@ -25,7 +25,6 @@ export default {
         axios
           .get(`${process.env.VUE_APP_URL}profile/personal/${payload}`)
           .then(response => {
-            console.log(response)
             context.commit('setProfile', response.data.data[0])
             resolve(response.data)
           })
@@ -37,7 +36,6 @@ export default {
         axios
           .post(`${process.env.VUE_APP_URL}user/register`, payload)
           .then(res => {
-            console.log(res.data)
             resolve(res.data)
           })
           .catch(err => {
@@ -53,7 +51,6 @@ export default {
             context.commit('setUser', res.data.data)
             localStorage.setItem('token', res.data.data.token)
             resolve(res.data)
-            console.log(res)
           })
           .catch(err => {
             reject(err.response.data.msg)
@@ -63,12 +60,12 @@ export default {
     interceptorRequest(context) {
       console.log('interceptors works!')
       axios.interceptors.request.use(
-        function (config) {
+        function(config) {
           config.headers.authorization = `Bearer ${context.state.token}`
           // Do something before request is sent
           return config
         },
-        function (error) {
+        function(error) {
           return Promise.reject(error)
         }
       )
@@ -81,10 +78,10 @@ export default {
     },
     interceptorResponse(context) {
       axios.interceptors.response.use(
-        function (response) {
+        function(response) {
           return response
         },
-        function (error) {
+        function(error) {
           if (error.response.status === 403) {
             if (
               error.response.data.msg === 'invalid token' ||

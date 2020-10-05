@@ -40,34 +40,29 @@
                         icon="arrow-down"
                         style="color: #1ec15f; font-size: 28px"
                       ></b-icon>
-                      <p>Income</p>
-                      <h6>Rp2.120.000</h6>
+                      <p style="cursor: pointer" @click="showIncome">Income</p>
+                      <h6>Rp {{ this.income }}</h6>
                     </b-col>
                     <b-col cols="4">
                       <b-icon
                         icon="arrow-up"
                         style="color: #ff5b37; font-size: 28px"
                       ></b-icon>
-                      <p>Expense</p>
-                      <h6>Rp1.560.000</h6>
+                      <p style="cursor: pointer" @click="showExpense">
+                        Expense
+                      </p>
+                      <h6>Rp {{ this.expense }}</h6>
                     </b-col>
                   </b-row>
                   <b-row>
                     <b-col cols="12" class="mt-4">
                       <line-chart
-                        :data="{
-                          '2017-01-01': 9,
-                          '2017-01-02': 6,
-                          '2017-01-03': 8,
-                          '2017-01-03': 13,
-                          '2017-01-04': 10,
-                          '2017-01-05': 15,
-                          '2017-01-06': 1,
-                          '2017-01-07': 5,
-                          '2017-01-08': 8,
-                          '2017-01-09': 13,
-                          '2017-01-10': 15
-                        }"
+                        v-show="showDailyIncome"
+                        :data="this.dataIncome"
+                      ></line-chart>
+                      <line-chart
+                        v-show="showDailyExpense"
+                        :data="this.dataExpense"
                       ></line-chart>
                     </b-col>
                   </b-row>
@@ -140,7 +135,9 @@ export default {
   name: 'MainPage',
   data() {
     return {
-      urlAPI: process.env.VUE_APP_URL
+      urlAPI: process.env.VUE_APP_URL,
+      showDailyIncome: true,
+      showDailyExpense: false
     }
   },
   components: {
@@ -151,23 +148,36 @@ export default {
   created() {
     this.getDataRecent()
     this.getProfile(this.user.id)
+    this.getChart(this.user.id)
+    // this.getChart()
   },
   computed: {
-    ...mapGetters(['getRecentTransferHome', 'user'])
+    ...mapGetters([
+      'getRecentTransferHome',
+      'user',
+      'income',
+      'expense',
+      'dailyExpense',
+      'dailyIncome',
+      'dataExpense',
+      'dataIncome'
+    ])
   },
   methods: {
-    ...mapActions(['dataRecentTransferHome', 'getProfile']),
+    ...mapActions(['dataRecentTransferHome', 'getProfile', 'getChart']),
     getDataRecent() {
-      // const setData = {
-      //   id: this.user[0].id
-      // }
       this.dataRecentTransferHome(this.user)
-        .then((response) => {
-          console.log(response)
-        })
-        .catch((error) => {
-          console.log(error.data.msg)
-        })
+    },
+    showIncome() {
+      this.showDailyIncome = true
+      this.showDailyExpense = false
+      this.getChart(this.user.id)
+    },
+    showExpense() {
+      this.showDailyIncome = false
+      this.showDailyExpense = true
+      console.log(this.dataExpense)
+      this.getChart(this.user.id)
     }
   }
 }
