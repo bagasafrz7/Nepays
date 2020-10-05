@@ -114,7 +114,7 @@ const routes = [
     component: Landing
   },
   {
-    path: '/change-pin',
+    path: '/profile/change-pin',
     name: 'changePin',
     component: changePin,
     meta: { requiresAuth: true }

@@ -47,6 +47,17 @@ export default {
           .then(response => resolve(response.data))
           .catch(error => reject(error.response))
       })
+    },
+    patchPin(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios
+          .patch(
+            `${process.env.VUE_APP_URL}pin/pin_edit/${payload.id}`,
+            payload.form
+          )
+          .then(response => resolve(response.data))
+          .catch(error => reject(error.response))
+      })
     }
   },
   getters: {

@@ -49,7 +49,7 @@
               </div>
               <div
                 class="profile-menu text-center"
-                @click="$router.push('/change-pin')"
+                @click="$router.push('/profile/change-pin')"
               >
                 <p class="mb-0 text-muted">
                   <strong>Change PIN</strong>
