@@ -177,26 +177,72 @@
         <!-- CAROUSEL -->
         <b-carousel
           id="carousel-1"
+          v-model="slide"
+          :interval="4000"
           controls
           indicators
-          background="#e5e5e5"
+          background="#fff"
           img-width="1024"
           img-height="480"
+          @sliding-start="onSlideStart"
+          @sliding-end="onSlideEnd"
+          style="
+            background: #ffffff;
+            box-shadow: 0px 0px 11px 6px rgba(0, 0, 0, 0.15);
+            text-shadow: 1px 1px 2px #333;
+            color: #000;
+          "
         >
           <b-carousel-slide img-blank>
-            <b-avatar size="6rem" class="mb-1 opinion-people">
+            <b-avatar size="10rem" class="mb-4 opinion-people align-baseline">
               <img
                 src="@/assets/landing/testi.png"
-                style="width: 7.5rem"
+                style="width: 15rem"
                 class="mt-4"
               />
             </b-avatar>
-            <h4 class="mb-0">Muhammad Nur Hidayat</h4>
-            <small class="text-muted">Backend Developer</small>
-            <b-card-text class="mt-2 px-4"
-              >Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque
-              ea nisi magni accusamus. Saepe sequi, culpa suscipit aut nam
-              doloremque doloribus? Soluta laboriosam vitae odit!</b-card-text
+            <h4 class="mt-2" style="color: #000">Muhammad Nur Hidayat</h4>
+            <small class="text-muted" style="color: #000"
+              >Fullstack Developer</small
+            >
+            <b-card-text class="mt-2 px-4" style="color: #000"
+              >Initially I was hesitant to use Nepays, but after a few days of
+              trying it turned out to be satisfactory. Easy to use and very
+              scratchy. Success continues at Nepays</b-card-text
+            >
+          </b-carousel-slide>
+          <b-carousel-slide img-blank>
+            <b-avatar size="10rem" class="mb-4 opinion-people align-baseline">
+              <img
+                src="@/assets/landing/testi2.png"
+                style="width: 15rem"
+                class="mt-4"
+              />
+            </b-avatar>
+            <h4 class="mt-2" style="color: #000">Arif Rahman</h4>
+            <small class="text-muted" style="color: #000"
+              >Fullstack Developer</small
+            >
+            <b-card-text class="mt-2 px-4" style="color: #000"
+              >amazing, this application is really interesting. Even though it
+              has just been launched, its function is very attractive and also
+              safe. Thanks Nepays</b-card-text
+            >
+          </b-carousel-slide>
+          <b-carousel-slide img-blank>
+            <b-avatar size="10rem" class="mb-4 opinion-people align-baseline">
+              <img
+                src="@/assets/landing/testi3.png"
+                style="width: 15rem"
+                class="mt-4"
+              />
+            </b-avatar>
+            <h4 class="mt-2" style="color: #000">Johan Simbolon</h4>
+            <small class="text-muted" style="color: #000">UI UX Designer</small>
+            <b-card-text class="mt-2 px-4" style="color: #000"
+              >It is very nice to be able to use Papaya, easy to use, attractive
+              and safe UI in transactions. I really recommend this application
+              for friends to use. Thanks Nepays</b-card-text
             >
           </b-carousel-slide>
         </b-carousel>
@@ -231,9 +277,19 @@ export default {
   name: 'Landing',
   components: {},
   data() {
-    return {}
+    return {
+      slide: 0,
+      sliding: null
+    }
   },
-  methods: {}
+  methods: {
+    onSlideStart(slide) {
+      this.sliding = true
+    },
+    onSlideEnd(slide) {
+      this.sliding = false
+    }
+  }
 }
 </script>
 
@@ -366,5 +422,38 @@ hr {
 .phone-email {
   display: flex;
   justify-content: space-between;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 15%;
+  color: #fff;
+  text-align: center;
+  opacity: 0.5;
+  transition: opacity 0.15s ease;
+}
+.carousel-control-prev-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
+}
+
+.carousel-control-next-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
+}
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  height: 100px;
+  width: 100px;
+  outline: black;
+  background-color: rgba(0, 0, 0, 0.3);
+  background-size: 100%, 100%;
+  border-radius: 50%;
+  border: 1px solid black;
 }
 </style>
