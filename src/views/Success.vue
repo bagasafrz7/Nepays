@@ -21,7 +21,7 @@
                 <b-row>
                   <b-col cols="12">
                     <p>Amount</p>
-                    <h5>Rp.100.000</h5>
+                    <h5>Rp. {{ transferDetail.amount }}</h5>
                   </b-col>
                 </b-row>
               </div>
@@ -29,7 +29,7 @@
                 <b-row>
                   <b-col cols="12">
                     <p>Balance Left</p>
-                    <h5>Rp.20.000</h5>
+                    <h5>Rp. {{ user.balance - transferDetail.amount }}</h5>
                   </b-col>
                 </b-row>
               </div>
@@ -37,7 +37,7 @@
                 <b-row>
                   <b-col cols="12">
                     <p>Date & Time</p>
-                    <h5>May 11, 2020 - 12.20</h5>
+                    <h5>{{ transferDetail.date }}</h5>
                   </b-col>
                 </b-row>
               </div>
@@ -45,7 +45,7 @@
                 <b-row>
                   <b-col cols="12">
                     <p>Notes</p>
-                    <h5>For buying some socks</h5>
+                    <h5>{{ transferDetail.note }}</h5>
                   </b-col>
                 </b-row>
               </div>
@@ -53,15 +53,17 @@
               <div class="detail-user">
                 <b-row>
                   <b-col cols="2">
-                    <img src="../assets/img/users.png" alt="" />
+                    <img :src="port + getReceiver.image" alt="" />
                   </b-col>
                   <b-col cols="10">
-                    <h6>Sushi Samuel</h6>
-                    <p>+62 813-8492-9994</p>
+                    <h6>
+                      {{ getReceiver.first_name }} {{ getReceiver.last_name }}
+                    </h6>
+                    <p>{{ getReceiver.phone }}</p>
                   </b-col>
                 </b-row>
               </div>
-              <b-row>
+              <b-row class="mb-3">
                 <b-col cols="6" class="text-right">
                   <!-- <div class="icon-share"> -->
                   <b-button variant="primary icon-share">
@@ -70,18 +72,24 @@
                   <!-- </div> -->
                 </b-col>
                 <b-col cols="3" class="btn-download text-right">
-                  <b-button variant="primary" class="btn-download">
+                  <b-button
+                    variant="primary"
+                    @click="generatePdf"
+                    class="btn-download"
+                  >
                     <b-icon icon="download" aria-hidden="true"></b-icon>
                     Download PDF
                   </b-button>
                 </b-col>
                 <b-col cols="3" class="btn-back text-right">
-                  <b-button
-                    class="btn-back"
-                    variant="primary"
-                    aria-hidden="true"
-                    >Back To Home</b-button
-                  >
+                  <router-link to="/home">
+                    <b-button
+                      class="btn-back"
+                      variant="primary"
+                      aria-hidden="true"
+                      >Back To Home</b-button
+                    >
+                  </router-link>
                 </b-col>
               </b-row>
             </div>
@@ -97,15 +105,43 @@
 import Header from '../components/_base/header'
 import Aside from '../components/_base/aside'
 import Footer from '../components/_base/footer'
+import { mapGetters } from 'vuex'
+import Jspdf from 'jspdf'
 export default {
-  name: 'Sukses',
+  name: 'Success',
   data() {
-    return {}
+    return {
+      port: process.env.VUE_APP_URL
+    }
+  },
+  computed: {
+    ...mapGetters(['transferDetail', 'user', 'getReceiver'])
   },
   components: {
     Header,
     Aside,
     Footer
+  },
+  methods: {
+    generatePdf() {
+      const doc = new Jspdf()
+      doc.setFont('helvetica')
+      doc.setFontSize(12)
+      doc.text(
+        ` Status: Success! \n \n Amount: Rp. ${
+          this.transferDetail.amount
+        }\n Balance left: Rp. ${this.user.balance -
+          this.transferDetail.amount} \n Date & Time: ${
+          this.transferDetail.date
+        } \n Notes: ${this.transferDetail.note} \n \n Transfer to: \n Name: ${
+          this.getReceiver.first_name
+        } ${this.getReceiver.last_name} \n Phone: ${this.getReceiver.phone}`,
+        15,
+        15
+      )
+
+      doc.save('pdf.pdf')
+    }
   }
 }
 </script>

@@ -201,9 +201,6 @@ export default {
       this.getDataHistory()
     },
     getDataHistory() {
-      // const setData = {
-      //   id: this.user[0].id
-      // }
       this.dataHistoryTransaction(this.user)
         .then((response) => {
           this.search = false

@@ -12,7 +12,7 @@ import History from '../views/History.vue'
 import Topup from '../views/topUp.vue'
 import Amount from '../views/Amount.vue'
 import Confirmation from '../views/Confirmation.vue'
-import Sukses from '../views/Sukses.vue'
+import Success from '../views/Success.vue'
 import Failed from '../views/Failed.vue'
 import Landing from '../views/Landing.vue'
 import changePin from '../views/changePin.vue'
@@ -97,9 +97,9 @@ const routes = [
     meta: { requiresAuth: true }
   },
   {
-    path: '/sukses',
-    name: 'Sukses',
-    component: Sukses,
+    path: '/success',
+    name: 'Success',
+    component: Success,
     meta: { requiresAuth: true }
   },
   {

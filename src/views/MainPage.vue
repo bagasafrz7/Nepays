@@ -56,14 +56,14 @@
                   </b-row>
                   <b-row>
                     <b-col cols="12" class="mt-4">
-                      <line-chart
+                      <column-chart
                         v-show="showDailyIncome"
                         :data="this.dataIncome"
-                      ></line-chart>
-                      <line-chart
+                      ></column-chart>
+                      <column-chart
                         v-show="showDailyExpense"
                         :data="this.dataExpense"
-                      ></line-chart>
+                      ></column-chart>
                     </b-col>
                   </b-row>
                   <!-- <h3>Data Income</h3> -->
@@ -155,13 +155,12 @@ export default {
     showIncome() {
       this.showDailyIncome = true
       this.showDailyExpense = false
-      this.getChart(this.user.id)
+      console.log(this.dataIncome)
     },
     showExpense() {
       this.showDailyIncome = false
       this.showDailyExpense = true
       console.log(this.dataExpense)
-      this.getChart(this.user.id)
     }
   }
 }
