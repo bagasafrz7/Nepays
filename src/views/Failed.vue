@@ -61,7 +61,7 @@
                   </b-col>
                 </b-row>
               </div>
-              <b-row>
+              <b-row class="mb-3">
                 <b-col cols="12" class="btn-try text-right">
                   <b-button class="btn-try" variant="primary" aria-hidden="true"
                     >Try Again</b-button

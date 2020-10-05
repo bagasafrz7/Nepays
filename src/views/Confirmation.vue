@@ -205,7 +205,7 @@ export default {
             showConfirmButton: false,
             timer: 1500
           })
-          this.$router.push('/transfer')
+          this.$router.push('/success')
         })
         .catch((err) => {
           this.$swal.fire({

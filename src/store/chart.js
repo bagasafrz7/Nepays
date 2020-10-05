@@ -29,6 +29,7 @@ export default {
         axios
           .get(`${process.env.VUE_APP_URL}transaction/chart/${payload}`)
           .then(res => {
+            // console.log(res.data.data)
             context.commit('setChart', res.data.data)
           })
           .catch(err => {

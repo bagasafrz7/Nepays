@@ -172,6 +172,7 @@ import Aside from '../components/_base/aside'
 import Footer from '../components/_base/footer'
 import Header from '../components/_base/header'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
+import moment from 'moment'
 export default {
   components: {
     Aside,
@@ -213,7 +214,7 @@ export default {
           targetId: data,
           amount: this.amounts,
           note: this.notes,
-          date: new Date()
+          date: moment().format('MMM Do YY')
         }
         this.setTransferDetails(setData)
         this.$router.push('/confirmation')

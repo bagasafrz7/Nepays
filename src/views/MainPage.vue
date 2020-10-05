@@ -56,14 +56,14 @@
                   </b-row>
                   <b-row>
                     <b-col cols="12" class="mt-4">
-                      <line-chart
+                      <column-chart
                         v-show="showDailyIncome"
                         :data="this.dataIncome"
-                      ></line-chart>
-                      <line-chart
+                      ></column-chart>
+                      <column-chart
                         v-show="showDailyExpense"
                         :data="this.dataExpense"
-                      ></line-chart>
+                      ></column-chart>
                     </b-col>
                   </b-row>
                   <!-- <h3>Data Income</h3> -->
@@ -75,7 +75,7 @@
                     <b-col cols="8">
                       <h5>Transaction History</h5>
                     </b-col>
-                    <b-col cols="4">
+                    <b-col cols="4" class="text-right">
                       <router-link to="/history">See All</router-link>
                     </b-col>
                   </b-row>
@@ -89,11 +89,27 @@
                     <b-col cols="6">
                       <div class="info-transaction">
                         <h6>{{ item.first_name }} {{ item.last_name }}</h6>
-                        <p>Transfer</p>
+                        <p v-if="item.category === 1">Transfer</p>
+                        <p v-if="item.category === 2">Receive</p>
                       </div>
                     </b-col>
-                    <b-col cols="4">
-                      <p>+{{ item.amount }}</p>
+                    <b-col cols="4" class="text-right">
+                      <p
+                        v-if="item.category === 2"
+                        style="
+                          color: #1ec15f;
+                          font-size: 14px;
+                          font-weight: bold;
+                        "
+                      >
+                        + {{ item.amount }}
+                      </p>
+                      <p
+                        v-if="item.category === 1"
+                        style="color: red; font-size: 14px; font-weight: bold"
+                      >
+                        - {{ item.amount }}
+                      </p>
                     </b-col>
                   </b-row>
                 </div>
@@ -155,13 +171,12 @@ export default {
     showIncome() {
       this.showDailyIncome = true
       this.showDailyExpense = false
-      this.getChart(this.user.id)
+      console.log(this.dataIncome)
     },
     showExpense() {
       this.showDailyIncome = false
       this.showDailyExpense = true
       console.log(this.dataExpense)
-      this.getChart(this.user.id)
     }
   }
 }
