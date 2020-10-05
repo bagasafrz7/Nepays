@@ -12,13 +12,22 @@
               <b-row>
                 <b-col cols="6">
                   <h2>Change PIN</h2>
-                  <p>
-                    Enter your current 6 digits Zwallet PIN below to continue to
+                  <p v-if="changePin">
+                    Enter your current 6 digits NePays PIN below to continue to
                     the next steps.
+                  </p>
+                  <p v-else>
+                    Type your new 6 digits security PIN to use in NePays.
                   </p>
                 </b-col>
               </b-row>
-              <b-form class="mt-5">
+              <div class="text-center">
+                <h5 v-if="changePin" class="mt-5">
+                  <strong>Input Current PIN</strong>
+                </h5>
+                <h5 v-else class="mt-5"><strong>Input New PIN</strong></h5>
+              </div>
+              <b-form class="mt-3">
                 <div class="otp">
                   <b-form-input
                     class="input-otp"
@@ -64,10 +73,14 @@
                   ></b-form-input>
                 </div>
               </b-form>
-              <b-button class="btn-login" block v-if="changePin"
+              <b-button
+                class="btn-login"
+                block
+                v-if="changePin"
+                @click="checkPin"
                 >Continue</b-button
               >
-              <b-button class="btn-login" block v-else-if="changePin === false"
+              <b-button class="btn-login" block v-else @click="upPin"
                 >Change Pin</b-button
               >
             </div>
@@ -83,17 +96,104 @@
 import Header from '../components/_base/header'
 import Aside from '../components/_base/aside'
 import Footer from '../components/_base/footer'
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
   name: 'changePin',
   data() {
     return {
-      changePin: true
+      changePin: true,
+      pin1: '',
+      pin2: '',
+      pin3: '',
+      pin4: '',
+      pin5: '',
+      pin6: '',
+      lastPin: ''
     }
   },
   components: {
     Header,
     Aside,
     Footer
+  },
+  created() {
+    this.getProfile(this.user.id)
+  },
+  computed: {
+    ...mapGetters(['user'])
+  },
+  methods: {
+    ...mapActions(['getProfile', 'patchPin']),
+    checkPin() {
+      const setData = [
+        this.pin1,
+        this.pin2,
+        this.pin3,
+        this.pin4,
+        this.pin5,
+        this.pin6
+      ]
+      const pin = setData.join('')
+      console.log(pin)
+      this.changePin = false
+      this.pin1 = ''
+      this.pin2 = ''
+      this.pin3 = ''
+      this.pin4 = ''
+      this.pin5 = ''
+      this.pin6 = ''
+      this.lastPin = pin
+    },
+    upPin() {
+      console.log(this.lastPin)
+      const newPin = [
+        this.pin1,
+        this.pin2,
+        this.pin3,
+        this.pin4,
+        this.pin5,
+        this.pin6
+      ]
+      const pin = newPin.join('')
+      const payload = {
+        id: this.user.id,
+        form: {
+          pin_last: this.lastPin,
+          pin_new: pin
+        }
+      }
+      console.log(payload)
+      this.patchPin(payload)
+        .then(response => {
+          this.$swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: response.msg,
+            showConfirmButton: false,
+            timer: 1500
+          })
+          setTimeout(() => {
+            this.$router.push('/profile')
+          }, 1500)
+        })
+        .catch(error => {
+          this.$swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: error.data.msg,
+            showConfirmButton: false,
+            timer: 1500
+          })
+          this.changePin = true
+          this.pin1 = ''
+          this.pin2 = ''
+          this.pin3 = ''
+          this.pin4 = ''
+          this.pin5 = ''
+          this.pin6 = ''
+        })
+    }
   }
 }
 </script>
@@ -112,7 +212,7 @@ main {
 }
 .otp {
   display: grid;
-  margin: 75px 200px;
+  margin: 25px 200px 75px 200px;
   grid-template-columns: repeat(6, 38px);
   gap: 24px;
 }

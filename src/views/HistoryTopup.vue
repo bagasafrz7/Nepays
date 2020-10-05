@@ -10,9 +10,60 @@
           <b-col cols="9">
             <div class="main-topup">
               <b-container>
-                <h3 class="mb-4" style="font-size: 18px; font-weight: 700">
-                  Top-up History
-                </h3>
+                <h4 class="mb-4">
+                  <strong>Top-up History</strong>
+                </h4>
+                <b-row>
+                  <b-col cols="12">
+                    <div class="search-result">
+                      <b-row class="mt-4">
+                        <b-col cols="6"
+                          ><p class="mb-0"><strong>Topup</strong></p></b-col
+                        >
+                        <b-col cols="6"
+                          ><p class="mb-0"><strong>Date</strong></p></b-col
+                        >
+                      </b-row>
+                      <b-row
+                        class="my-4"
+                        v-for="(item, index) in getHistoryTopup"
+                        :key="index"
+                      >
+                        <b-col cols="6">
+                          <p
+                            style="
+                            color: #1ec15f;
+                            font-size: 18px;
+                            font-weight: bold;
+                          "
+                          >
+                            + {{ item.nominal }}
+                          </p>
+                        </b-col>
+                        <b-col cols="6">
+                          <p>{{ item.date }}</p>
+                        </b-col>
+                        <b-col cols="12">
+                          <hr />
+                        </b-col>
+                      </b-row>
+                    </div>
+                  </b-col>
+                </b-row>
+                <b-row>
+                  <b-col cols="12">
+                    <div class="mt-4">
+                      <b-pagination
+                        v-model="currentPage"
+                        :total-rows="totalPage"
+                        :per-page="limit"
+                        @change="handlePageChange"
+                        align="center"
+                        style="margin-top: 50px"
+                      ></b-pagination>
+                    </div>
+                  </b-col>
+                </b-row>
               </b-container>
             </div>
           </b-col>
@@ -22,6 +73,59 @@
     <Footer />
   </div>
 </template>
+
+<script>
+import Aside from '../components/_base/aside'
+import Footer from '../components/_base/footer'
+import Header from '../components/_base/header'
+import { mapGetters, mapActions, mapMutations } from 'vuex'
+
+export default {
+  name: 'Topup-history',
+  components: {
+    Aside,
+    Header,
+    Footer
+  },
+  data() {
+    return {
+      total: 50,
+      currentPage: 1,
+      urlAPI: process.env.VUE_APP_URL
+    }
+  },
+  created() {
+    this.getDataHistoryTopup()
+  },
+  computed: {
+    ...mapGetters({
+      user: 'user',
+      totalPage: 'getTotalPageTopup',
+      limit: 'getLimitTopup',
+      getHistoryTopup: 'getHistoryTopup'
+    })
+    // ...mapGetters(['getHistoryTopup'])
+  },
+  methods: {
+    ...mapActions(['dataHistoryTopup']),
+    ...mapMutations(['changePage']),
+    handlePageChange(numberPage) {
+      this.$router.push(`?page=${numberPage}`)
+      this.changePage(numberPage)
+      this.getDataHistoryTopup()
+    },
+    getDataHistoryTopup() {
+      this.dataHistoryTopup(this.user)
+        .then(response => {
+          console.log(response)
+        })
+        .catch(error => {
+          console.log(error.data)
+        })
+    }
+  }
+}
+</script>
 
 <style scoped>
 main {
@@ -35,17 +139,3 @@ main {
   height: 660px;
 }
 </style>
-
-<script>
-import Aside from '../components/_base/aside'
-import Footer from '../components/_base/footer'
-import Header from '../components/_base/header'
-export default {
-  name: 'Topup-history',
-  components: {
-    Aside,
-    Header,
-    Footer
-  }
-}
-</script>

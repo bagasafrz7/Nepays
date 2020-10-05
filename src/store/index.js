@@ -7,6 +7,7 @@ import createPersistedState from 'vuex-persistedstate'
 import Transaction from './transaction'
 import Chart from './chart'
 import Notification from './notification'
+import Topup from './topup'
 
 Vue.use(Vuex)
 
@@ -20,7 +21,8 @@ export default new Vuex.Store({
     Profile,
     Transaction,
     Chart,
-    Notification
+    Notification,
+    Topup
   },
 
   plugins: [

@@ -48,11 +48,13 @@ export default {
           .catch(error => reject(error.response))
       })
     },
-    postBalance(context, payload) {
-      console.log(payload)
+    patchPin(context, payload) {
       return new Promise((resolve, reject) => {
         axios
-          .post(`${process.env.VUE_APP_URL}payment/${payload.id}`, payload.data)
+          .patch(
+            `${process.env.VUE_APP_URL}pin/pin_edit/${payload.id}`,
+            payload.form
+          )
           .then(response => resolve(response.data))
           .catch(error => reject(error.response))
       })

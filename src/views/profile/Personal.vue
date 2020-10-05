@@ -133,23 +133,57 @@ export default {
           last_name: this.form.last_name
         }
       }
-      console.log(payloadName)
-      this.patchPersonalName(payloadName)
-      const payloadPhone = {
-        id: this.user.id,
-        setData2: {
-          phone: this.form.phone
+      if (this.form.phone === this.user.phone) {
+        this.patchPersonalName(payloadName)
+          .then(response => {
+            this.getProfile(this.user.id)
+            this.$bvModal.hide('edit-profile')
+            this.$swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: response.msg,
+              showConfirmButton: false,
+              timer: 1500
+            })
+          })
+          .catch(error => {
+            this.$swal.fire({
+              position: 'center',
+              icon: 'error',
+              title: error.data.msg,
+              showConfirmButton: false,
+              timer: 1500
+            })
+          })
+      } else {
+        const payloadPhone = {
+          id: this.user.id,
+          setData2: {
+            phone: this.form.phone
+          }
         }
+        this.patchPersonalPhone(payloadPhone)
+          .then(response => {
+            this.getProfile(this.user.id)
+            this.$bvModal.hide('edit-profile')
+            this.$swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: response.msg,
+              showConfirmButton: false,
+              timer: 1500
+            })
+          })
+          .catch(error => {
+            this.$swal.fire({
+              position: 'center',
+              icon: 'error',
+              title: error.data.msg,
+              showConfirmButton: false,
+              timer: 1500
+            })
+          })
       }
-      console.log(payloadPhone)
-      this.patchPersonalPhone(payloadPhone)
-        .then((response) => {
-          this.getProfile(this.user.id)
-          this.$bvModal.hide('edit-profile')
-        })
-        .catch((error) => {
-          console.log(error)
-        })
     }
   }
 }
