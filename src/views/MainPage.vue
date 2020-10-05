@@ -75,7 +75,7 @@
                     <b-col cols="8">
                       <h5>Transaction History</h5>
                     </b-col>
-                    <b-col cols="4">
+                    <b-col cols="4" class="text-right">
                       <router-link to="/history">See All</router-link>
                     </b-col>
                   </b-row>
@@ -89,11 +89,27 @@
                     <b-col cols="6">
                       <div class="info-transaction">
                         <h6>{{ item.first_name }} {{ item.last_name }}</h6>
-                        <p>Transfer</p>
+                        <p v-if="item.category === 1">Transfer</p>
+                        <p v-if="item.category === 2">Receive</p>
                       </div>
                     </b-col>
-                    <b-col cols="4">
-                      <p>+{{ item.amount }}</p>
+                    <b-col cols="4" class="text-right">
+                      <p
+                        v-if="item.category === 2"
+                        style="
+                          color: #1ec15f;
+                          font-size: 14px;
+                          font-weight: bold;
+                        "
+                      >
+                        + {{ item.amount }}
+                      </p>
+                      <p
+                        v-if="item.category === 1"
+                        style="color: red; font-size: 14px; font-weight: bold"
+                      >
+                        - {{ item.amount }}
+                      </p>
                     </b-col>
                   </b-row>
                 </div>
