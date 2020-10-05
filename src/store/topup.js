@@ -20,7 +20,7 @@ export default {
     postBalance(context, payload) {
       return new Promise((resolve, reject) => {
         axios
-          .post(`${process.env.VUE_APP_URL}payment/midtrans/${payload.id}`, payload.data)
+          .post(`${process.env.VUE_APP_URL}payment/${payload.id}`, payload.data)
           .then(response => resolve(response.data))
           .catch(error => reject(error.response))
       })
