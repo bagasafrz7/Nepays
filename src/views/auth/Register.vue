@@ -13,7 +13,7 @@
             wherever you are. Desktop, laptop, mobile phone? we cover all of
             that for you!
           </p>
-          <b-form>
+          <b-form @submit.prevent="registerBtn">
             <div class="form-email">
               <img src="../../assets/auth_img/person.png" alt="" />
               <b-form-group>
@@ -57,6 +57,7 @@
                   class="input"
                   id="input-1"
                   type="email"
+                  required
                   placeholder="Enter your e-mail"
                   v-model="form.email"
                 ></b-form-input>
@@ -74,10 +75,8 @@
                 ></b-form-input>
               </b-form-group>
             </div>
+            <b-button class="btn-login" block type="submit">Register</b-button>
           </b-form>
-          <b-button class="btn-login" block @click="registerBtn"
-            >Register</b-button
-          >
           <p class="p-login">
             Already have an account?
             <router-link to="/login"><span>Login</span></router-link>
