@@ -64,7 +64,11 @@
                   ></b-form-input>
                 </div>
               </b-form>
-              <b-button class="btn-login" block v-if="changePin"
+              <b-button
+                class="btn-login"
+                block
+                v-if="changePin"
+                @click="checkPin"
                 >Continue</b-button
               >
               <b-button class="btn-login" block v-else-if="changePin === false"
@@ -83,17 +87,55 @@
 import Header from '../components/_base/header'
 import Aside from '../components/_base/aside'
 import Footer from '../components/_base/footer'
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
   name: 'changePin',
   data() {
     return {
-      changePin: true
+      changePin: true,
+      pin1: '',
+      pin2: '',
+      pin3: '',
+      pin4: '',
+      pin5: '',
+      pin6: ''
     }
   },
   components: {
     Header,
     Aside,
     Footer
+  },
+  created() {
+    this.getProfile(this.user.id)
+  },
+  computed: {
+    ...mapGetters(['user'])
+  },
+  methods: {
+    ...mapActions(['getProfile']),
+    checkPin() {
+      const setData = [
+        this.pin1,
+        this.pin2,
+        this.pin3,
+        this.pin4,
+        this.pin5,
+        this.pin6
+      ]
+      const pin = setData.join('')
+      const newResult = {
+        id: this.user.id,
+        form: {
+          pin_last: pin,
+          pin_new: this.user.pin_code
+        }
+      }
+      console.log(newResult)
+      // this.setPin(newResult)
+      // this.changePin = false
+    }
   }
 }
 </script>

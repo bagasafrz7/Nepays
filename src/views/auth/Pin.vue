@@ -125,7 +125,7 @@ export default {
         }
       }
       this.setPin(newResult)
-        .then((res) => {
+        .then(res => {
           this.$swal.fire({
             position: 'center',
             icon: 'success',
@@ -137,7 +137,7 @@ export default {
             this.$router.push('/home')
           }, 4000)
         })
-        .catch((err) => {
+        .catch(err => {
           this.$swal.fire({
             position: 'center',
             icon: 'error',

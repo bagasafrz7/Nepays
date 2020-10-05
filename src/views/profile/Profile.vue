@@ -107,7 +107,7 @@ export default {
         image: data
       }
       this.patchProfileImage(payload)
-        .then((response) => {
+        .then(response => {
           this.getProfile(this.user.id)
           this.$swal.fire({
             position: 'center',
@@ -117,7 +117,7 @@ export default {
             timer: 1500
           })
         })
-        .catch((error) => {
+        .catch(error => {
           this.$swal.fire({
             position: 'center',
             icon: 'error',
@@ -128,6 +128,7 @@ export default {
         })
     },
     toLogout() {
+      console.log(this.user)
       this.$swal
         .fire({
           title: 'logout account ?',
@@ -137,7 +138,7 @@ export default {
           confirmButtonText: 'Yes',
           denyButtonText: 'Cancel'
         })
-        .then((result) => {
+        .then(result => {
           /* Read more about isConfirmed, isDenied below */
           if (result.isConfirmed) {
             this.$swal.fire('See you again!', '', 'success')

@@ -47,15 +47,6 @@ export default {
           .then(response => resolve(response.data))
           .catch(error => reject(error.response))
       })
-    },
-    postBalance(context, payload) {
-      console.log(payload)
-      return new Promise((resolve, reject) => {
-        axios
-          .post(`${process.env.VUE_APP_URL}payment/${payload.id}`, payload.data)
-          .then(response => resolve(response.data))
-          .catch(error => reject(error.response))
-      })
     }
   },
   getters: {

@@ -4,7 +4,7 @@ import axios from 'axios'
 export default {
   state: {
     page: 1,
-    limit: 3,
+    limit: 4,
     search: '',
     totalPage: '',
     totalSearch: '',
@@ -51,7 +51,9 @@ export default {
     dataHistoryTransaction(context, payload) {
       return new Promise((resolve, reject) => {
         axios
-          .get(`${process.env.VUE_APP_URL}transaction/history/?id=${payload.id}&span=${context.state.span}&page=${context.state.page}`)
+          .get(
+            `${process.env.VUE_APP_URL}transaction/history/?id=${payload.id}&span=${context.state.span}&page=${context.state.page}`
+          )
           .then(response => {
             resolve(response.data)
             context.commit('setHistoryTransaction', response.data)
