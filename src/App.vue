@@ -14,6 +14,6 @@
 }
 
 body {
-  font-family: NunitoSans !important;
+  font-family: NunitoSans;
 }
 </style>

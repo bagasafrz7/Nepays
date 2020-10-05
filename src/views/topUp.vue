@@ -37,9 +37,11 @@
                 </b-form>
               </b-row>
               <b-row>
-                <b-button class="btn-continue ml-auto" @click="upBalance"
-                  >Continue</b-button
-                >
+                <a href="/home" target="_blank" style="margin: 100px auto">
+                  <b-button class="btn-continue ml-auto" @click="upBalance"
+                    >Continue</b-button
+                  >
+                </a>
               </b-row>
             </div>
           </b-col>
@@ -59,7 +61,8 @@ export default {
   name: 'Topup',
   data() {
     return {
-      form: {}
+      form: {},
+      link: ''
     }
   },
   components: {
@@ -80,7 +83,8 @@ export default {
       this.postBalance(payload)
         .then((response) => {
           window.location.href = response.data
-          console.log(response.data)
+          this.link = response.data
+          console.log(this.link)
           this.$swal.fire({
             position: 'center',
             icon: 'success',

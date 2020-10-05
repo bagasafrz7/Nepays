@@ -103,11 +103,13 @@ export default {
       )
     },
     resetPassword(context, payload) {
+      console.log(payload)
       return new Promise((resolve, reject) => {
         axios
           .post(`${process.env.VUE_APP_URL}user/forgot`, payload)
           .then(res => {
             resolve(res.data.msg)
+            console.log(res.data)
           })
           .catch(err => {
             reject(err.response.data.msg)
