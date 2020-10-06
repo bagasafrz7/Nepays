@@ -71,7 +71,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['login']),
+    ...mapActions(['login', 'getChart']),
     loginBtn() {
       const setData = {
         email: this.form.email,
@@ -79,6 +79,7 @@ export default {
       }
       this.login(setData)
         .then((res) => {
+          this.getChart(this.user.id)
           this.$swal.fire({
             position: 'center',
             icon: 'success',
@@ -96,7 +97,7 @@ export default {
             } else {
               this.$router.push('/home')
             }
-          }, 1)
+          }, 100)
         })
         .catch((err) => {
           this.$swal.fire({

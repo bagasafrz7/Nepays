@@ -60,12 +60,12 @@ export default {
     interceptorRequest(context) {
       console.log('interceptors works!')
       axios.interceptors.request.use(
-        function (config) {
+        function(config) {
           config.headers.authorization = `Bearer ${context.state.token}`
           // Do something before request is sent
           return config
         },
-        function (error) {
+        function(error) {
           return Promise.reject(error)
         }
       )
@@ -78,10 +78,10 @@ export default {
     },
     interceptorResponse(context) {
       axios.interceptors.response.use(
-        function (response) {
+        function(response) {
           return response
         },
-        function (error) {
+        function(error) {
           if (error.response.status === 403) {
             if (
               error.response.data.msg === 'invalid token' ||
@@ -103,13 +103,11 @@ export default {
       )
     },
     resetPassword(context, payload) {
-      console.log(payload)
       return new Promise((resolve, reject) => {
         axios
           .post(`${process.env.VUE_APP_URL}user/forgot`, payload)
           .then(res => {
             resolve(res.data.msg)
-            console.log(res.data)
           })
           .catch(err => {
             reject(err.response.data.msg)
@@ -121,22 +119,18 @@ export default {
         axios
           .patch(`${process.env.VUE_APP_URL}user/reset`, payload)
           .then(res => {
-            console.log(res.data)
             resolve(res.data)
           })
           .catch(err => {
-            console.log(err.response)
             resolve(err.response.data)
           })
       })
     },
     setPin(context, payload) {
-      console.log(payload)
       return new Promise((resolve, reject) => {
         axios
           .patch(`${process.env.VUE_APP_URL}pin/${payload.id}`, payload.form)
           .then(res => {
-            console.log(res)
             resolve(res.data.msg)
           })
           .catch(err => {

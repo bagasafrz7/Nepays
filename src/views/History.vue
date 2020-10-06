@@ -68,13 +68,23 @@
                             font-weight: bold;
                           "
                         >
-                          + {{ item.amount }}
+                          +
+                          {{
+                            item.amount
+                              .toString()
+                              .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+                          }}
                         </p>
                         <p
                           v-if="item.category === 1"
                           style="color: red; font-size: 18px; font-weight: bold"
                         >
-                          - {{ item.amount }}
+                          -
+                          {{
+                            item.amount
+                              .toString()
+                              .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+                          }}
                         </p>
                       </b-col>
                     </b-row>
@@ -102,13 +112,23 @@
                             font-weight: bold;
                           "
                         >
-                          + {{ item.amount }}
+                          +
+                          {{
+                            item.amount
+                              .toString()
+                              .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+                          }}
                         </p>
                         <p
                           v-if="item.category === 1"
                           style="color: red; font-size: 18px; font-weight: bold"
                         >
-                          - {{ item.amount }}
+                          -
+                          {{
+                            item.amount
+                              .toString()
+                              .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+                          }}
                         </p>
                       </b-col>
                     </b-row>

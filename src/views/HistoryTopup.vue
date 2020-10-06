@@ -32,12 +32,17 @@
                         <b-col cols="6">
                           <p
                             style="
-                            color: #1ec15f;
-                            font-size: 18px;
-                            font-weight: bold;
-                          "
+                              color: #1ec15f;
+                              font-size: 18px;
+                              font-weight: bold;
+                            "
                           >
-                            + {{ item.nominal }}
+                            +
+                            {{
+                              item.nominal
+                                .toString()
+                                .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+                            }}
                           </p>
                         </b-col>
                         <b-col cols="6">
@@ -116,10 +121,10 @@ export default {
     },
     getDataHistoryTopup() {
       this.dataHistoryTopup(this.user)
-        .then(response => {
+        .then((response) => {
           console.log(response)
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error.data)
         })
     }

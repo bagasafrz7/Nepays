@@ -21,7 +21,14 @@
                 <b-row>
                   <b-col cols="12">
                     <p>Amount</p>
-                    <h5>Rp. {{ transferDetail.amount }}</h5>
+                    <h5>
+                      Rp.
+                      {{
+                        transferDetail.amount
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+                      }}
+                    </h5>
                   </b-col>
                 </b-row>
               </div>
@@ -130,12 +137,13 @@ export default {
       doc.text(
         ` Status: Success! \n \n Amount: Rp. ${
           this.transferDetail.amount
-        }\n Balance left: Rp. ${this.user.balance -
-          this.transferDetail.amount} \n Date & Time: ${
-          this.transferDetail.date
-        } \n Notes: ${this.transferDetail.note} \n \n Transfer to: \n Name: ${
-          this.getReceiver.first_name
-        } ${this.getReceiver.last_name} \n Phone: ${this.getReceiver.phone}`,
+        }\n Balance left: Rp. ${
+          this.user.balance - this.transferDetail.amount
+        } \n Date & Time: ${this.transferDetail.date} \n Notes: ${
+          this.transferDetail.note
+        } \n \n Transfer to: \n Name: ${this.getReceiver.first_name} ${
+          this.getReceiver.last_name
+        } \n Phone: ${this.getReceiver.phone}`,
         15,
         15
       )

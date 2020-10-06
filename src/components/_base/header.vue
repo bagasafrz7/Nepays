@@ -33,7 +33,7 @@
                   >
                     <template v-slot:title>Notification</template>
                     <div
-                      style="height: 150px; overflow-x: hidden"
+                      style="height: 100px; overflow-x: hidden"
                       v-if="notifications"
                     >
                       <div v-for="(value, index) in notifications" :key="index">
@@ -45,7 +45,7 @@
                       </div>
                     </div>
                   </b-popover>
-                  <div v-if="notifications" class="notif">{{ unseen }}</div>
+                  <div v-if="unseen >= 1" class="notif">{{ unseen }}</div>
                 </b-col>
               </b-row>
             </div>
@@ -93,6 +93,7 @@ export default {
     },
     seenNotif() {
       this.patchNotification(this.user.id)
+      this.notification()
     }
   }
 }

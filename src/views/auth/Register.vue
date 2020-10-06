@@ -57,7 +57,6 @@
                   class="input"
                   id="input-1"
                   type="email"
-                  required
                   placeholder="Enter your e-mail"
                   v-model="form.email"
                 ></b-form-input>

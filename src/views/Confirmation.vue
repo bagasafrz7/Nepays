@@ -28,7 +28,14 @@
                 <b-row>
                   <b-col cols="12">
                     <p>Amount</p>
-                    <h5>Rp. {{ transferDetail.amount }}</h5>
+                    <h5>
+                      Rp.
+                      {{
+                        transferDetail.amount
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+                      }}
+                    </h5>
                   </b-col>
                 </b-row>
               </div>
@@ -36,7 +43,17 @@
                 <b-row>
                   <b-col cols="12">
                     <p>Balance Left</p>
-                    <h5>Rp. {{ user.balance - transferDetail.amount }}</h5>
+                    <h5>
+                      Rp.
+                      {{
+                        user.balance
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, '.') -
+                        transferDetail.amount
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+                      }}
+                    </h5>
                   </b-col>
                 </b-row>
               </div>

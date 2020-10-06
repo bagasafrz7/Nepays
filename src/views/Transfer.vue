@@ -130,7 +130,13 @@
                             font-size: 16px;
                           "
                         >
-                          Rp. {{ user.balance }} Available
+                          Rp.
+                          {{
+                            user.balance
+                              .toString()
+                              .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+                          }}
+                          Available
                         </p>
                       </b-form>
                     </b-row>
@@ -232,7 +238,6 @@ export default {
       this.searchReceiverSection = false
       this.transferSection = true
       this.getReceiverById(id)
-      this.getProfile(this.user.id)
     },
     searchReceiver() {
       const setData = {

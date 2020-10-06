@@ -12,7 +12,14 @@
               <b-row>
                 <b-col cols="8">
                   <p>Balance</p>
-                  <h2>Rp. {{ user.balance }}</h2>
+                  <h2>
+                    Rp.
+                    {{
+                      user.balance
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+                    }}
+                  </h2>
                   <p>{{ user.phone }}</p>
                 </b-col>
                 <b-col cols="4" class="text-right">
@@ -35,15 +42,30 @@
               <b-col cols="7">
                 <div class="income">
                   <b-row>
-                    <b-col cols="8">
+                    <b-col cols="4" style="text-align: center">
                       <b-icon
                         icon="arrow-down"
                         style="color: #1ec15f; font-size: 28px"
                       ></b-icon>
                       <p style="cursor: pointer" @click="showIncome">Income</p>
-                      <h6>Rp {{ this.income }}</h6>
+                      <h6>
+                        Rp
+                        {{
+                          this.income
+                            .toString()
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+                        }}
+                      </h6>
                     </b-col>
-                    <b-col cols="4">
+                    <b-col cols="4" class="mt-5">
+                      <h6 style="text-align: center" v-show="showIncomeText">
+                        INCOME
+                      </h6>
+                      <h6 style="text-align: center" v-show="showExpenseText">
+                        EXPENSE
+                      </h6>
+                    </b-col>
+                    <b-col cols="4" style="text-align: center">
                       <b-icon
                         icon="arrow-up"
                         style="color: #ff5b37; font-size: 28px"
@@ -51,19 +73,26 @@
                       <p style="cursor: pointer" @click="showExpense">
                         Expense
                       </p>
-                      <h6>Rp {{ this.expense }}</h6>
+                      <h6>
+                        Rp
+                        {{
+                          this.expense
+                            .toString()
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+                        }}
+                      </h6>
                     </b-col>
                   </b-row>
                   <b-row>
                     <b-col cols="12" class="mt-4">
                       <column-chart
                         v-show="showDailyIncome"
-                        v-if="this.dataIncome"
+                        v-if="dataIncome"
                         :data="this.dataIncome"
                       ></column-chart>
                       <column-chart
                         v-show="showDailyExpense"
-                        v-if="this.dataExpense"
+                        v-if="dataExpense"
                         :data="this.dataExpense"
                       ></column-chart>
                     </b-col>
@@ -111,13 +140,23 @@
                           font-weight: bold;
                         "
                       >
-                        + {{ item.amount }}
+                        +
+                        {{
+                          item.amount
+                            .toString()
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+                        }}
                       </p>
                       <p
                         v-if="item.category === 1"
                         style="color: red; font-size: 12px; font-weight: bold"
                       >
-                        - {{ item.amount }}
+                        -
+                        {{
+                          item.amount
+                            .toString()
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+                        }}
                       </p>
                     </b-col>
                   </b-row>
@@ -146,7 +185,9 @@ export default {
     return {
       urlAPI: process.env.VUE_APP_URL,
       showDailyIncome: true,
-      showDailyExpense: false
+      showDailyExpense: false,
+      showIncomeText: true,
+      showExpenseText: false
     }
   },
   components: {
@@ -156,9 +197,8 @@ export default {
   },
   created() {
     this.getDataRecent()
-    this.getProfile(this.user.id)
     this.getChart(this.user.id)
-    // this.getChart()
+    this.getProfile(this.user.id)
   },
   computed: {
     ...mapGetters([
@@ -166,8 +206,6 @@ export default {
       'user',
       'income',
       'expense',
-      'dailyExpense',
-      'dailyIncome',
       'dataExpense',
       'dataIncome'
     ])
@@ -180,12 +218,14 @@ export default {
     showIncome() {
       this.showDailyIncome = true
       this.showDailyExpense = false
-      console.log(this.dataIncome)
+      this.showExpenseText = false
+      this.showIncomeText = true
     },
     showExpense() {
       this.showDailyIncome = false
       this.showDailyExpense = true
-      console.log(this.dataExpense)
+      this.showExpenseText = true
+      this.showIncomeText = false
     }
   }
 }
