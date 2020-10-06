@@ -35,7 +35,7 @@ Our goal is to make this application so that people make money transfer easier a
 3. Type `npm install` or `yarn install`
 4. Add .env file at root folder project
 ```sh
-VUE_APP_ENDPOINT = [Backend API]
+VUE_APP_URL = https://backend-nepays.fwdev.online/
 ```
 5. Type `npm run serve`
 
@@ -50,7 +50,7 @@ VUE_APP_ENDPOINT = [Backend API]
 
 | <a href="https://github.com/bagasafrz7" target="_blank">**Full-Stack Developer & Team Leader**</a> | <a href="https://github.com/mhdnaldi" target="_blank">**Front-End Developer**</a> | <a href="https://github.com/ardhikarn" target="_blank">**Front-End Developer**</a> | <a href="https://github.com/nurf21" target="_blank">**Back-End Developer**</a> | <a href="https://github.com/careerdimasprayoga" target="_blank">**Back-End Developer**</a> | 
 | :---: |:---:| :---:|:---:| :---:|
-| [![Full-Stack Developer Image](https://avatars1.githubusercontent.com/u/36648956?s=460&u=231204fcec6ae5e59f7249acf062af41d00fbc1c&v=4)](https://github.com/Bagusth15) | [![Front-End Developer Image](https://avatars3.githubusercontent.com/u/50584044?s=400&u=6b5e4649dc263aa17b1924e7dc656e0550b2c2bc&v=4)](https://github.com/mhdnaldi) | [![Front-End Developer Image](https://avatars1.githubusercontent.com/u/62016621?s=400&u=8a784a8febbe53913f7f81ec28bd4688dbe6278c&v=4)](https://github.com/ardhikarn) | [![Back-End Developer Image](https://avatars2.githubusercontent.com/u/59104753?s=400&u=47d2fd5039e33093e0c2f68ea2a0a2c170934e73&v=4)](https://github.com/nurf21) | [![Back-End Developer Image](https://https://avatars1.githubusercontent.com/u/66796874?s=400&u=9923d61a23f9bb11683c3f5c523387b87a41c455&v=4)](https://github.com/careerdimasprayoga) |
+| [![Full-Stack Developer Image](https://avatars3.githubusercontent.com/u/58078070?s=400&u=2bd92c36a3400d5523909fc8319025a703a68461&v=4)](https://github.com/bagasafrz7) | [![Front-End Developer Image](https://avatars3.githubusercontent.com/u/50584044?s=400&u=6b5e4649dc263aa17b1924e7dc656e0550b2c2bc&v=4)](https://github.com/mhdnaldi) | [![Front-End Developer Image](https://avatars1.githubusercontent.com/u/62016621?s=400&u=8a784a8febbe53913f7f81ec28bd4688dbe6278c&v=4)](https://github.com/ardhikarn) | [![Back-End Developer Image](https://avatars2.githubusercontent.com/u/59104753?s=400&u=47d2fd5039e33093e0c2f68ea2a0a2c170934e73&v=4)](https://github.com/nurf21) | [![Back-End Developer Image](https://https://avatars1.githubusercontent.com/u/66796874?s=400&u=9923d61a23f9bb11683c3f5c523387b87a41c455&v=4)](https://github.com/careerdimasprayoga) |
 | <a href="https://github.com/bagasafrz7" target="_blank">`https://github.com/bagasafrz7`</a> | <a href="https://github.com/mhdnaldi" target="_blank">`https://github.com/mhdnaldi`</a> | <a href="https://github.com/ardhikarn" target="_blank">`https://github.com/ardhikarn`</a> | <a href="https://github.com/nurf21" target="_blank">`https://github.com/nurf21`</a> | <a href="https://github.com/careerdimasprayoga" target="_blank">`https://github.com/careerdimasprayoga`</a> |
 
 ---
