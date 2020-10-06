@@ -124,4 +124,33 @@ export default {
 .aside a:hover {
   text-decoration: none;
 }
+
+@media (max-width: 768px) {
+  .aside {
+    padding: 20px 0px;
+  }
+  .aside .nav {
+    padding: 15px 0px;
+  }
+  .aside .b-icon.bi {
+    font-size: 16px;
+    margin-left: 15px;
+  }
+  .aside h3 {
+    font-size: 16px;
+    margin-left: 15px;
+  }
+}
+
+@media (max-width: 576px) {
+  .aside {
+    margin: 50px 0 0 0;
+  }
+  .aside .logout {
+    margin-top: 25px;
+  }
+  .aside {
+    height: 340px;
+  }
+}
 </style>

@@ -4,10 +4,10 @@
     <main>
       <b-container>
         <b-row>
-          <b-col cols="3">
+          <b-col cols="12" md="3">
             <Aside />
           </b-col>
-          <b-col cols="9">
+          <b-col cols="12" md="9">
             <div class="main-topup">
               <b-container>
                 <h4 class="mb-4">
@@ -142,5 +142,11 @@ main {
   padding: 30px;
   border-radius: 20px;
   height: 660px;
+}
+
+@media (max-width: 576px) {
+  .main-topup {
+    margin: 50px 0;
+  }
 }
 </style>
