@@ -41,7 +41,7 @@
                           </p>
                         </b-col>
                         <b-col cols="6">
-                          <p>{{ item.date }}</p>
+                          <p>{{ item.date.slice(0, 10) }}</p>
                         </b-col>
                         <b-col cols="12">
                           <hr />
