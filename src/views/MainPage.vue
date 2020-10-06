@@ -19,7 +19,7 @@
                   <router-link to="/transfer">
                     <b-button size="lg" class="btn-transfer">
                       <b-icon icon="arrow-up" aria-hidden="true"></b-icon>
-                      Transer
+                      Transfer
                     </b-button>
                   </router-link>
                   <router-link to="/top-up">
@@ -58,10 +58,12 @@
                     <b-col cols="12" class="mt-4">
                       <column-chart
                         v-show="showDailyIncome"
+                        v-if="this.dataIncome"
                         :data="this.dataIncome"
                       ></column-chart>
                       <column-chart
                         v-show="showDailyExpense"
+                        v-if="this.dataExpense"
                         :data="this.dataExpense"
                       ></column-chart>
                     </b-col>
@@ -205,6 +207,7 @@ main {
   background: #9da9f3;
   border: 1px solid #fff;
   margin: 5px 0;
+  width: 180px;
 }
 .home .main-home .income {
   background: #fff;

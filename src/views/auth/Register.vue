@@ -134,7 +134,7 @@ export default {
           }
           setTimeout(() => {
             this.$router.push('/login')
-          }, 3000)
+          }, 1)
         })
         .catch((err) => {
           this.$swal.fire({

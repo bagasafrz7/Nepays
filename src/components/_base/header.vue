@@ -18,12 +18,34 @@
                   <h6>{{ user.first_name }} {{ user.last_name }}</h6>
                   <p>{{ user.phone }}</p>
                 </b-col>
-                <b-col cols="3">
+                <b-col cols="3" style="display: relative; cursor: pointer">
                   <img
+                    id="popover-5"
                     style="width: 30px; height: 30px; margin: 10px auto"
                     src="../../assets/img/bell.png"
                     alt=""
+                    @click="seenNotif"
                   />
+                  <b-popover
+                    target="popover-5"
+                    triggers="click"
+                    placement="top"
+                  >
+                    <template v-slot:title>Notification</template>
+                    <div
+                      style="height: 150px; overflow-x: hidden"
+                      v-if="notifications"
+                    >
+                      <div v-for="(value, index) in notifications" :key="index">
+                        <p>
+                          {{ value.message }} |
+                          {{ value.created_at.slice(0, 10) }}
+                        </p>
+                        <hr />
+                      </div>
+                    </div>
+                  </b-popover>
+                  <div v-if="notifications" class="notif">{{ unseen }}</div>
                 </b-col>
               </b-row>
             </div>
@@ -35,18 +57,44 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import axios from 'axios'
+import { mapGetters, mapActions } from 'vuex'
 export default {
+  created() {
+    // this.getNotification(this.user.id)
+    this.notification()
+  },
   name: 'Header',
   data() {
     return {
-      port: process.env.VUE_APP_URL
+      port: process.env.VUE_APP_URL,
+      unseen: '',
+      notifications: []
     }
   },
   computed: {
     ...mapGetters(['user'])
   },
-  methods: {}
+
+  methods: {
+    ...mapActions(['patchNotification', 'patchNotification']),
+    notification() {
+      return new Promise((resolve, reject) => {
+        axios
+          .get(`${process.env.VUE_APP_URL}notification/${this.user.id}`)
+          .then((res) => {
+            this.unseen = res.data.data.unseen
+            this.notifications = res.data.data.notifications
+          })
+          .catch((err) => {
+            resolve(err.response.data.msg)
+          })
+      })
+    },
+    seenNotif() {
+      this.patchNotification(this.user.id)
+    }
+  }
 }
 </script>
 
@@ -77,5 +125,19 @@ export default {
 }
 .header .header-info a:hover {
   text-decoration: none;
+}
+
+.notif {
+  position: absolute;
+  background: red;
+  font-size: 10px;
+  color: #eee;
+  text-align: center;
+  font-weight: bold;
+  width: 24.5px;
+  padding: 2px 3px;
+  border-radius: 50%;
+  top: 0;
+  left: 37px;
 }
 </style>
