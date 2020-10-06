@@ -50,4 +50,9 @@
   color: #fff;
 }
 /* LEFT-SIDE */
+@media (max-width: 670px) {
+  .nepays-title {
+    display: none;
+  }
+}
 </style>
