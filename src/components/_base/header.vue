@@ -18,7 +18,11 @@
                   <h6>{{ user.first_name }} {{ user.last_name }}</h6>
                   <p>{{ user.phone }}</p>
                 </b-col>
-                <b-col cols="3" style="display: relative; cursor: pointer">
+                <b-col
+                  cols="3"
+                  style="display: relative; cursor: pointer"
+                  class="img-icon"
+                >
                   <img
                     id="popover-5"
                     style="width: 30px; height: 30px; margin: 10px auto"
@@ -139,5 +143,41 @@ export default {
   border-radius: 50%;
   top: 0;
   left: 37px;
+}
+
+@media (max-width: 768px) {
+  .header .header-info h6 {
+    margin-left: 20px;
+  }
+  .header .header-info p {
+    margin-left: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .header .logo img {
+    display: none;
+  }
+  .header .header-info img {
+    margin-left: -225px;
+  }
+  .header .header-info h6 {
+    position: absolute;
+    left: -200px;
+  }
+  .header .header-info p {
+    position: absolute;
+    left: -200px;
+    top: 30px;
+  }
+  .header .header-info .img-icon img {
+    position: absolute;
+    top: -50px;
+  }
+  .notif {
+    position: absolute;
+    top: -50px;
+    left: 37px;
+  }
 }
 </style>

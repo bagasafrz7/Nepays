@@ -4,10 +4,10 @@
     <main>
       <b-container>
         <b-row>
-          <b-col cols="3">
+          <b-col cols="12" md="3">
             <Aside />
           </b-col>
-          <b-col cols="9">
+          <b-col cols="12" md="9">
             <div class="main-topup">
               <b-row>
                 <b-col cols="6">
@@ -145,5 +145,11 @@ a:hover {
 .btn-continue:hover {
   background-color: #586de4;
   border-color: #586de4;
+}
+
+@media (max-width: 576px) {
+  .main-topup {
+    margin: 50px 0;
+  }
 }
 </style>

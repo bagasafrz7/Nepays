@@ -4,10 +4,10 @@
     <main>
       <b-container>
         <b-row>
-          <b-col cols="3">
+          <b-col cols="12" md="3">
             <Aside />
           </b-col>
-          <b-col cols="9">
+          <b-col cols="12" md="9">
             <div class="main-personal py-2">
               <h5 class="mt-3"><strong>Personal Information</strong></h5>
               <small class="text-muted mt-4">
@@ -135,7 +135,7 @@ export default {
       }
       if (this.form.phone === this.user.phone) {
         this.patchPersonalName(payloadName)
-          .then(response => {
+          .then((response) => {
             this.getProfile(this.user.id)
             this.$bvModal.hide('edit-profile')
             this.$swal.fire({
@@ -146,7 +146,7 @@ export default {
               timer: 1500
             })
           })
-          .catch(error => {
+          .catch((error) => {
             this.$swal.fire({
               position: 'center',
               icon: 'error',
@@ -163,7 +163,7 @@ export default {
           }
         }
         this.patchPersonalPhone(payloadPhone)
-          .then(response => {
+          .then((response) => {
             this.getProfile(this.user.id)
             this.$bvModal.hide('edit-profile')
             this.$swal.fire({
@@ -174,7 +174,7 @@ export default {
               timer: 1500
             })
           })
-          .catch(error => {
+          .catch((error) => {
             this.$swal.fire({
               position: 'center',
               icon: 'error',

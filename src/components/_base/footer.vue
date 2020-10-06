@@ -32,4 +32,16 @@ export default {
   padding: 30px 0 20px 0;
   color: #fff;
 }
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 30px 50px 20px 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .footer {
+    display: none;
+  }
+}
 </style>

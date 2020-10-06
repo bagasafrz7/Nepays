@@ -4,10 +4,10 @@
     <main>
       <b-container>
         <b-row>
-          <b-col cols="3">
+          <b-col cols="12" md="3">
             <Aside />
           </b-col>
-          <b-col cols="9">
+          <b-col cols="12" md="9">
             <div class="main-confirmation">
               <h2>Transfer To</h2>
               <div class="detail-user">
@@ -296,5 +296,17 @@ main {
   text-align: center;
   font-weight: bold;
   height: 50px;
+}
+
+@media (max-width: 576px) {
+  .main-confirmation {
+    margin: 50px 0;
+  }
+  .main-confirmation .detail-user h6 {
+    margin-left: 75px;
+  }
+  .main-confirmation .detail-user p {
+    margin-left: 75px;
+  }
 }
 </style>

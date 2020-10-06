@@ -4,10 +4,10 @@
     <main>
       <b-container>
         <b-row>
-          <b-col cols="3">
+          <b-col cols="12" md="3">
             <Aside />
           </b-col>
-          <b-col cols="9" class="main-home">
+          <b-col cols="12" md="9" class="main-home">
             <div class="balance">
               <b-row>
                 <b-col cols="8">
@@ -32,7 +32,7 @@
               </b-row>
             </div>
             <b-row>
-              <b-col cols="7">
+              <b-col cols="12" md="6">
                 <div class="income">
                   <b-row>
                     <b-col cols="8">
@@ -71,7 +71,7 @@
                   <!-- <h3>Data Income</h3> -->
                 </div>
               </b-col>
-              <b-col cols="5">
+              <b-col cols="12" md="6">
                 <div class="transaction-history">
                   <b-row class="mb-4">
                     <b-col cols="8">
@@ -235,5 +235,51 @@ main {
   width: 46px;
   height: 46px;
   border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+  .home .main-home .balance .btn-transfer {
+    width: 140px;
+  }
+  .home .main-home .transaction-history {
+    padding: 15px;
+  }
+  .home .main-home .transaction-history h5 {
+    font-size: 16px;
+  }
+  .home .main-home .transaction-history h6 {
+    font-size: 14px;
+  }
+  .home .main-home .transaction-history .info-transaction {
+    margin-left: 0px;
+  }
+  .home .main-home .transaction-history .info-transaction h6 {
+    font-size: 10px;
+    margin-left: 10px;
+  }
+  .home .main-home .transaction-history .info-transaction p {
+    font-size: 13px;
+    margin-left: 10px;
+  }
+  .home .main-home .transaction-history img {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+@media (max-width: 576px) {
+  .home .main-home .balance .btn-transfer {
+    position: relative;
+    top: 0;
+    left: -50px;
+    width: 120px;
+    font-size: 14px;
+  }
+  .home .main-home .balance h2 {
+    font-size: 18px;
+  }
+  .home .main-home {
+    padding: 0 20px 50px 20px;
+  }
 }
 </style>

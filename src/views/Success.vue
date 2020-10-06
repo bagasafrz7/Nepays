@@ -4,10 +4,10 @@
     <main>
       <b-container>
         <b-row>
-          <b-col cols="3">
+          <b-col cols="12" md="3">
             <Aside />
           </b-col>
-          <b-col cols="9">
+          <b-col cols="12" md="9">
             <div class="main-sukses">
               <b-row>
                 <b-col cols="12" class="text-center">
@@ -63,7 +63,7 @@
                   </b-col>
                 </b-row>
               </div>
-              <b-row class="mb-3">
+              <b-row class="mb-3 detail-btn">
                 <b-col cols="6" class="text-right">
                   <!-- <div class="icon-share"> -->
                   <b-button variant="primary icon-share">
@@ -130,12 +130,13 @@ export default {
       doc.text(
         ` Status: Success! \n \n Amount: Rp. ${
           this.transferDetail.amount
-        }\n Balance left: Rp. ${this.user.balance -
-          this.transferDetail.amount} \n Date & Time: ${
-          this.transferDetail.date
-        } \n Notes: ${this.transferDetail.note} \n \n Transfer to: \n Name: ${
-          this.getReceiver.first_name
-        } ${this.getReceiver.last_name} \n Phone: ${this.getReceiver.phone}`,
+        }\n Balance left: Rp. ${
+          this.user.balance - this.transferDetail.amount
+        } \n Date & Time: ${this.transferDetail.date} \n Notes: ${
+          this.transferDetail.note
+        } \n \n Transfer to: \n Name: ${this.getReceiver.first_name} ${
+          this.getReceiver.last_name
+        } \n Phone: ${this.getReceiver.phone}`,
         15,
         15
       )
@@ -204,5 +205,48 @@ main {
   border: 1px solid #6379f4;
   border-radius: 12px;
   color: #fff;
+}
+@media (max-width: 768px) {
+  .main-sukses .btn-download button {
+    font-size: 14px;
+  }
+  .main-sukses .btn-back button {
+    padding: 20px 15px;
+    font-size: 14px;
+  }
+  .main-sukses .detail-user h6 {
+    margin-left: 25px;
+  }
+  .main-sukses .detail-user p {
+    margin-left: 25px;
+  }
+}
+@media (max-width: 576px) {
+  .main-sukses .detail-user h6 {
+    margin-left: 35px;
+  }
+  .main-sukses .detail-user p {
+    margin-left: 35px;
+  }
+  .main-sukses .detail-user {
+    margin: 10px 0 50px 0;
+  }
+  .main-sukses .btn-download button {
+    position: absolute;
+    left: -50px;
+    margin-bottom: 50px;
+    width: 100px;
+  }
+  .main-sukses .btn-back button {
+    position: absolute;
+    left: -10px;
+    margin-bottom: 50px;
+  }
+  .main-sukses .icon-share {
+    position: absolute;
+    left: 0;
+    top: 10px;
+    margin-bottom: 50px;
+  }
 }
 </style>

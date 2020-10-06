@@ -4,63 +4,65 @@
     <main>
       <b-container>
         <b-row>
-          <b-col cols="3">
+          <b-col cols="12" md="3">
             <Aside />
           </b-col>
-          <b-col cols="9" class="profile text-center">
-            <b-img :src="url + '/' + user.image" />
-            <div class="my-1 text-muted">
-              <label for="files" class="mb-0">
-                <b-icon
-                  class="align-self-center"
-                  font-scale="0.8"
-                  icon="pencil"
-                ></b-icon>
-                Edit
-              </label>
-              <input
-                @change.prevent="upImage"
-                id="files"
-                type="file"
-                ref="file"
-                style="display: none"
-              />
-            </div>
-            <h4 class="mt-3">{{ user.first_name + ' ' + user.last_name }}</h4>
-            <p class="text-muted">{{ user.phone }}</p>
-            <div class="my-5">
-              <div
-                class="profile-menu text-center"
-                @click="$router.push('/profile/personal-information')"
-              >
-                <p class="mb-0 text-muted">
-                  <strong>Personal Information</strong>
-                </p>
-                <b-icon class="align-self-center" icon="arrow-right"></b-icon>
+          <b-col cols="12" md="9">
+            <div class="profile text-center">
+              <b-img :src="url + '/' + user.image" />
+              <div class="my-1 text-muted">
+                <label for="files" class="mb-0">
+                  <b-icon
+                    class="align-self-center"
+                    font-scale="0.8"
+                    icon="pencil"
+                  ></b-icon>
+                  Edit
+                </label>
+                <input
+                  @change.prevent="upImage"
+                  id="files"
+                  type="file"
+                  ref="file"
+                  style="display: none"
+                />
               </div>
-              <div
-                class="profile-menu text-center"
-                @click="$router.push('/profile/change-password')"
-              >
-                <p class="mb-0 text-muted">
-                  <strong>Change Password</strong>
-                </p>
-                <b-icon class="align-self-center" icon="arrow-right"></b-icon>
-              </div>
-              <div
-                class="profile-menu text-center"
-                @click="$router.push('/profile/change-pin')"
-              >
-                <p class="mb-0 text-muted">
-                  <strong>Change PIN</strong>
-                </p>
-                <b-icon class="align-self-center" icon="arrow-right"></b-icon>
-              </div>
-              <div class="profile-menu text-center" @click="toLogout">
-                <p class="mb-0 text-muted">
-                  <strong>Logout</strong>
-                </p>
-                <b-icon class="align-self-center" icon="arrow-right"></b-icon>
+              <h4 class="mt-3">{{ user.first_name + ' ' + user.last_name }}</h4>
+              <p class="text-muted">{{ user.phone }}</p>
+              <div class="my-5">
+                <div
+                  class="profile-menu text-center"
+                  @click="$router.push('/profile/personal-information')"
+                >
+                  <p class="mb-0 text-muted">
+                    <strong>Personal Information</strong>
+                  </p>
+                  <b-icon class="align-self-center" icon="arrow-right"></b-icon>
+                </div>
+                <div
+                  class="profile-menu text-center"
+                  @click="$router.push('/profile/change-password')"
+                >
+                  <p class="mb-0 text-muted">
+                    <strong>Change Password</strong>
+                  </p>
+                  <b-icon class="align-self-center" icon="arrow-right"></b-icon>
+                </div>
+                <div
+                  class="profile-menu text-center"
+                  @click="$router.push('/profile/change-pin')"
+                >
+                  <p class="mb-0 text-muted">
+                    <strong>Change PIN</strong>
+                  </p>
+                  <b-icon class="align-self-center" icon="arrow-right"></b-icon>
+                </div>
+                <div class="profile-menu text-center" @click="toLogout">
+                  <p class="mb-0 text-muted">
+                    <strong>Logout</strong>
+                  </p>
+                  <b-icon class="align-self-center" icon="arrow-right"></b-icon>
+                </div>
               </div>
             </div>
           </b-col>
@@ -107,7 +109,7 @@ export default {
         image: data
       }
       this.patchProfileImage(payload)
-        .then(response => {
+        .then((response) => {
           this.getProfile(this.user.id)
           this.$swal.fire({
             position: 'center',
@@ -117,7 +119,7 @@ export default {
             timer: 1500
           })
         })
-        .catch(error => {
+        .catch((error) => {
           this.$swal.fire({
             position: 'center',
             icon: 'error',
@@ -138,7 +140,7 @@ export default {
           confirmButtonText: 'Yes',
           denyButtonText: 'Cancel'
         })
-        .then(result => {
+        .then((result) => {
           /* Read more about isConfirmed, isDenied below */
           if (result.isConfirmed) {
             this.$swal.fire('See you again!', '', 'success')
@@ -185,5 +187,12 @@ main {
 label:hover {
   opacity: 0.6;
   cursor: pointer;
+}
+
+@media (max-width: 576px) {
+  .profile {
+    margin: 50px 5px;
+    padding: 20px 0;
+  }
 }
 </style>
