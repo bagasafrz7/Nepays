@@ -103,13 +103,11 @@ export default {
       )
     },
     resetPassword(context, payload) {
-      console.log(payload)
       return new Promise((resolve, reject) => {
         axios
           .post(`${process.env.VUE_APP_URL}user/forgot`, payload)
           .then(res => {
             resolve(res.data.msg)
-            console.log(res.data)
           })
           .catch(err => {
             reject(err.response.data.msg)
@@ -121,22 +119,18 @@ export default {
         axios
           .patch(`${process.env.VUE_APP_URL}user/reset`, payload)
           .then(res => {
-            console.log(res.data)
             resolve(res.data)
           })
           .catch(err => {
-            console.log(err.response)
             resolve(err.response.data)
           })
       })
     },
     setPin(context, payload) {
-      console.log(payload)
       return new Promise((resolve, reject) => {
         axios
           .patch(`${process.env.VUE_APP_URL}pin/${payload.id}`, payload.form)
           .then(res => {
-            console.log(res)
             resolve(res.data.msg)
           })
           .catch(err => {

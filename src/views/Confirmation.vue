@@ -4,10 +4,10 @@
     <main>
       <b-container>
         <b-row>
-          <b-col cols="3">
+          <b-col cols="12" md="3">
             <Aside />
           </b-col>
-          <b-col cols="9">
+          <b-col cols="12" md="9">
             <div class="main-confirmation">
               <h2>Transfer To</h2>
               <div class="detail-user">
@@ -28,7 +28,14 @@
                 <b-row>
                   <b-col cols="12">
                     <p>Amount</p>
-                    <h5>Rp. {{ transferDetail.amount }}</h5>
+                    <h5>
+                      Rp.
+                      {{
+                        transferDetail.amount
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+                      }}
+                    </h5>
                   </b-col>
                 </b-row>
               </div>
@@ -36,7 +43,10 @@
                 <b-row>
                   <b-col cols="12">
                     <p>Balance Left</p>
-                    <h5>Rp. {{ user.balance - transferDetail.amount }}</h5>
+                    <h5>
+                      Rp.
+                      {{ user.balance - transferDetail.amount }}
+                    </h5>
                   </b-col>
                 </b-row>
               </div>
@@ -222,7 +232,6 @@ export default {
           this.pin5 = ''
           this.pin6 = ''
         })
-      this.getProfile(this.user.id)
     },
     toggleModal() {
       // We pass the ID of the button that we want to return focus to
@@ -296,5 +305,17 @@ main {
   text-align: center;
   font-weight: bold;
   height: 50px;
+}
+
+@media (max-width: 576px) {
+  .main-confirmation {
+    margin: 50px 0;
+  }
+  .main-confirmation .detail-user h6 {
+    margin-left: 75px;
+  }
+  .main-confirmation .detail-user p {
+    margin-left: 75px;
+  }
 }
 </style>

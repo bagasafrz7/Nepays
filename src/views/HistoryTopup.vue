@@ -4,10 +4,10 @@
     <main>
       <b-container>
         <b-row>
-          <b-col cols="3">
+          <b-col cols="12" md="3">
             <Aside />
           </b-col>
-          <b-col cols="9">
+          <b-col cols="12" md="9">
             <div class="main-topup">
               <b-container>
                 <h4 class="mb-4">
@@ -32,12 +32,17 @@
                         <b-col cols="6">
                           <p
                             style="
-                            color: #1ec15f;
-                            font-size: 18px;
-                            font-weight: bold;
-                          "
+                              color: #1ec15f;
+                              font-size: 18px;
+                              font-weight: bold;
+                            "
                           >
-                            + {{ item.nominal }}
+                            +
+                            {{
+                              item.nominal
+                                .toString()
+                                .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+                            }}
                           </p>
                         </b-col>
                         <b-col cols="6">
@@ -116,10 +121,10 @@ export default {
     },
     getDataHistoryTopup() {
       this.dataHistoryTopup(this.user)
-        .then(response => {
+        .then((response) => {
           console.log(response)
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error.data)
         })
     }
@@ -137,5 +142,11 @@ main {
   padding: 30px;
   border-radius: 20px;
   height: 660px;
+}
+
+@media (max-width: 576px) {
+  .main-topup {
+    margin: 50px 0;
+  }
 }
 </style>

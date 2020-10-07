@@ -4,15 +4,22 @@
     <main>
       <b-container>
         <b-row>
-          <b-col cols="3">
+          <b-col cols="12" md="3">
             <Aside />
           </b-col>
-          <b-col cols="9" class="main-home">
+          <b-col cols="12" md="9" class="main-home">
             <div class="balance">
               <b-row>
                 <b-col cols="8">
                   <p>Balance</p>
-                  <h2>Rp. {{ user.balance }}</h2>
+                  <h2>
+                    Rp.
+                    {{
+                      user.balance
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+                    }}
+                  </h2>
                   <p>{{ user.phone }}</p>
                 </b-col>
                 <b-col cols="4" class="text-right">
@@ -32,18 +39,33 @@
               </b-row>
             </div>
             <b-row>
-              <b-col cols="7">
+              <b-col cols="12" md="6">
                 <div class="income">
                   <b-row>
-                    <b-col cols="8">
+                    <b-col cols="4" style="text-align: center">
                       <b-icon
                         icon="arrow-down"
                         style="color: #1ec15f; font-size: 28px"
                       ></b-icon>
                       <p style="cursor: pointer" @click="showIncome">Income</p>
-                      <h6>Rp {{ this.income }}</h6>
+                      <h6 v-if="income">
+                        Rp
+                        {{
+                          this.income
+                            .toString()
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+                        }}
+                      </h6>
                     </b-col>
-                    <b-col cols="4">
+                    <b-col cols="4" class="mt-5">
+                      <h6 style="text-align: center" v-show="showIncomeText">
+                        INCOME
+                      </h6>
+                      <h6 style="text-align: center" v-show="showExpenseText">
+                        EXPENSE
+                      </h6>
+                    </b-col>
+                    <b-col cols="4" style="text-align: center">
                       <b-icon
                         icon="arrow-up"
                         style="color: #ff5b37; font-size: 28px"
@@ -51,19 +73,26 @@
                       <p style="cursor: pointer" @click="showExpense">
                         Expense
                       </p>
-                      <h6>Rp {{ this.expense }}</h6>
+                      <h6 v-if="expense">
+                        Rp
+                        {{
+                          this.expense
+                            .toString()
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+                        }}
+                      </h6>
                     </b-col>
                   </b-row>
                   <b-row>
                     <b-col cols="12" class="mt-4">
                       <column-chart
                         v-show="showDailyIncome"
-                        v-if="this.dataIncome"
+                        v-if="dataIncome"
                         :data="this.dataIncome"
                       ></column-chart>
                       <column-chart
                         v-show="showDailyExpense"
-                        v-if="this.dataExpense"
+                        v-if="dataExpense"
                         :data="this.dataExpense"
                       ></column-chart>
                     </b-col>
@@ -71,7 +100,7 @@
                   <!-- <h3>Data Income</h3> -->
                 </div>
               </b-col>
-              <b-col cols="5">
+              <b-col cols="12" md="6">
                 <div class="transaction-history">
                   <b-row class="mb-4">
                     <b-col cols="8">
@@ -111,13 +140,23 @@
                           font-weight: bold;
                         "
                       >
-                        + {{ item.amount }}
+                        +
+                        {{
+                          item.amount
+                            .toString()
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+                        }}
                       </p>
                       <p
                         v-if="item.category === 1"
                         style="color: red; font-size: 12px; font-weight: bold"
                       >
-                        - {{ item.amount }}
+                        -
+                        {{
+                          item.amount
+                            .toString()
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+                        }}
                       </p>
                     </b-col>
                   </b-row>
@@ -146,7 +185,9 @@ export default {
     return {
       urlAPI: process.env.VUE_APP_URL,
       showDailyIncome: true,
-      showDailyExpense: false
+      showDailyExpense: false,
+      showIncomeText: true,
+      showExpenseText: false
     }
   },
   components: {
@@ -156,9 +197,8 @@ export default {
   },
   created() {
     this.getDataRecent()
-    this.getProfile(this.user.id)
     this.getChart(this.user.id)
-    // this.getChart()
+    this.getProfile(this.user.id)
   },
   computed: {
     ...mapGetters([
@@ -166,8 +206,6 @@ export default {
       'user',
       'income',
       'expense',
-      'dailyExpense',
-      'dailyIncome',
       'dataExpense',
       'dataIncome'
     ])
@@ -180,12 +218,14 @@ export default {
     showIncome() {
       this.showDailyIncome = true
       this.showDailyExpense = false
-      console.log(this.dataIncome)
+      this.showExpenseText = false
+      this.showIncomeText = true
     },
     showExpense() {
       this.showDailyIncome = false
       this.showDailyExpense = true
-      console.log(this.dataExpense)
+      this.showExpenseText = true
+      this.showIncomeText = false
     }
   }
 }
@@ -235,5 +275,51 @@ main {
   width: 46px;
   height: 46px;
   border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+  .home .main-home .balance .btn-transfer {
+    width: 140px;
+  }
+  .home .main-home .transaction-history {
+    padding: 15px;
+  }
+  .home .main-home .transaction-history h5 {
+    font-size: 16px;
+  }
+  .home .main-home .transaction-history h6 {
+    font-size: 14px;
+  }
+  .home .main-home .transaction-history .info-transaction {
+    margin-left: 0px;
+  }
+  .home .main-home .transaction-history .info-transaction h6 {
+    font-size: 10px;
+    margin-left: 10px;
+  }
+  .home .main-home .transaction-history .info-transaction p {
+    font-size: 13px;
+    margin-left: 10px;
+  }
+  .home .main-home .transaction-history img {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+@media (max-width: 576px) {
+  .home .main-home .balance .btn-transfer {
+    position: relative;
+    top: 0;
+    left: -50px;
+    width: 120px;
+    font-size: 14px;
+  }
+  .home .main-home .balance h2 {
+    font-size: 18px;
+  }
+  .home .main-home {
+    padding: 0 20px 50px 20px;
+  }
 }
 </style>

@@ -4,10 +4,10 @@
     <main>
       <b-container>
         <b-row>
-          <b-col cols="3">
+          <b-col cols="12" md="3">
             <Aside />
           </b-col>
-          <b-col cols="9">
+          <b-col cols="12" md="9">
             <div class="main-transfer">
               <section v-show="searchReceiverSection">
                 <b-container>
@@ -18,7 +18,7 @@
                     <div @click="searchReceiver">
                       <img src="../assets/img/search.png" alt="" />
                     </div>
-                    <b-form>
+                    <b-form class="form">
                       <b-form-input
                         class="input"
                         type="text"
@@ -46,17 +46,10 @@
                           />
                         </div>
                         <div>
-                          <p
-                            style="
-                              font-size: 18px;
-                              color: #4d4b57;
-                              margin-bottom: 5px;
-                              margin-top: 9px;
-                            "
-                          >
+                          <p class="nickname">
                             {{ value.first_name }} {{ value.last_name }}
                           </p>
-                          <p style="font-size: 16px; color: #7a7886">
+                          <p class="phone-number">
                             {{ value.phone }}
                           </p>
                         </div>
@@ -130,7 +123,13 @@
                             font-size: 16px;
                           "
                         >
-                          Rp. {{ user.balance }} Available
+                          Rp.
+                          {{
+                            user.balance
+                              .toString()
+                              .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+                          }}
+                          Available
                         </p>
                       </b-form>
                     </b-row>
@@ -232,7 +231,6 @@ export default {
       this.searchReceiverSection = false
       this.transferSection = true
       this.getReceiverById(id)
-      this.getProfile(this.user.id)
     },
     searchReceiver() {
       const setData = {
@@ -255,6 +253,18 @@ export default {
 <style scoped>
 main {
   background: #e5e5e5;
+}
+
+.nickname {
+  font-size: 18px;
+  color: #4d4b57;
+  margin-bottom: 5px;
+  margin-top: 9px;
+}
+
+.phone-number {
+  font-size: 16px;
+  color: #7a7886;
 }
 .main-transfer {
   position: relative;
@@ -356,5 +366,37 @@ main {
 .btn-continue:hover {
   background-color: #586de4;
   border-color: #586de4;
+}
+
+@media (max-width: 576px) {
+  .main-transfer {
+    margin: 50px 0;
+  }
+
+  .grid {
+    width: 292px;
+  }
+
+  .input {
+    width: 250px;
+  }
+
+  .receiver-img {
+    padding-top: 5px;
+    width: 50px;
+    height: 50px;
+  }
+
+  .nickname {
+    font-size: 14px;
+  }
+
+  .phone-number {
+    font-size: 14px;
+  }
+
+  .form {
+    width: 250px;
+  }
 }
 </style>

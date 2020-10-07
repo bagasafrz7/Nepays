@@ -4,10 +4,10 @@
     <main>
       <b-container>
         <b-row>
-          <b-col cols="3">
+          <b-col cols="12" md="3">
             <Aside />
           </b-col>
-          <b-col cols="9">
+          <b-col cols="12" md="9">
             <div class="main-pin">
               <b-row>
                 <b-col cols="6">
@@ -165,7 +165,7 @@ export default {
       }
       console.log(payload)
       this.patchPin(payload)
-        .then(response => {
+        .then((response) => {
           this.$swal.fire({
             position: 'center',
             icon: 'success',
@@ -177,7 +177,7 @@ export default {
             this.$router.push('/profile')
           }, 1500)
         })
-        .catch(error => {
+        .catch((error) => {
           this.$swal.fire({
             position: 'center',
             icon: 'error',
@@ -238,5 +238,17 @@ main {
   background-color: #6379f4;
   border-color: #6379f4;
   color: #fff;
+}
+
+@media (max-width: 576px) {
+  .main-pin {
+    margin: 50px 5px;
+  }
+  .otp {
+    display: grid;
+    margin: 20px 10px 75px -10px;
+    grid-template-columns: repeat(6, 38px);
+    gap: 24px;
+  }
 }
 </style>

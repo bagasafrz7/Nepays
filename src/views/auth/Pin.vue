@@ -2,7 +2,10 @@
   <b-container fluid>
     <b-row>
       <Left />
-      <b-col cols="5">
+      <div class="logo">
+        <img class="logo-img" src="../../assets/img/nepays-blue.png" alt="" />
+      </div>
+      <b-col cols lg="5" sm="12">
         <section v-show="showOtp">
           <div class="login-form">
             <h3>
@@ -125,7 +128,7 @@ export default {
         }
       }
       this.setPin(newResult)
-        .then(res => {
+        .then((res) => {
           this.$swal.fire({
             position: 'center',
             icon: 'success',
@@ -137,7 +140,7 @@ export default {
             this.$router.push('/home')
           }, 4000)
         })
-        .catch(err => {
+        .catch((err) => {
           this.$swal.fire({
             position: 'center',
             icon: 'error',
@@ -206,4 +209,46 @@ export default {
   height: 50px;
 }
 /* RIGHT-SIDE */
+.logo {
+  display: none;
+}
+@media (max-width: 670px) {
+  .login-form {
+    padding-right: 40px;
+  }
+
+  h3.start {
+    font-size: 18px;
+  }
+
+  .login-form p.p-text {
+    font-size: 14px;
+  }
+
+  .input {
+    font-size: 14px;
+    width: 250px;
+  }
+
+  .p-forgot {
+    font-size: 12px;
+    margin-right: 15px;
+    margin-top: 15px;
+  }
+
+  .logo {
+    width: 100%;
+    margin-bottom: -130px;
+    display: block;
+  }
+
+  .logo .logo-img {
+    display: block;
+    margin: auto;
+  }
+
+  .otp {
+    gap: 18px;
+  }
+}
 </style>
