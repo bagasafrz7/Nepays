@@ -100,7 +100,7 @@ export default {
             } else {
               this.$router.push('/home')
             }
-          }, 100)
+          }, 1500)
         })
         .catch((err) => {
           this.$swal.fire({

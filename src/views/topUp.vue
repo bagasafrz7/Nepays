@@ -37,11 +37,9 @@
                 </b-form>
               </b-row>
               <b-row>
-                <a href="/home" target="_blank" style="margin: 100px auto">
-                  <b-button class="btn-continue ml-auto" @click="upBalance"
-                    >Continue</b-button
-                  >
-                </a>
+                <b-button class="btn-continue ml-auto" @click="upBalance"
+                  >Continue</b-button
+                >
               </b-row>
             </div>
           </b-col>
