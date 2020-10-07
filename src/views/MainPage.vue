@@ -48,7 +48,7 @@
                         style="color: #1ec15f; font-size: 28px"
                       ></b-icon>
                       <p style="cursor: pointer" @click="showIncome">Income</p>
-                      <h6>
+                      <h6 v-if="income">
                         Rp
                         {{
                           this.income
@@ -73,7 +73,7 @@
                       <p style="cursor: pointer" @click="showExpense">
                         Expense
                       </p>
-                      <h6>
+                      <h6 v-if="expense">
                         Rp
                         {{
                           this.expense

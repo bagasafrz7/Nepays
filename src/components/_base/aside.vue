@@ -3,59 +3,59 @@
     <b-row>
       <b-col cols="12">
         <b-row class="nav">
-          <b-col cols="2">
+          <b-col cols="2" class="img">
             <router-link to="/home">
               <b-icon icon="grid"></b-icon>
             </router-link>
           </b-col>
-          <b-col cols="10">
+          <b-col cols="9">
             <router-link to="/home">
-              <h3>Dashboard</h3>
+              <h3 class="ml-3">Dashboard</h3>
             </router-link>
           </b-col>
         </b-row>
         <b-row class="nav">
-          <b-col cols="2">
+          <b-col cols="2" class="img">
             <routerLink to="/transfer">
               <b-icon icon="arrow-up"></b-icon>
             </routerLink>
           </b-col>
-          <b-col cols="10">
+          <b-col cols="9">
             <router-link to="/transfer">
-              <h3>Transfer</h3>
+              <h3 class="ml-3">Transfer</h3>
             </router-link>
           </b-col>
         </b-row>
         <b-row class="nav">
-          <b-col cols="2">
+          <b-col cols="2" class="img">
             <router-link to="/top-up">
               <b-icon icon="plus"></b-icon>
             </router-link>
           </b-col>
-          <b-col cols="10">
+          <b-col cols="9">
             <router-link to="/top-up">
-              <h3>Top Up</h3>
+              <h3 class="ml-3">Top Up</h3>
             </router-link>
           </b-col>
         </b-row>
         <b-row class="nav">
-          <b-col cols="2">
+          <b-col cols="2" class="img">
             <router-link to="/profile">
               <b-icon icon="person"></b-icon>
             </router-link>
           </b-col>
-          <b-col cols="10">
+          <b-col cols="9">
             <router-link to="/profile">
-              <h3>Profile</h3>
+              <h3 class="ml-3">Profile</h3>
             </router-link>
           </b-col>
         </b-row>
         <b-row class="logout">
-          <b-col cols="2">
+          <b-col cols="2" class="img">
             <b-icon icon="box-arrow-right" @click="logoutBtn"></b-icon>
           </b-col>
-          <b-col cols="10">
-            <h3 @click="logoutBtn">Logout</h3>
+          <b-col cols="9">
+            <h3 @click="logoutBtn" class="ml-3">Logout</h3>
           </b-col>
         </b-row>
       </b-col>
@@ -151,6 +151,12 @@ export default {
   }
   .aside {
     height: 340px;
+  }
+
+  .img {
+    margin-left: 20px;
+    margin-right: -30px;
+    margin-top: 3px;
   }
 }
 </style>

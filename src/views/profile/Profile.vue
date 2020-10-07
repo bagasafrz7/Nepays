@@ -26,6 +26,15 @@
                   ref="file"
                   style="display: none"
                 />
+                |
+                <label class="mb-0" @click="delImage">
+                  <b-icon
+                    class="align-self-center"
+                    font-scale="0.8"
+                    icon="trash"
+                  ></b-icon>
+                  Delete
+                </label>
               </div>
               <h4 class="mt-3">{{ user.first_name + ' ' + user.last_name }}</h4>
               <p class="text-muted">{{ user.phone }}</p>
@@ -99,7 +108,12 @@ export default {
     ...mapGetters(['user'])
   },
   methods: {
-    ...mapActions(['patchProfileImage', 'logout', 'getProfile']),
+    ...mapActions([
+      'patchProfileImage',
+      'logout',
+      'getProfile',
+      'deleteImageUser'
+    ]),
     upImage(event) {
       this.formImage.image = event.target.files[0]
       const data = new FormData()
@@ -129,8 +143,42 @@ export default {
           })
         })
     },
+    delImage() {
+      this.$swal
+        .fire({
+          title: 'Delete Photo Profile?',
+          icon: 'warning',
+          showDenyButton: true,
+          showCancelButton: true,
+          confirmButtonText: 'Yes',
+          denyButtonText: 'Cancel'
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            this.deleteImageUser(this.user.id)
+              .then((response) => {
+                this.getProfile(this.user.id)
+                this.$swal.fire({
+                  position: 'center',
+                  icon: 'success',
+                  title: response.msg,
+                  showConfirmButton: false,
+                  timer: 1500
+                })
+              })
+              .catch((error) => {
+                this.$swal.fire({
+                  position: 'center',
+                  icon: 'error',
+                  title: error.data.msg,
+                  showConfirmButton: false,
+                  timer: 1500
+                })
+              })
+          }
+        })
+    },
     toLogout() {
-      console.log(this.user)
       this.$swal
         .fire({
           title: 'logout account ?',

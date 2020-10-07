@@ -2,7 +2,10 @@
   <b-container fluid>
     <b-row>
       <Left />
-      <b-col cols="5">
+      <div class="logo">
+        <img class="logo-img" src="../../assets/img/nepays-blue.png" alt="" />
+      </div>
+      <b-col cols lg="5" sm="12">
         <div class="login-form">
           <h3>
             Start Accessing Banking Needs With All Devices and All Platforms
@@ -97,7 +100,7 @@ export default {
             } else {
               this.$router.push('/home')
             }
-          }, 100)
+          }, 1500)
         })
         .catch((err) => {
           this.$swal.fire({
@@ -192,4 +195,42 @@ export default {
   color: #6379f4;
 }
 /* RIGHT-SIDE */
+.logo {
+  display: none;
+}
+@media (max-width: 670px) {
+  .login-form {
+    padding-right: 40px;
+  }
+
+  h3.start {
+    font-size: 18px;
+  }
+
+  .login-form p.p-text {
+    font-size: 14px;
+  }
+
+  .input {
+    font-size: 14px;
+    width: 250px;
+  }
+
+  .p-forgot {
+    font-size: 12px;
+    margin-right: 15px;
+    margin-top: 15px;
+  }
+
+  .logo {
+    width: 100%;
+    margin-bottom: -130px;
+    display: block;
+  }
+
+  .logo .logo-img {
+    display: block;
+    margin: auto;
+  }
+}
 </style>

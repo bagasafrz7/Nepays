@@ -45,14 +45,7 @@
                     <p>Balance Left</p>
                     <h5>
                       Rp.
-                      {{
-                        user.balance
-                          .toString()
-                          .replace(/\B(?=(\d{3})+(?!\d))/g, '.') -
-                        transferDetail.amount
-                          .toString()
-                          .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
-                      }}
+                      {{ user.balance - transferDetail.amount }}
                     </h5>
                   </b-col>
                 </b-row>
@@ -239,7 +232,6 @@ export default {
           this.pin5 = ''
           this.pin6 = ''
         })
-      this.getProfile(this.user.id)
     },
     toggleModal() {
       // We pass the ID of the button that we want to return focus to
