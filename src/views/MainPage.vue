@@ -321,5 +321,9 @@ main {
   .home .main-home {
     padding: 0 20px 50px 20px;
   }
+
+  .home .main-home .income {
+    height: 470px;
+  }
 }
 </style>

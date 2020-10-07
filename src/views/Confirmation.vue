@@ -312,10 +312,28 @@ main {
     margin: 50px 0;
   }
   .main-confirmation .detail-user h6 {
-    margin-left: 75px;
+    margin-left: 25px;
+    margin-top: 5px;
   }
   .main-confirmation .detail-user p {
-    margin-left: 75px;
+    margin-left: 25px;
+  }
+
+  .main-confirmation .detail-user img {
+    width: 60px;
+    height: 60px;
+    margin-right: -40px;
+  }
+
+  .main-confirmation h2 {
+    font-size: 20px;
+  }
+  .main-confirmation h4 {
+    font-size: 20px;
+  }
+
+  .detail h5 {
+    font-size: 17px;
   }
 }
 </style>

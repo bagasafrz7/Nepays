@@ -57,10 +57,10 @@
                 </b-row>
               </div>
               <h5 class="mb-3">Transfer To</h5>
-              <div class="detail-user">
+              <div id="detail-user">
                 <b-row>
                   <b-col cols="2">
-                    <img :src="port + getReceiver.image" alt="" />
+                    <img id="img" :src="port + getReceiver.image" alt="" />
                   </b-col>
                   <b-col cols="10">
                     <h6>
@@ -85,7 +85,7 @@
                     class="btn-download"
                   >
                     <b-icon icon="download" aria-hidden="true"></b-icon>
-                    Download PDF
+                    <p>Download PDF</p>
                   </b-button>
                 </b-col>
                 <b-col cols="3" class="btn-back text-right">
@@ -94,7 +94,7 @@
                       class="btn-back"
                       variant="primary"
                       aria-hidden="true"
-                      >Back To Home</b-button
+                      >Home</b-button
                     >
                   </router-link>
                 </b-col>
@@ -178,7 +178,7 @@ main {
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.09);
   border-radius: 10px;
 }
-.main-sukses .detail-user img {
+.main-sukses #detail-user img {
   width: 100px;
   height: 100px;
   border-radius: 20px;
@@ -221,21 +221,21 @@ main {
     padding: 20px 15px;
     font-size: 14px;
   }
-  .main-sukses .detail-user h6 {
+  .main-sukses #detail-user h6 {
     margin-left: 25px;
   }
-  .main-sukses .detail-user p {
+  .main-sukses #detail-user p {
     margin-left: 25px;
   }
 }
 @media (max-width: 576px) {
-  .main-sukses .detail-user h6 {
+  .main-sukses #detail-user h6 {
     margin-left: 35px;
   }
-  .main-sukses .detail-user p {
+  .main-sukses #detail-user p {
     margin-left: 35px;
   }
-  .main-sukses .detail-user {
+  .main-sukses #detail-user {
     margin: 10px 0 50px 0;
   }
   .main-sukses .btn-download button {
@@ -254,6 +254,44 @@ main {
     left: 0;
     top: 10px;
     margin-bottom: 50px;
+  }
+
+  #detail-user h6,
+  p {
+    font-size: 16px;
+    margin-top: 15px;
+  }
+
+  #detail-user #img {
+    width: 60px;
+    height: 60px;
+    margin-top: 16px;
+  }
+
+  .main-sukses .btn-download button {
+    /* position: absolute; */
+    margin-top: 11px;
+    height: 46px;
+    width: 52px;
+    margin-left: 20px;
+  }
+  .main-sukses .btn-download p {
+    display: none;
+  }
+
+  .main-sukses .btn-back button {
+    margin-left: 22px;
+    margin-top: 11px;
+    height: 46px;
+    width: 52px;
+    font-size: 10px;
+    padding-top: 14px;
+  }
+
+  .main-sukses .icon-share {
+    margin-left: 20px;
+    height: 46px;
+    width: 52px;
   }
 }
 </style>

@@ -101,10 +101,12 @@
                       </div>
                     </b-row>
                     <b-row class="ml-1 mt-5">
-                      <p>Type the amount you want to transfer and then</p>
+                      <p class="txt-title">
+                        Type the amount you want to transfer and then
+                      </p>
                     </b-row>
                     <b-row class="ml-1 mb-5">
-                      <p>press continue to the next steps.</p>
+                      <p class="txt-title">press continue to the next steps.</p>
                     </b-row>
                     <b-row class="ml-1">
                       <b-form style="margin: auto">
@@ -397,6 +399,19 @@ main {
 
   .form {
     width: 250px;
+  }
+
+  .form-notes {
+    grid-template-columns: 18px 230px;
+  }
+
+  .txt-title {
+    font-size: 14px;
+  }
+
+  .btn-continue {
+    width: 100px;
+    height: 40px;
   }
 }
 </style>
