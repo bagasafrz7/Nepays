@@ -58,6 +58,14 @@ export default {
           .then(response => resolve(response.data))
           .catch(error => reject(error.response))
       })
+    },
+    deleteImageUser(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios
+          .patch(`${process.env.VUE_APP_URL}profile/delete/image/${payload}`)
+          .then(response => resolve(response.data))
+          .catch(error => reject(error.response))
+      })
     }
   },
   getters: {
