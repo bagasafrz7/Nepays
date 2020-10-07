@@ -145,7 +145,6 @@ export default {
 @media (max-width: 576px) {
   .aside {
     margin: 50px 0 0 0;
-    height: 20px;
   }
   .aside .logout {
     margin-top: 25px;
