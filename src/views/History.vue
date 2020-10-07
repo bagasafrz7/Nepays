@@ -4,10 +4,10 @@
     <main>
       <b-container>
         <b-row>
-          <b-col cols="3">
+          <b-col cols="12" md="3">
             <Aside />
           </b-col>
-          <b-col cols="9">
+          <b-col cols="12" md="9">
             <div class="main-history">
               <h6 class="mb-4">Transaction History</h6>
               <b-row>
@@ -27,6 +27,7 @@
                 <b-col cols="2">
                   <b-dropdown
                     id="dropdown-right"
+                    class="btn-drop"
                     right
                     :text="sortText"
                     variant="primary"
@@ -54,12 +55,12 @@
                       <b-col cols="2">
                         <img :src="urlAPI + item.image" alt="" />
                       </b-col>
-                      <b-col cols="8">
+                      <b-col cols="8" class="detail">
                         <h6>{{ item.first_name }} {{ item.last_name }}</h6>
                         <p v-if="item.category === 1">Transfer</p>
                         <p v-if="item.category === 2">Receive</p>
                       </b-col>
-                      <b-col cols="2">
+                      <b-col cols="2" class="detail-total">
                         <p
                           v-if="item.category === 2"
                           style="
@@ -98,12 +99,12 @@
                       <b-col cols="2">
                         <img :src="urlAPI + item.image" alt="" />
                       </b-col>
-                      <b-col cols="8">
+                      <b-col cols="8" class="detail">
                         <h6>{{ item.first_name }} {{ item.last_name }}</h6>
                         <p v-if="item.category === 1">Transfer</p>
                         <p v-if="item.category === 2">Receive</p>
                       </b-col>
-                      <b-col cols="2">
+                      <b-col cols="2" class="detail-total">
                         <p
                           v-if="item.category === 2"
                           style="
@@ -276,5 +277,39 @@ main {
   width: 100px;
   height: 100px;
   border-radius: 20px;
+}
+
+@media (max-width: 768px) {
+  .main-history .search-result img {
+    width: 80px;
+    height: 80px;
+    margin-right: 15px;
+  }
+  .main-history .search-result .detail h6 {
+    margin-left: 15px;
+  }
+  .main-history .search-result .detail p {
+    margin-left: 15px;
+  }
+  .main-history .search-result .detail-total p {
+    font-size: 14px !important;
+    margin-left: -20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .main-history {
+    margin: 50px 0;
+  }
+  .main-history .search-result img {
+    width: 56px;
+    height: 56px;
+  }
+  .main-history .search-result .detail-total p {
+    margin-left: -40px;
+  }
+  .main-history .btn-drop {
+    margin-left: -25px;
+  }
 }
 </style>

@@ -23,11 +23,17 @@
                   ></b-icon>
                   <input
                     required
-                    type="password"
+                    :type="this.type1"
                     placeholder="Current Password"
                     class="border-0"
                     v-model="form.current"
                   />
+                  <b-icon
+                    class="align-self-center icon"
+                    font-scale="1"
+                    :icon="this.show1"
+                    @click="showPass1"
+                  ></b-icon>
                 </div>
                 <div class="input-field mb-5">
                   <b-icon
@@ -37,11 +43,17 @@
                   ></b-icon>
                   <input
                     required
-                    type="password"
+                    :type="this.type2"
                     placeholder="New Password"
                     class="border-0"
                     v-model="form.new"
                   />
+                  <b-icon
+                    class="align-self-center icon"
+                    font-scale="1"
+                    :icon="this.show2"
+                    @click="showPass2"
+                  ></b-icon>
                 </div>
                 <div class="input-field mb-4">
                   <b-icon
@@ -51,14 +63,23 @@
                   ></b-icon>
                   <input
                     required
-                    type="password"
+                    :type="this.type3"
                     placeholder="Repeat New Password"
                     class="border-0"
                     v-model="form.confirm"
                   />
+                  <b-icon
+                    class="align-self-center icon"
+                    font-scale="1"
+                    :icon="this.show3"
+                    @click="showPass3"
+                  ></b-icon>
                 </div>
-                <div class="btn-changepass text-center" @click="upChange">
-                  Change Password
+                <div
+                  class="btn-changepass text-center text-secondary"
+                  @click="upChange"
+                >
+                  <strong>Change Password</strong>
                 </div>
               </div>
             </div>
@@ -85,7 +106,13 @@ export default {
   },
   data() {
     return {
-      form: {}
+      form: {},
+      type1: 'password',
+      show1: 'eye-slash',
+      type2: 'password',
+      show2: 'eye-slash',
+      type3: 'password',
+      show3: 'eye-slash'
     }
   },
   computed: {
@@ -125,6 +152,33 @@ export default {
             timer: 1500
           })
         })
+    },
+    showPass1() {
+      if (this.type1 === 'password') {
+        this.type1 = 'text'
+        this.show = 'eye'
+      } else {
+        this.type1 = 'password'
+        this.show = 'eye-slash'
+      }
+    },
+    showPass2() {
+      if (this.type2 === 'password') {
+        this.type2 = 'text'
+        this.show2 = 'eye'
+      } else {
+        this.type2 = 'password'
+        this.show2 = 'eye-slash'
+      }
+    },
+    showPass3() {
+      if (this.type3 === 'password') {
+        this.type3 = 'text'
+        this.show3 = 'eye'
+      } else {
+        this.type3 = 'password'
+        this.show3 = 'eye-slash'
+      }
     }
   }
 }
@@ -145,7 +199,7 @@ main {
 
 .input-field {
   display: grid;
-  grid-template-columns: 10% 90%;
+  grid-template-columns: 10% 80% 10%;
   margin: 15px 27%;
   border-bottom: 1px solid #000;
   padding-bottom: 3px;
@@ -165,5 +219,10 @@ main {
   margin: 65px 27%;
   padding: 17px 15px;
   border-radius: 10px;
+  cursor: pointer;
+}
+
+.btn-changepass:hover {
+  opacity: 0.8;
 }
 </style>
